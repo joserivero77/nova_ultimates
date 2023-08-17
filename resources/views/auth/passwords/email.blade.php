@@ -1,4 +1,4 @@
-@extends('layouts.amd')
+@extends('layouts.home_amd')
 @section('stylescss')
 @section('content')
 <div class="container">

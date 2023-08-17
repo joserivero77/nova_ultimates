@@ -70,8 +70,8 @@ class VentasController extends Controller
             ->get();
         $ventasConTotales = Venta::join("productos_vendidos", "productos_vendidos.id_venta", "=", "ventas.id")
             ->select("ventas.*", DB::raw("sum(productos_vendidos.cantidad * productos_vendidos.precio) as total"))
-            ->select("ventas.*", DB::raw("sum(productos_vendidos.cantidad * productos_vendidos.precio) as sutotal"))
-            ->select("ventas.*", DB::raw("sum(productos_vendidos.cantidad * productos_vendidos.precio) as totalfinal"), DB::raw("sum(productos_vendidos.cantidad) as vent"))
+
+            ->select("ventas.*", DB::raw("sum(productos_vendidos.cantidad * productos_vendidos.precio*1.16) as totalfinal"), DB::raw("sum(productos_vendidos.cantidad) as vent"))
             ->groupBy("ventas.id", "ventas.created_at", "ventas.updated_at", "ventas.id_cliente")
             ->get();
         return view("amd.ventas.ventas_index", ["ventas" => $ventasConTotales,'ConTotales'=>$ConTotales]);
@@ -110,32 +110,32 @@ class VentasController extends Controller
 
         foreach ($venta->productos as $producto) {
             $total += $producto->cantidad * $producto->precio;
-            $sutotal=$total*0.16;
-            $totalfinal=$total*1.16;
+
+            $totalfinal=$total;
 
         }
         return view("amd.ventas.ventas_show", [
             "venta" => $venta,
             "total" => $total,
-            "sutotal"=>$sutotal*0.16,
-            "totalfinal"=>$totalfinal*1.16,
+
+            "totalfinal"=>$totalfinal,
         ]);
     }
-    public function pdf(Venta $ConTotales){
+    public function pdf(){
 
         $total = 0;
-        dd($ConTotales);
-        foreach ($ConTotales->productos as $producto) {
+        //dd($ConTotales);
+        foreach ($ventas->productos as $producto) {
             $total += $producto->cantidad * $producto->precio;
 
         }
 
-        /*$pdf=\Pdf::loadView('amd.ventas.ventas_pdf',compact([
+        $pdf=\Pdf::loadView('amd.ventas.ventas_pdf',compact([
             "venta" => $venta,
             "total" => $total,
 
         ]));
-        return $pdf->stream('ReporteVenta_'.$venta->id.'.pdf');*/
+        return $pdf->stream('ReporteVenta_'.$venta->id.'.pdf');
     }
 
     /**

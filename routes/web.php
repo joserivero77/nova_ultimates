@@ -36,29 +36,22 @@ use Barryvdh\DomPdf\Facade\Pdf;
 |
 */
 
-//Route::get('/', function () {
-    //$pdf=App::make('dompdf.wrapper');
-    //$pdf=app('dompdf.wrapper');
-    //$pdf->loadHtml('<h1>Este es mi pdf helper</h1>');
-  //  $pdf->loadView('pdfs.pdf');
-    //$pdf=Pdf::loadHtml('<h1>Este es mi pdf helper PDF</h1>');
-//    return $pdf->stream();
-//});
-//Route::get('/', function () {
-//    return view('layouts.admin');
-//});
+
 Route::get('/', function () {
-  return view('layouts.amd');
+    return view('layouts.amd');
 });
+/*Route::get('/', function () {
+  return view('layouts.amd');
+});*/
 
 //Route::resource('almacen/categoria','CategoriaController');
 //Route::resource('almacen/categoria', CategoriaController::class);
 Auth::routes();
-Route::get('/imprimir-pdf',[Controller::class,'imprimir'])->name('imprimir');
+Route::get('categories/pdf2',[Controller::class,'imprimir'])->name('imprimir');
 Route::get('visita/visitas/pdf',[VisitaController::class, 'imprimir'])->name('visitas.pdf');
 Route::get('categories/pdf',[CategoryController::class, 'imprime'])->name('category.pdf');
 Route::get('pdf',[ProductController::class, 'pdf'])->name('catalogoproducto.pdf');
-Route::get("ventas_pdf", [VentasController::class,'pdf'])->name("ventas_pdf");
+Route::get("ventas_pdf/{venta}", [VentasController::class,'pdf'])->name("ventas_pdf");
 
 Route::resource('categories', CategoryController::class)->names('categories');
 Route::resource('clients', ClientController::class)->names('clients');

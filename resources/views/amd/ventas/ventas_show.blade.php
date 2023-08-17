@@ -13,7 +13,7 @@
             <a class="btn btn-info" href="{{route("ventas.index")}}">
                 <i class="fa fa-arrow-left"></i>&nbsp;Volver
             </a>
-            <a class="btn btn-success" href="{{route("ventas.ticket", ["id" => $venta->id])}}">
+            <a class="btn btn-success" href="{{route("ventas_pdf", ["id" => $venta->id])}}">
                 <i class="fa fa-print"></i>&nbsp;Reporte
             </a>
             <h2>Productos</h2>
@@ -52,12 +52,12 @@
                 <tr>
                     <td colspan="3"></td>
                     <td><strong>Impuesto (16,0%) </strong></td>
-                    <td>Bs{{ number_format($sutotal,2) }}</td>
+                    <td>Bs{{ number_format($producto->cantidad * $producto->precio*0.16,2) }}</td>
                 </tr>
                 <tr>
                     <td colspan="3"></td>
                     <td><strong>Total</strong></td>
-                    <td>Bs{{ number_format($totalfinal,2) }}</td>
+                    <td>Bs{{ number_format($producto->cantidad * $producto->precio*1.16,2) }}</td>
                 </tr>
                 </tfoot>
             </table>

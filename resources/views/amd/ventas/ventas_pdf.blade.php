@@ -54,12 +54,12 @@
                 <tr>
                     <td colspan="3"></td>
                     <td><strong>Impuesto (16,0%) </strong></td>
-                    <td>Bs{{ number_format($total,2) }}</td>
+                    <td>Bs{{ number_format($producto->cantidad * $producto->precio*0.16,2) }}</td>
                 </tr>
                 <tr>
                     <td colspan="3"></td>
                     <td><strong>Total</strong></td>
-                    <td>Bs{{ number_format($total,2) }}</td>
+                    <td>Bs{{ number_format($producto->cantidad * $producto->precio*1.16,2) }}</td>
                 </tr>
                 </tfoot>
             </table>

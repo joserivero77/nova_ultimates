@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>@yield('title') Panel</title>
+    <title>@yield('title') AppSisNova</title>
     @yield('stylescss')
     <!-- Custom fonts for this template-->
     {!! Html::style('sbadmin/vendor/fontawesome-free/css/all.min.css') !!}
@@ -75,8 +75,8 @@
                         <h6 class="collapse-header">Vistas</h6>
                         <a class="collapse-item" href="{{ asset(route('categories.index')) }}">Categorias</a>
                         <a class="collapse-item" href="{{ asset(route('products.index')) }}">Productos</a>
-                        <!--a class="collapse-item" href="buttons.html">Buttons</!--a>
-                        <a-- class="collapse-item" href="cards.html">Cards</a-->
+                        <a class="collapse-item" href="buttons.html">Buttons</a>
+                        <a class="collapse-item" href="cards.html">Cards</a>
                     </div>
                 </div>
             </li>
@@ -128,7 +128,7 @@
                         <a class="collapse-item" href="{{ asset(route('compras.index')) }}">Historial de compras</a>
                         <a class="collapse-item" href="{{ asset(route('vender.index')) }}">Vender</a>
                         <a class="collapse-item" href="{{ asset(route('ventas.index')) }}">Historial de ventas</a>
-                        <!--a class="collapse-item" href="login.html">Login</!--a>
+                        <a class="collapse-item" href="login.html">Login</a>
                         <a class="collapse-item" href="register.html">Register</a>
                         <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
                         <div class="collapse-divider"></div>
@@ -197,7 +197,7 @@
                                 </button>
                             </div>
                         </div>
-                    </!--form-->
+                    </!--form>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">

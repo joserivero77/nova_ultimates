@@ -14,7 +14,7 @@ class Controller extends BaseController
 
 public function imprimir(){
     $categories=Category::orderBy('name')->get();
-    $pdf=\Pdf::loadView('pdf',compact('categories'));
+    $pdf=\Pdf::loadView('amd.category.pdf2',compact('categories'));
     return $pdf->stream('primerpdf.pdf');
 }
 }
