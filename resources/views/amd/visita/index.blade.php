@@ -51,8 +51,6 @@
                                     <th>Fecha de la visita</th>
                                     <th>Cliente</th>
                                     <th>Motivo</th>
-
-
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -94,6 +92,7 @@
     </div>
 </div>
 <div><br><br></div>
+
 @endsection
 @section('scripts')
 

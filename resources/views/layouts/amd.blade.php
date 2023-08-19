@@ -13,7 +13,7 @@
     @yield('stylescss')
     <!-- Custom fonts for this template-->
     {!! Html::style('sbadmin/vendor/fontawesome-free/css/all.min.css') !!}
-    {!! Html::style('sbadmin/https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i') !!}
+    <!--{! Html::style('sbadmin/https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i') !!}-->
     {!! Html::style('sbadmin/css/sb-admin-2.min.css') !!}
     {!! Html::style('css/sb-admin-2.min.css') !!}
 
@@ -38,7 +38,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('home') }}">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <!--i-- class="fas fa-laugh-wink"></!--i-->
                 </div>
@@ -50,7 +50,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('home') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Panel</span></a>
             </li>
@@ -75,8 +75,8 @@
                         <h6 class="collapse-header">Vistas</h6>
                         <a class="collapse-item" href="{{ asset(route('categories.index')) }}">Categorias</a>
                         <a class="collapse-item" href="{{ asset(route('products.index')) }}">Productos</a>
-                        <a class="collapse-item" href="buttons.html">Buttons</a>
-                        <a class="collapse-item" href="cards.html">Cards</a>
+                        <!--a class="collapse-item" href="buttons.html">Buttons</!--a>
+                        <a-- class="collapse-item" href="cards.html">Cards</a-->
                     </div>
                 </div>
             </li>
@@ -128,7 +128,7 @@
                         <a class="collapse-item" href="{{ asset(route('compras.index')) }}">Historial de compras</a>
                         <a class="collapse-item" href="{{ asset(route('vender.index')) }}">Vender</a>
                         <a class="collapse-item" href="{{ asset(route('ventas.index')) }}">Historial de ventas</a>
-                        <a class="collapse-item" href="login.html">Login</a>
+                        <!--a class="collapse-item" href="login.html">Login</!--a>
                         <a class="collapse-item" href="register.html">Register</a>
                         <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
                         <div class="collapse-divider"></div>
@@ -197,7 +197,7 @@
                                 </button>
                             </div>
                         </div>
-                    </!--form>
+                    </!--form-->
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -281,13 +281,13 @@
                         <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <!--i class="fas fa-envelope fa-fw"></!--i-->
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
+                                <!--i class="fas fa-envelope fa-fw"></!--i>
+                                <svg-- xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
                                     <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
-                                  </svg>
+                                  </svg-->
 
                                 <!-- Counter - Messages -->
-                                <span class="badge badge-danger badge-counter">7</span>
+                                <!--span class="badge badge-danger badge-counter">1</!--span-->
                             </a>
                             <!-- Dropdown - Messages -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -354,7 +354,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"></span>
-                                <b>.  </b><img class=" rounded-circle" width="80px;" height="70px;"
+                                <b>. </b><img class=" rounded-circle" width="80px;" height="70px;"
                                     src=" {{ asset('img/descarga(33).JPEG') }} ">
                             </a>
                             <!-- Dropdown - User Information -->
@@ -779,7 +779,7 @@
     <!-- Jquery Min Js -->
     {!! Html::script('galio/assets/js/vendor/jquery-3.3.1.min.js') !!}
     <!-- Popper Min Js -->
-    {!! Html::script('galio/assets/js/vendor/popper.min.js') !!}
+
     <!-- Bootstrap Min Js -->
     {!! Html::script('galio/assets/js/vendor/bootstrap.min.js') !!}
     <!-- Plugins Js-->
@@ -792,11 +792,13 @@
     <!-- Switcher JS [Please Remove this when Choose your Final Projct] -->
     {!! Html::script('galio/assets/js/switcher.js') !!}
     <!--{!! Html::script('js/popper.js@1.12.9_dist_umd_popper.min.js') !!}-->
-    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    {!! Html::script('vendor/datatables/jquery.dataTables.min.js') !!}
+    {!! Html::script('vendor/datatables/dataTables.bootstrap4.min.js') !!}
+    {!! Html::script('js/demo/datatables-demo.js') !!}
+
 
     <!-- Page level custom scripts -->
-    <script src="js/demo/datatables-demo.js"></script>
+
 
     <!--div>!! Html::script('sbadmin/vendor/chart.js/Chart.min.js') !!
     !! Html::script('sbadmin/js/demo/chart-area-demo.js') !!

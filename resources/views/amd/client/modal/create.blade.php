@@ -1,38 +1,21 @@
-@extends('layouts.amd')
-@section('title'.'Registrar clientes')
-@section('styles')
-@endsection
+<form action="" method="post" enctype="multipart/form-data">
+<!-- Modal Body -->
+<!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+<div class="modal fade text-left" id="createmodal" tabindex="-1" data-bs-keyboard="true"
+role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title text-bg-primary" id="modalTitleId"><i class="fa fa-address-book"></i>Registrar Cliente</h2>
+                    <button type="button" class="btn btn-close" data-dismiss="modal" aria-label="Close">x</button>
+            </div>
+            <div class="modal-body">
 
-@section('options')
-@endsection
-@section('preference')
-@endsection
-@section('content')
-<div class="content-wrapper">
-    <div class="page-header">
-        <h1 class="page-title">Registro de cliente<i class="fa fa-user-alt"></i></h1>
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Panel Administrador</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('clients.index') }}">clientes</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Registro de clientes</li>
-          </ol>
-        </nav>
-    </div>
-    <div class="row">
-        <div class=" col-lg-12 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                            <h4 class="card-title">Registro de cliente</h4>
-                        @if(session("mensaje"))
-                            <div class="alert alert-{{session('tipo') ? session("tipo") : "info"}}">
-                                {{session('mensaje')}}
-                            </div>
-                        @endif
-                    </div>
-                </div>
-                {!! Form::open(['route'=>'clients.store', 'method'=>'post']) !!}
+                <div class="row">
+                    <div class=" col-lg-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                {!! Form::open(['route'=>'clients.store', 'method'=>'post']) !!}
                 <div class="form-group">
                   <label for="name" class="form-label">Nombre</label>
                   <input type="text" name="name" id="name"  aria-describedby="helpId"
@@ -118,12 +101,23 @@
                 <button type="submit" class="btn btn-primary mr-2">Registrar</button>
                 <a href="{{ route('clients.index') }}" class="btn btn-danger">Cancelar</a>
             {!! Form::close() !!}
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
+            <!--div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save</button>
+            </!--div-->
         </div>
-
     </div>
-
 </div>
-@endsection
-@section('scripts')
-@endsection
+
+</form>
+
+
+
+

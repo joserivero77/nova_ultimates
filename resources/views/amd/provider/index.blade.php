@@ -28,35 +28,20 @@
           </ol>
         </nav>
     </div>
+    <!--div-- class="row">
+        <div class="col-12">
+            <a href="#" data-toggle="modal" data-target="#createmodal" class="nav-link"><span
+                class="btn btn-success">Registrar Cliente</span></a>
+        </div>
+    </!--div-->
     <div class="row">
         <li class="nav-item d-none d-lg-flex">
             <a class="nav-link" href="{{ route('providers.create') }}"><span class="btn btn-primary">Registrar Proveedor</span></a>
         </li>
+
         <div class=" col-lg-12 grid-margin stretch-card">
             <div class="card">
-                {{-- <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="card-title">Proveedores</h4>
 
-                        <div class="btn-group">
-                            <h4 class="card-title">
-                                <a href="">
-                                    <i class="fas fa-download"></i>
-                                    Exportar
-                                </a>
-                            </h4>
-                            <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                            <i class="fas fa-ellipsis-v"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" type="button" href="{{ route('providers.create') }}">Agregar</a>
-
-                            <button class="dropdown-item" type="button">Action</button>
-                            <button class="dropdown-item" type="button">Action</button>
-
-                        </div>
-                        </div>
-                    </div> --}}
 
                     <div class="table-responsive">
                         <table  class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -94,10 +79,7 @@
                                     </td>
                                 </tr>
                                 @endforeach
-
-
                             </tbody>
-
                         </table>
                         {{-- $providers->render() --}}
                     </div>
@@ -110,6 +92,7 @@
     </div>
 </div>
 <div><br><br></div>
+@include('amd.provider.modal.create')
 @endsection
 @section('scripts')
 

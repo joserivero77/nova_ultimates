@@ -177,33 +177,32 @@ class ProductController extends Controller
     }
 
     public function addtocart($id){
-        $purchaseDetails=PurchaseDetails::get($id);
+
         $product=Producto::findOrFail($id);
-        $cart=session()->get('cart',[]);dd($product);
+        $cart=session()->get('cart',[]);//dd($product);
         if(isset($cart[$id])){
             $cart[$id]['quantity']++;
         }else{
             $cart[$id]=[
                 'name'=>$product->name,
                 'quantity'=>1,
-                'price'=>$product->price,
+                'precio_venta'=>$product->precio_venta,
                 'image'=>$product->image,
-
         ];
         }
         session()->put('cart',$cart);
         return redirect()->back()->with('success','Producto agregado correctamente');
     }
     public function cart(){ return view('amd.product.cart');}
+
     public function remove(Request $request){
         if($request->id){
             $cart=session()->get('cart');
             if(isset($cart[$request->id])){
                 unset($cart[$request->id]);
                 session()->put('cart',$cart);
-                session()->flash('success','Producto eliminado correctamente');
             }
-
+            session()->flash('success','Producto eliminado correctamente');
         }
     }
 

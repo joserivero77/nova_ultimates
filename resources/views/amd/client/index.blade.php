@@ -13,8 +13,7 @@
 @section('usuario')
 {{-- $user --}}
 @endsection
-@section('options')
-@endsection
+
 @section('preference')
 @endsection
 @section('content')
@@ -30,7 +29,7 @@
     </div>
     <div class="row">
         <li class="nav-item d-none d-lg-flex">
-            <a class="nav-link" href="{{ route('clients.create') }}"><span class="btn btn-primary">Registrar Cliente</span></a>
+            <!--a-- class="nav-link" href="{{ route('clients.create') }}"><span class="btn btn-primary">Registrar Cliente</span></!--a-->
         </li>
         @if(session("mensaje"))
         <div class="alert alert-{{session('tipo') ? session("tipo") : "info"}}">
@@ -39,7 +38,12 @@
     @endif
         <div class=" col-lg-12 grid-margin stretch-card">
             <div class="card">
-
+                <div class="row">
+                    <div class="col-12">
+                        <a href="#" data-toggle="modal" data-target="#createmodal" class="nav-link"><span
+                            class="btn btn-success">Registrar Cliente</span></a>
+                    </div>
+                </div>
 
                     <div class="table-responsive">
                         <table  class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -98,7 +102,10 @@
 
     </div>
 </div>
-<div><br><br></div>
+<div><br><br>
+
+</div>
+@include('amd.client.modal.create')
 @endsection
 @section('scripts')
 

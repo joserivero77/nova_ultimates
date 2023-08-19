@@ -24,6 +24,7 @@
           <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('home') }}">Panel Administrador</a></li>
                 <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('imprimir') }}">Categorias</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('category.pdf') }}"><i class="fa fa-file-pdf w-20 h-20 btn-danger shadow"></i>PDF</a></li>
           </ol>
         </nav>
     </div>
@@ -33,16 +34,10 @@
 
 <div class="row">
     <div class="col-12">
-        <a class="nav-link" href="{{ route('categories.create') }}"
-        data-bs-toggle="modal" data-bs-target="#modalId"><span
-        class="btn btn-success">Registrar Categoria</span></a>
-
-
-        <h4><a href="{{ route('category.pdf') }}"><i class="fa fa-file-pdf btn-danger shadow"></i><small class="">PDF</small></a></h4>
+        <a href="#" data-toggle="modal" data-target="#createmodal" class="nav-link"><span
+            class="btn btn-success">Registrar Categoria</span></a>
     </div>
-
 </div>
-
 
                     <div class="table-responsive">
                         <table  class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -94,5 +89,5 @@
 @include('amd.category.modal.create')
 @endsection
 @section('scripts')
-
+{!! Html::script('js/jquery-3.5.1.min.js') !!}
 @endsection

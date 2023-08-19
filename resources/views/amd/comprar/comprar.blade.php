@@ -9,7 +9,16 @@
         {{session('mensaje')}}
     </div>
 @endif
-<div></div>
+<div>
+    <div class="container">
+        @if (session('success'))
+            <div class="alert alert-default-success">
+                {{ session('success') }}
+            </div>
+        @endif
+        @section('content')
+    </div>
+</div>
 <div class="page-header">
     <h3 class="page-title">----------------------</h3>
     <nav aria-label="breadcrumb">

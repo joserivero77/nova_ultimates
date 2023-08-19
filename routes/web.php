@@ -54,6 +54,7 @@ Route::get('pdf',[ProductController::class, 'pdf'])->name('catalogoproducto.pdf'
 Route::get("ventas_pdf/{venta}", [VentasController::class,'pdf'])->name("ventas_pdf");
 
 Route::resource('categories', CategoryController::class)->names('categories');
+Route::post('categories/modal/create','CategoryController@create')->name('create');
 Route::resource('clients', ClientController::class)->names('clients');
 
 Route::resource('vender/vender', ClientController::class)->names('vender');
@@ -64,10 +65,10 @@ Route::resource('providers', ProviderController::class)->names('providers');
 Route::resource('sales', SaleController::class)->names('sales');
 Route::resource('visitas', VisitaController::class)->names('visitas');
 
-Route::get('products/add_to_cart/{id}',[ProductController::class,'addtocart'])->name('add_to_cart');
-Route::get('products/cart',[ProductController::class, 'cart'])->name('products.cart');
-Route::delete('products/remove_from_cart', [ProductController::class,'remove'])->name('remove_from_cart');
-Route::patch('products/update_cart',[ProductController::class,'updatecart'])->name('update_cart');
+Route::get('products/add-to-cart/{id}',[ProductController::class,'addtocart'])->name('add_to_cart');
+Route::get('products/cart',[ProductController::class, 'cart'])->name('cart');
+Route::delete('products/remove-from-cart', [ProductController::class,'remove'])->name('remove_from_cart');
+Route::patch('products/update-cart',[ProductController::class,'updatecart'])->name('update_cart');
 
 
 //Route::get('purchases/pdf/{purchase}','PurchaseController@pdf')->name('purchases.pdf');
@@ -97,8 +98,6 @@ Route::resource('shopping_cart_detail','ShoppingCartDetailController')->only('st
         Route::post("/terminarOCancelarCompra", [ComprarController::class, 'terminarOCancelarCompra'])->name("terminarOCancelarCompra");
 
 
-Auth::routes();
-
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('home_amd', [HomeController::class, 'index'])->name('home');
@@ -109,6 +108,7 @@ Route::get('/Cart-checkout',[CartController::class,'cart'])->name('cart.checkout
 Route::post('/Cart-clear',[CartController::class,'clear'])->name('cart.clear');
 Route::get('/Cart-removeitem',[CartController::class,'removeitem'])->name('cart.removeitem');
 Route::get('/cart',)->name('atras');
+
 
 
 

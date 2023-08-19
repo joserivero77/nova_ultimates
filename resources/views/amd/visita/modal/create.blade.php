@@ -6,7 +6,7 @@ role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title text-bg-primary" id="modalTitleId"><i class="fa fa-address-book"></i>Registro de Categorias</h2>
+                <h2 class="modal-title text-bg-primary" id="modalTitleId"><i class="fa fa-address-book"></i>Registrar Cliente</h2>
                     <button type="button" class="btn btn-close" data-dismiss="modal" aria-label="Close">x</button>
             </div>
             <div class="modal-body">
@@ -15,15 +15,27 @@ role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
                     <div class=" col-lg-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
-                                {!! Form::open(['route'=>'categories.store', 'method'=>'post']) !!}
-                            @csrf
-                            @include('amd.category._form')
-                            <div>
-                                <button type="submit" class="btn btn-primary mr-2" style="font-size: 1rem;">Registrar</button>
-                                <a href="{{ route('categories.index') }}" class="btn btn-danger">Cancelar</a>
-                            </div>
+                                {!! Form::open(['route'=>'visitas.store', 'method'=>'post']) !!}
+                @csrf
+                <div class="form-group">
+                    <label for="client_id" class="form-label">Cliente</label>
+                    <select class="form-control" name="client_id" id="client_id">
+                        <option value="">Seleccionar</option>
+                        @foreach ($clientes as $client )
+                        <option value="{{ $client->id }}">{{ $client->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
+                  <label for="motivo" class="form-label">Motivo</label>
+                  <input type="text" name="motivo" id="motivo"  aria-describedby="helpId" class="form-control" placeholder="" aria-describedby="helpId">
+                </div>
 
-                        {!! Form::close() !!}
+
+                <button type="submit" class="btn btn-primary mr-2">Registrar</button>
+                <a href="{{ route('visitas.index') }}" class="btn btn-danger">Cancelar</a>
+            {!! Form::close() !!}
+
                             </div>
                         </div>
                     </div>
