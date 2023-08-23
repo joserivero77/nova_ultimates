@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Purchase\StoreRequest;
 use App\Models\Purchase;
 use App\Models\Producto;
 use App\Http\Requests\StorePurchaseRequest;
@@ -106,7 +107,7 @@ class PurchaseController extends Controller
 
     public function agregarProductoCompra(Request $request)
     {
-        dd($request);
+        //dd($request);
         $codigo = $request->post("codigo");
         $producto = Producto::where("code", "=", $codigo)->first();//dd($producto->name);
         if (!$producto) {
@@ -171,11 +172,11 @@ class PurchaseController extends Controller
     public function create()
     {
         //
-        $products=Product::get();
+        $products=Producto::get();
         $providers=Provider::get();
         $purchases=Purchase::get();
         $prod=Producto::get_active_products()->get();//dd($prod);
-        return view('amd.purchase.create',compact('purchases','providers','products','prod'));
+        return view('amd.purchase.create',compact('purchases','providers','products'));
     }
 
 
@@ -244,7 +245,17 @@ if ($purchaseDetails) {
         //$purchase->delete();
         //return redirect()->route('purchase.index');
     }
+    public function pasarId($code){
 
+        $products=Producto::get();
+        $providers=Provider::get();
+        $codigo=$code;
+
+        $prod=Producto::get_active_products()->get();//dd($prod);
+        //dd($code);
+
+        return view('amd.purchase.create',compact('codigo','products','providers','prod'));
+       }
     public function pdf(Purchase $purchase)
     {
 

@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'reset' => 'la contrasena debe tener almenos 6 caracteres y coincidir con la confirmacion. !',
+    'reset' => 'la contrasena debe tener al menos 8 caracteres y coincidir con la confirmacion. !',
     'sent' => 'Su constrasena ha sido restablecida!',
     'throttled' => 'Recordatorio de contrasena enviado!.',
     'token' => 'Este token de restablecimiento de contrasena es invalido.',

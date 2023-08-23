@@ -89,7 +89,7 @@
                 <span><b>CATALOGO DE PRODUCTOS</b></span></h2>
                 <div class="container">
                     <div class="row"><!--tarjetas del catalogo-->
-                        @foreach ($prod as $pro )
+                        @foreach ($products as $pro )
                         <div class="col-6">
                             <div class="card text-center justify-content-between align-content-lg-between" style="width: 200px">
                                 <div class="container align-content-center">
@@ -121,6 +121,30 @@
                                                     </a>
                                                 </p>
                                             </div>
+                                            <div  style="align-content: center">
+                                                <form action="{{route("pasarId",$pro->code)}}" method="post">
+                                                    @csrf
+                                                    <div class="form-group">
+                                                        <button class="btn btn-primary text-center btn-block"
+                                                        type="submit"
+                                                        name="codigo"
+                                                        value="Agregar"
+                                                        role="button">Agregar al carrito2</button>
+
+                                                    </div>
+                                                </form>
+
+                                                <p class="btn-holder">
+                                                    <a href="{{ route('pasarId',$pro->code) }}"
+                                                        class="btn btn-primary text-center btn-block"
+                                                        type="submit"
+                                                        name="codigo"
+                                                        value="Agregar" role="button">
+                                                        Agregar al carrito3
+                                                    </a>
+                                                </p>
+                                            </div>
+
 
                                 </div>
                             </div>
@@ -142,7 +166,7 @@
                 <div class="media d-block d-sm-flex text-center">
                     <div class="media-body pt-0">
                         <div class="form-group">
-                            <input type="text" class="form-control" value="{{ $pro->id }}"
+                            <input type="text" class="form-control" value=""
                             placeholder="Buscar producto" aria-label="Search">
                         <!--button-- type="button"  class="btn btn-primary"><i class="fas fa-times"></i></!--button-->
                         </div>
@@ -187,7 +211,7 @@
                                         </td>
                                         <td data-th="Subtotal">{{ $details['precio_venta']*$details['quantity'] }}</td>
                                         <td class="actions" data-th="">
-                                            <button class="btn btn-danger btn-sm cart_remove" onclick="remove(this)"><i class="fa fa-trash"></i> Borrar</button>
+                                            <button class="btn btn-danger btn-sm cart_remove"><i class="fa fa-trash"></i> Borrar</button>
                                         </td>
                                     </tr>
                                         @endforeach
@@ -370,10 +394,21 @@
     </!--div>
 </div-->
 @section('scripts')
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/jquery-3.5.1.min.js"></script>
+{!! Html::script('js/jquery-3.5.1.min.js') !!}
+    {!! Html::script('sbadmin/vendor/jquery/jquery.min.js') !!}
+        {!! Html::script('sbadmin/vendor/bootstrap/js/bootstrap.bundle.min.js') !!}
+        {!! Html::script('js/bootstrap.bundle.min.js') !!}
+        {!! Html::script('sbadmin/vendor/jquery-easing/jquery.easing.min.js') !!}
+        {!! Html::script('sbadmin/js/sb-admin-2.min.js') !!}
+        {!! Html::script('js/bootstrap.min.js') !!}
 
 
     <script type="text/javascript">
-        $(".cart_update").change(function(e){
+        $(document).ready(function(){
+
+            $(".cart_update").change(function(e){
             e.preventDefault();
             var ele=$(this);
 
@@ -390,7 +425,7 @@
                     },
                 });
 
-        });
+            });
 
 
 
@@ -399,7 +434,7 @@
             var ele=$(this);
             if(confirm("Realmente desea eliminar este producto del carrito?")){
                 $(.ajax{
-                    url:'{{ route("remove_from_cart") }}',
+                    url:'{{ route('remove_from_cart') }}',
                     method:'DELETE',
                     data:{
                         _token:'{{ csrf_token() }}',
@@ -411,21 +446,16 @@
                 });
             };
         });
+        });
     </script>
-    {!! Html::script('js/jquery-3.5.1.min.js') !!}
-    {!! Html::script('sbadmin/vendor/jquery/jquery.min.js') !!}
-        {!! Html::script('sbadmin/vendor/bootstrap/js/bootstrap.bundle.min.js') !!}
-        {!! Html::script('js/bootstrap.bundle.min.js') !!}
-        {!! Html::script('sbadmin/vendor/jquery-easing/jquery.easing.min.js') !!}
-        {!! Html::script('sbadmin/js/sb-admin-2.min.js') !!}
-        {!! Html::script('js/bootstrap.min.js') !!}
+
 
     <!-- Jquery Min Js -->
 
 <!-- Bootstrap core JavaScript->
 
 <script-- src="vendor/jquery/jquery.min.js"></script-->
-<script src="js/bootstrap.bundle.min.js"></script>
+
 <!--script src="/js/bootstrap.min.js"></!--script>
 
 <script src="vendor/jquery-easing/jquery.easing.min.js"></script>

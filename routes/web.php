@@ -20,7 +20,7 @@ use App\Http\Controllers\VenderController;
 use App\Http\Controllers\ComprarController;
 use App\Http\Controllers\ComprasController;
 use App\Http\Controllers\Controller;
-
+use App\Http\Controllers\ExchangeRateController;
 
 
 use Barryvdh\DomPdf\Facade\Pdf;
@@ -54,13 +54,16 @@ Route::get('pdf',[ProductController::class, 'pdf'])->name('catalogoproducto.pdf'
 Route::get("ventas_pdf/{venta}", [VentasController::class,'pdf'])->name("ventas_pdf");
 
 Route::resource('categories', CategoryController::class)->names('categories');
-Route::post('categories/modal/create','CategoryController@create')->name('create');
+Route::get('categories/modal/create','CategoryController@create')->name('create');
 Route::resource('clients', ClientController::class)->names('clients');
 
 Route::resource('vender/vender', ClientController::class)->names('vender');
 
 Route::resource('products', ProductController::class)->names('products');
 Route::resource('purchases', PurchaseController::class)->names('purchases');
+Route::post('/pasarIdc/{code}', [ComprarController::class,'pasarIdc'])->name('pasarIdc');
+Route::post('/pasarId/{code}', [VenderController::class,'pasarId'])->name('pasarId');
+
 Route::resource('providers', ProviderController::class)->names('providers');
 Route::resource('sales', SaleController::class)->names('sales');
 Route::resource('visitas', VisitaController::class)->names('visitas');
@@ -87,15 +90,17 @@ Route::resource('shopping_cart_detail','ShoppingCartDetailController')->only('st
         Route::get("/ventas/ticket", [VentasController::class,'ticket'])->name("ventas.ticket");
         Route::resource("ventas", VentasController::class);
         Route::get("/vender", [VenderController::class, 'index'])->name("vender.index");
-        Route::post("/productoDeVenta", [VenderController::class, 'agregarProductoVenta'])->name("agregarProductoVenta");
+        Route::get("/productoDeVenta", [VenderController::class, 'agregarProductoVenta'])->name("agregarProductoVenta");
         Route::delete("/productoDeVenta", [VenderController::class,'quitarProductoDeVenta'])->name("quitarProductoDeVenta");
         Route::post("/terminarOCancelarVenta", [VenderController::class, 'terminarOCancelarVenta'])->name("terminarOCancelarVenta");
+        Route::post("/agregarCantidadProductov/{code}", [VenderController::class, 'agregarCantidadProductov'])->name("agregarCantidadProductov");
 
         Route::resource("compras", ComprasController::class);
         Route::get("/comprar", [ComprarController::class, 'index'])->name("comprar.index");
-        Route::post("/productoDeCompra", [ComprarController::class, 'agregarProductoCompra'])->name("agregarProductoCompra");
+        Route::get("/productoDeCompra", [ComprarController::class, 'agregarProductoCompra'])->name("agregarProductoCompra");
         Route::delete("/productoDeCompra", [ComprarController::class,'quitarProductoDeCompra'])->name("quitarProductoDeCompra");
         Route::post("/terminarOCancelarCompra", [ComprarController::class, 'terminarOCancelarCompra'])->name("terminarOCancelarCompra");
+        Route::post("/agregarCantidadProducto/{code}", [ComprarController::class, 'agregarCantidadProducto'])->name("agregarCantidadProducto");
 
 
 
@@ -108,7 +113,8 @@ Route::get('/Cart-checkout',[CartController::class,'cart'])->name('cart.checkout
 Route::post('/Cart-clear',[CartController::class,'clear'])->name('cart.clear');
 Route::get('/Cart-removeitem',[CartController::class,'removeitem'])->name('cart.removeitem');
 Route::get('/cart',)->name('atras');
-
+Route::get('board',[HomeController::class,'amd'])->name('amd');
+Route::get('/exchange-rate', [ExchangeRateController::class,'index']);
 
 
 

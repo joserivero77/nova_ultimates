@@ -14,7 +14,7 @@
           <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Panel Administrador</a></li>
                 <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('vender.index') }}">Vender</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><a href="">Ventas Realizadas</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Ventas Realizadas</li>
           </ol>
         </nav>
     </div>

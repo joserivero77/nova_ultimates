@@ -7,15 +7,16 @@ role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="modal-title text-bg-primary" id="modalTitleId"><i class="fa fa-address-book"></i>Registrar Cliente</h2>
-                    <button type="button" class="btn btn-close" data-dismiss="modal" aria-label="Close">x</button>
+                    <button type="button" class="btn btn-close" data-dismiss="modal" aria-label="Close"><i class="far fa-times-circle"></i></button>
             </div>
             <div class="modal-body">
 
                 <div class="row">
                     <div class=" col-lg-12 grid-margin stretch-card">
-                        <div class="card">
-                            <div class="card-body">
+                        <div class="">
+                            <div class="">
                                 {!! Form::open(['route'=>'clients.store', 'method'=>'post']) !!}
+
                 <div class="form-group">
                   <label for="name" class="form-label">Nombre</label>
                   <input type="text" name="name" id="name"  aria-describedby="helpId"

@@ -29,7 +29,7 @@
           <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Panel Administrador</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Productos</li>
-                <li class="breadcrumb-item"><a href="{{ route('catalogoproducto.pdf') }}"><i class="fa fa-file-pdf w-20 h-20 btn-danger shadow"></i>PDF</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('catalogoproducto.pdf') }}" target="_blanck"><i class="fa fa-file-pdf w-20 h-20 btn-danger shadow"></i>PDF</a></li>
           </ol>
         </nav>
     </div>
@@ -193,13 +193,25 @@
                                     </div>
                                                 <div  style="align-content: center">
                                                     <p class="btn-holder">
-                                                        <a href="{{ route('vender.index',$pro->code) }}"
+                                                       <!-- <a href="{{ route('vender.index',$pro->code) }}"-->
+                                                            <a href="{{ route('pasarId',$pro->code) }}"
                                                             class="btn btn-primary text-center btn-block" type="submit"
-                                                            name=""
+                                                            name="codigo"
                                                             value="Agregar" role="button">
                                                             Agregar al carrito
                                                         </a>
                                                     </p>
+                                                    <form action="{{route("pasarId",$pro->code)}}" method="post">
+                                                        @csrf
+                                                        <div class="form-group">
+                                                            <button class="btn btn-primary text-center btn-block"
+                                                            type="submit"
+                                                            name=""
+                                                            value="Agregar"
+                                                            role="button">Agregar al carrito2</button>
+
+                                                        </div>
+                                                    </form>
                                                 </div>
 
                                     </div>
@@ -217,6 +229,15 @@
 
 </div>
 
+@endsection
+@section('footer')
+<footer class="sticky-footer bg-white">
+    <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+            <span>Copyright &copy; Website 2023</span>
+        </div>
+    </div>
+</footer>
 @endsection
 @section('scripts')
 <script>

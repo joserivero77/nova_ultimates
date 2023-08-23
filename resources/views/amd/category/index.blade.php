@@ -22,9 +22,9 @@
         <h1 class="page-title"><i class="fa fa-book"></i>Categorias</h1>
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('home') }}">Panel Administrador</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('amd') }}">Panel Administrador</a></li>
                 <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('imprimir') }}">Categorias</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('category.pdf') }}"><i class="fa fa-file-pdf w-20 h-20 btn-danger shadow"></i>PDF</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('category.pdf') }}" target="_blank"><i class="fa fa-file-pdf w-20 h-20 btn-danger shadow"></i>PDF</a></li>
           </ol>
         </nav>
     </div>

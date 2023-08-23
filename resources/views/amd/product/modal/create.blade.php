@@ -7,7 +7,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h2 class="modal-title text-bg-primary" id="modalTitleId"><i class="fa fa-address-book"></i>Registrar Producto</h2>
-                        <button type="button" class="btn btn-close" data-dismiss="modal" aria-label="Close">x</button>
+                        <button type="button" class="btn btn-close" data-dismiss="modal" aria-label="Close"><i class="far fa-times-circle"></i></button>
                 </div>
                 <div class="modal-body">
 

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Client;
+use App\Models\Category;
 use App\Models\Provider;
 use App\Models\Producto;
 use App\Models\ProductoComprado;
@@ -24,6 +24,9 @@ class comprarController extends Controller
     public function terminarCompra(Request $request)
     {
         // Crear una Compra
+        $this->validate($request,[
+            "id_provider"=>'required',
+        ]);
         $compra = new Compra();//dd($request);
         $compra->id_provider = $request->input("id_provider");
         $compra->saveOrFail();
@@ -105,10 +108,25 @@ class comprarController extends Controller
         return redirect()
             ->route("comprar.index");
     }
+    //*************************************************************** */
+    public function pasarIdc($code){
 
+        $producto=Producto::get();
+        $providers=Provider::get();
+        $codigo=$code;
+        //dd($code);
+
+        $prod=Producto::get_active_products()->get();//dd($codigo);
+        //$this->agregarProductoACarrito($producto);
+        //return redirect()->back()->with('success','Producto agregado correctamente');
+        //dd($code);
+
+        return redirect()->route('agregarProductoCompra',compact('codigo'));
+       }
+       //*********************************************************** */
     private function agregarProductoACarrito($producto)
     {
-        if ($producto->stock <=0) {
+        if ($producto->stock <0) {
             return redirect()->route("comprar.index")
                 ->with([
                     "mensaje" => "No hay existencias del producto",
@@ -128,11 +146,28 @@ class comprarController extends Controller
                         "mensaje" => "No se pueden agregar más productos de este tipo, se quedarían sin existencia",
                         "tipo" => "danger"
                     ]);
-            }//dd($productos[$posibleIndice]->cantidad);
+            }
+            //$cant = $request->post("cantidad");dd($cant);
+            //$productos[$posibleIndice]->$this->agregarCantidadProducto();
+            //dd($productos[$posibleIndice]->cantidad);
             $productos[$posibleIndice]->cantidad++;
         }
         $this->guardarProductos($productos);
     }
+    /******************************************************* */
+    public function agregarCantidadProducto(Request $request,$code){
+        $codigo=$code;
+        $producto = Producto::where("code", "=", $codigo)->first();
+        $cantidad=$request->post("cantidad");//dd($request);
+        $productos = $this->obtenerProductos();//dd($productos);
+        $posibleIndice = $this->buscarIndiceDeProducto($producto->code, $productos);
+        $productos[$posibleIndice]->cantidad+=$cantidad;
+        $this->guardarProductos($productos);
+        return redirect()->route("comprar.index");
+        //return redirect()->route('pasarIdc',compact('code'));
+    }
+    /**************************************************************** */
+
 
     private function buscarIndiceDeProducto(string $codigo, array &$productos)
     {
@@ -151,18 +186,26 @@ class comprarController extends Controller
      */
     public function index()
     {
-        $total = 0;
-        foreach ($this->obtenerProductos() as $producto) {
+        $categories=Category::get();
+
+        if($categories){
+        $prodo=Producto::get_active_products()->get();//dd($prod);
+        $prod=Producto::get();
+        $total = 0;$cant=0;
+        foreach ($this->obtenerProductos() as $producto) {//dd($producto->cantidad);
             $total += $producto->cantidad * $producto->precio_compra;//dd($total);
-            //$cant=$cant+$producto->cantidad;//dd($cant);
+            $cant+=$producto->cantidad;//dd($cant);
         }
 
         return view("amd.comprar.comprar",
             [
                 "total" => $total,
                 "providers" => Provider::all(),
-                //"cant"=>$cant,
+                "prod"=> $prod,
+                "cant"=>$cant,
+
 
             ]);
+        }
     }
 }

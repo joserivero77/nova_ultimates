@@ -125,9 +125,9 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Vistas:</h6>
                         <a class="collapse-item" href="{{ asset(route('comprar.index')) }}">Comprar</a>
-                        <a class="collapse-item" href="{{ asset(route('compras.index')) }}">Historial de compras</a>
+
                         <a class="collapse-item" href="{{ asset(route('vender.index')) }}">Vender</a>
-                        <a class="collapse-item" href="{{ asset(route('ventas.index')) }}">Historial de ventas</a>
+
                         <!--a class="collapse-item" href="login.html">Login</!--a>
                         <a class="collapse-item" href="register.html">Register</a>
                         <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
@@ -728,13 +728,14 @@
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            <footer class="sticky-footer bg-white">
+            @yield('footer')
+            <!--footer-- class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
                         <span>Copyright &copy; Website 2023</span>
                     </div>
                 </div>
-            </footer>
+            </!--footer-->
             <!-- End of Footer -->
 
         </div>

@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Client;
+use App\Models\Category;
 use App\Models\Cliente;
 use App\Models\Producto;
 use App\Models\ProductoVendido;
 use App\MOdels\Venta;
 use Illuminate\Http\Request;
+use App\Http\Requests\VenderStoreRequest;
 
 class VenderController extends Controller
 {
@@ -22,8 +23,11 @@ class VenderController extends Controller
     }
 
     public function terminarVenta(Request $request)
-    {
+    {//dd($request);
         // Crear una venta
+        $this->validate($request,[
+            "id_cliente"=>'required',
+        ]);
         $venta = new Venta();
         $venta->id_cliente = $request->input("id_cliente");
         $venta->saveOrFail();
@@ -101,11 +105,24 @@ class VenderController extends Controller
                 ->route("vender.index")
                 ->with("mensaje", "Producto no encontrado");
         }
+
         $this->agregarProductoACarrito($producto);
         return redirect()
             ->route("vender.index");
     }
+    //*************************************************************** */
+    public function pasarId($code){
 
+        $producto=Producto::get();
+        $clientes=Cliente::get();
+        $codigo=$code;
+        //dd($code);
+
+        $prod=Producto::get_active_products()->get();//dd($codigo);
+
+        return redirect()->route('agregarProductoVenta',compact('codigo'));
+       }
+       //*********************************************************** */
     private function agregarProductoACarrito($producto)
     {
         if ($producto->stock <= 0) {
@@ -133,7 +150,19 @@ class VenderController extends Controller
         }
         $this->guardarProductos($productos);
     }
-
+    /******************************************************* */
+    public function agregarCantidadProductov(Request $request,$code){
+        $codigo=$code;
+        $producto = Producto::where("code", "=", $codigo)->first();
+        $cantidad=$request->post("cantidad");//dd($request);
+        $productos = $this->obtenerProductos();//dd($productos);
+        $posibleIndice = $this->buscarIndiceDeProducto($producto->code, $productos);
+        $productos[$posibleIndice]->cantidad+=$cantidad;
+        $this->guardarProductos($productos);
+        return redirect()->route("vender.index");
+        //return redirect()->route('pasarId',compact('code'));
+    }
+    /**************************************************************** */
     private function buscarIndiceDeProducto(string $codigo, array &$productos)
     {
         foreach ($productos as $indice => $producto) {
@@ -151,6 +180,11 @@ class VenderController extends Controller
      */
     public function index()
     {
+        $categories=Category::get();
+
+        if($categories){
+        $prodo=Producto::get_active_products()->get();//dd($prod);
+        $prod=Producto::get();
         $total = 0;$cant=0;
         foreach ($this->obtenerProductos() as $producto) {
             $total += $producto->cantidad * $producto->precio_venta;
@@ -161,8 +195,10 @@ class VenderController extends Controller
             [
                 "total" => $total,
                 "clientes" => Cliente::all(),
+                "prod"=>$prod,
                 "cant"=>$cant,
 
             ]);
+        }
     }
 }

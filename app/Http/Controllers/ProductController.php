@@ -43,6 +43,8 @@ class ProductController extends Controller
            return $pdf->stream('ReporteCatalogoProductos.pdf');
        }
 
+
+
     /**
      * Show the form for creating a new resource.
      *
