@@ -12,6 +12,8 @@ class ExchangeRateController extends Controller
         $baseCurrency = $request->input('base_currency');
         $targetCurrency = $request->input('target_currency');
 
+
+
         $url = 'https://www.bcv.org.ve/tasas-de-cambio/dolar-paralelo/';
 
         $response = Http::get($url);

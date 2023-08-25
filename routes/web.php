@@ -21,8 +21,7 @@ use App\Http\Controllers\ComprarController;
 use App\Http\Controllers\ComprasController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ExchangeRateController;
-
-
+use App\Http\Controllers\ReportController;
 use Barryvdh\DomPdf\Facade\Pdf;
 
 /*
@@ -47,6 +46,11 @@ Route::get('/', function () {
 //Route::resource('almacen/categoria','CategoriaController');
 //Route::resource('almacen/categoria', CategoriaController::class);
 Auth::routes();
+
+Route::get('ventas/reporte_dia', [ReportController::class,'reporte_dia'])->name('reporte.dia');
+Route::get('ventas/reporte_fecha', [ReportController::class,'reporte_fecha'])->name('reporte.fecha');
+Route::post('ventas/reporte_results', [ReportController::class,'reporte_results'])->name('reporte.results');
+
 Route::get('categories/pdf2',[Controller::class,'imprimir'])->name('imprimir');
 Route::get('visita/visitas/pdf',[VisitaController::class, 'imprimir'])->name('visitas.pdf');
 Route::get('categories/pdf',[CategoryController::class, 'imprime'])->name('category.pdf');
@@ -100,7 +104,7 @@ Route::resource('shopping_cart_detail','ShoppingCartDetailController')->only('st
         Route::get("/productoDeCompra", [ComprarController::class, 'agregarProductoCompra'])->name("agregarProductoCompra");
         Route::delete("/productoDeCompra", [ComprarController::class,'quitarProductoDeCompra'])->name("quitarProductoDeCompra");
         Route::post("/terminarOCancelarCompra", [ComprarController::class, 'terminarOCancelarCompra'])->name("terminarOCancelarCompra");
-        Route::post("/agregarCantidadProducto/{code}", [ComprarController::class, 'agregarCantidadProducto'])->name("agregarCantidadProducto");
+        Route::post("/agregarCantidadProductoc/{code}", [ComprarController::class, 'agregarCantidadProductoc'])->name("agregarCantidadProductoc");
 
 
 

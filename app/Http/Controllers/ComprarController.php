@@ -155,7 +155,7 @@ class comprarController extends Controller
         $this->guardarProductos($productos);
     }
     /******************************************************* */
-    public function agregarCantidadProducto(Request $request,$code){
+    public function agregarCantidadProductoc(Request $request,$code){
         $codigo=$code;
         $producto = Producto::where("code", "=", $codigo)->first();
         $cantidad=$request->post("cantidad");//dd($request);

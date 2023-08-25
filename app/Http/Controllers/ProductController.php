@@ -94,6 +94,7 @@ class ProductController extends Controller
     public function show(Producto $product)
     {
         //
+        $pro=Producto::find($product->id);
         return view('amd.product.show',compact('product'));
     }
 

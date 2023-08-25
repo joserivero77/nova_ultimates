@@ -1,5 +1,11 @@
 @extends("layouts.amd")
 @section("titulo", "Realizar compra")
+@section('stylescss')
+<style>
+.card-menos{
+    display: none;
+}
+</style>
 @section("content")
 <div>
     <div class="">
@@ -36,8 +42,7 @@
                 <div class="row">
                     <div class=" col-10">
                         <strong>
-                            <a href="#" data-toggle="modal" data-target="#createmodal" class="nav-link"><span
-                                class="">CATALOGO DE PRODUCTOS</span></a>
+                            CATALOGO DE PRODUCTOS
                         </strong>
 
                         <!----------------------------------------------------------------------->
@@ -109,7 +114,7 @@
     <div class="row">
         <!--tarjetas del catalogo-->
         <div class="">
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xxl-4 col-4">
+            <div class="col-lg-12 col-md-3 col-sm-3 col-xl-12 col-xxl-12">
                 @foreach ($prod as $pro )
             <div class="card text-center justify-center align-content-center align-content-lg-center align-content-xl-between align-content-xxl-between align-content-md-around align-content-sm-start" style="width: 200px">
                         <div class="container align-content-center">
@@ -117,7 +122,7 @@
                                 src="{{ asset('/image') }}/{{ $pro->image }}"
                                 alt="Title"
                                 title="Categoria"
-                                style="height: 80px;width: 80px;"
+                                style="height: 100px;width: 120px;"
                                 data-toggle="popover"
                                 data-trigger="hover"
                                 data-content="{{ $pro->description }}">
@@ -136,7 +141,7 @@
                                                 type="submit"
                                                 name=""
                                                 value="Agregar"
-                                                role="button">Agregar al carrito</button>
+                                                role="button">Agregar al carrito2</button>
                                             </div>
                                 </form>
                             </div>
@@ -216,7 +221,7 @@
                                 <td>{{$producto->cantidad}}</td>
                                 <td>Bs{{ number_format($producto->cantidad*$producto->precio_compra,2) }}</td>
 
-                                            <form action="{{route("agregarCantidadProducto",$producto->code)}}" method="post">
+                                            <form action="{{route("agregarCantidadProductoc",$producto->code)}}" method="post">
                                                 @csrf
                                                 <div class="form-group">
                                                     <!--label-- for="codigo">Código del producto</!--label-->
@@ -276,6 +281,7 @@
             console.log("listo para registrar proveedor");
         }else{
             console.log("Debe seleccionar un proveedor");
+            alert('ATENCION:Debe selccionar un proveedor');
         }
         form.classList.add("was-validated");
     });
