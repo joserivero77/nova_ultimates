@@ -1,4 +1,4 @@
-<form action="" method="" enctype="multipart/form-data">
+<form action="" method="" >
     @csrf
     <!-- Modal Body -->
     <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
@@ -93,8 +93,9 @@
                                                                     Agregar al carrito
                                                                 </a>-->
                                                     </p>
-                                                    <form action="{{ route('pasarId', $pro->code) }}" method="post">
-                                                        @csrf
+                                                    <form action="{{ route('pasarId', $pro->code) }}"
+                                                        method="post" enctype="multipart/form-data">
+
                                                         <div class="form-group">
                                                             <button class="btn btn-primary text-center btn-block"
                                                                 type="submit" name="" value="Agregar"
