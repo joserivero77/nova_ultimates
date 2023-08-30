@@ -50,12 +50,12 @@
                                     <td>Bs{{number_format($venta->totalfinal, 2)}}</td>
                                     <td>{{number_format($venta->vent)}}</td>
                                     <td style="margin-left: 50px">
-                                        <a class="btn btn-info" href="">
+                                        <a class="btn btn-info btn-sm" href="">
                                             <i class="fa fa-print"></i>
                                         </a>
                                     </td>
                                     <td style="width: 20px">
-                                        <a class="btn btn-success" href="{{route("ventas.show", $venta)}}">
+                                        <a class="btn btn-success btn-sm" href="{{route("ventas.show", $venta)}}">
                                             <i class="fa fa-info"></i>
                                         </a>
                                     </td>
@@ -63,7 +63,7 @@
                                         <form action="{{route("ventas.destroy", [$venta])}}" method="post">
                                             @method("delete")
                                             @csrf
-                                            <button type="submit" class="btn btn-danger">
+                                            <button type="submit" class="btn btn-danger btn-sm">
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         </form>

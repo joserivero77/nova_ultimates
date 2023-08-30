@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Factura extends Model
+class Pago extends Model
 {
     use HasFactory;
     protected $guarded=[];
@@ -32,9 +32,12 @@ class Factura extends Model
     }
     public function venta()
     {
-        return $this->belongsTo(Factura::class, 'id_venta');
+        return $this->belongsTo(Venta::class, 'id_venta');
     }
-
+    public function productosv()
+    {
+        return $this->hasMany("App\Models\ProductoVendido", "id_venta");
+    }
 
 
 

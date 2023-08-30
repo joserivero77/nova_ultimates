@@ -46,12 +46,12 @@
                             <td>Bs{{number_format($compra->total, 2)}}</td>
                             <td>{{number_format($compra->cante)}}</td>
                             <td style="width: 50px">
-                                <a class="btn btn-info" href="">
+                                <a class="btn btn-info btn-sm" href="">
                                     <i class="fa fa-print"></i>
                                 </a>
                             </td>
                             <td style="width: 20px">
-                                <a class="btn btn-success" href="{{route("compras.show", $compra)}}">
+                                <a class="btn btn-success btn-sm" href="{{route("compras.show", $compra)}}">
                                     <i class="fa fa-info"></i>
                                 </a>
                             </td>
@@ -59,7 +59,7 @@
                                 <form action="{{route("compras.destroy", [$compra])}}" method="post">
                                     @method("delete")
                                     @csrf
-                                    <button type="submit" class="btn btn-danger">
+                                    <button type="submit" class="btn btn-danger btn-sm">
                                         <i class="fa fa-trash"></i>
                                     </button>
                                 </form>

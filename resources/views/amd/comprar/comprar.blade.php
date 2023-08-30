@@ -2,6 +2,12 @@
 @section("titulo", "Realizar compra")
 @section('stylescss')
 <style>
+.overflow-scroll{
+    overflow: auto;
+    width: 230px;
+    height: 300px;
+    border: 1px solid blue;
+}
 .card-menos{
     display: none;
 }
@@ -53,7 +59,7 @@
                                 <div class="col-lg-3 col-sm-4 col-md-4 col-xl-3 col-xxl-3 col-4">
                                     <!-- Content Wrapper -->
                                     <div class="dropdown open">
-                                        <a href="#" class=" btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                                        <a href="#" class=" btn btn-primary dropdown-toggle btn-sm" data-toggle="dropdown"
                                         aria-haspopup="true" type="button" id="triggerId" aria-expanded="false"><i class="fa fa-shopping-cart"></i>
 
                                             Car<span class="badge badge-pill badge-danger">{{ $cant }}</span>
@@ -113,7 +119,7 @@
 
     <div class="row">
         <!--tarjetas del catalogo-->
-        <div class="">
+        <div class="overflow-scroll">
             <div class="col-lg-12 col-md-3 col-sm-3 col-xl-12 col-xxl-12">
                 @foreach ($prod as $pro )
             <div class="card text-center justify-center align-content-center align-content-lg-center align-content-xl-between align-content-xxl-between align-content-md-around align-content-sm-start" style="width: 200px">
@@ -137,11 +143,11 @@
                                 <form action="{{route("pasarIdc",$pro->code)}}" method="post">
                                         @csrf
                                             <div class="form-group">
-                                                <button class="btn btn-primary text-center btn-block"
+                                                <button class="btn btn-primary text-center btn-block btn-sm"
                                                 type="submit"
                                                 name=""
                                                 value="Agregar"
-                                                role="button">Agregar al carrito2</button>
+                                                role="button">Agregar al carrito</button>
                                             </div>
                                 </form>
                             </div>
@@ -169,10 +175,10 @@
                         </div>
                         @if(session("productosc") !== null)
                             <div class="form-group">
-                                <button name="accion" value="terminar" id="terminar" type="submit" class="btn btn-success">Terminar
+                                <button name="accion" value="terminar" id="terminar" type="submit" class="btn btn-success btn-sm">Terminar
                                     compra
                                 </button>
-                                <button name="accion" value="cancelar" type="submit" class="btn btn-danger">Cancelar
+                                <button name="accion" value="cancelar" type="submit" class="btn btn-danger btn-sm">Cancelar
                                     compra
                                 </button>
                             </div>
@@ -233,7 +239,7 @@
                                                     placeholder="" min="1">
                                                     </td>
                                                     <td style="width: 5%">
-                                                        <button type="submit" class="btn btn-warning">
+                                                        <button type="submit" class="btn btn-warning btn-sm">
                                                             +
                                                         </button>
                                                     </td>

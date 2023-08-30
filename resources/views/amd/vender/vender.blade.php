@@ -2,6 +2,13 @@
 @section('titulo', 'Realizar venta')
 @section('stylescss')
     <style>
+        .overflow-scroll {
+            overflow: auto;
+            width: 240px;
+            height: 300px;
+            border: 1px solid blue;
+        }
+
         .formulario .vuelto {
             display: inline-block;
         }
@@ -73,6 +80,14 @@
         .formulario .diferencia {
             display: none;
         }
+
+        .formulario .descripcionLabel {
+            display: none;
+        }
+
+        .formulario .descripcion {
+            display: none;
+        }
     </style>
 
 
@@ -131,7 +146,7 @@
                                     <div class="col-lg-3 col-sm-4 col-md-4 col-xl-3 col-xxl-3 col-4">
                                         <!-- Content Wrapper -->
                                         <div class="dropdown open">
-                                            <a href="#" class=" btn btn-primary dropdown-toggle"
+                                            <a href="#" class=" btn btn-primary dropdown-toggle btn-sm"
                                                 data-toggle="dropdown" aria-haspopup="true" type="button" id="triggerId"
                                                 aria-expanded="false"><i class="fa fa-shopping-cart"></i>
 
@@ -200,7 +215,6 @@
             </div>
 
 
-
             <div class="row">
 
                 <<div class=" overflow-scroll">
@@ -225,7 +239,7 @@
                                         <form action="{{ route('pasarId', $pro->code) }}" method="post">
                                             @csrf
                                             <div class="form-group">
-                                                <button class="btn btn-primary text-center btn-block" type="submit"
+                                                <button class="btn btn-primary text-center btn-block btn-sm" type="submit"
                                                     name="" value="Agregar" role="button">Agregar al
                                                     carrito</button>
                                             </div>
@@ -258,11 +272,11 @@
                             @if (session('productos') !== null)
                                 <div class="form-group">
                                     <button name="accion" value="terminar" id="terminar" type="submit"
-                                        class="btn btn-success">Terminar
+                                        class="btn btn-success btn-sm">Terminar
                                         venta
                                     </button>
                                     <button name="accion" value="cancelar" type="submit"
-                                        class="btn btn-danger">Cancelar
+                                        class="btn btn-danger btn-sm">Cancelar
                                         venta
                                     </button>
 
@@ -271,11 +285,11 @@
                         </form>
                     </div>
                     <!--div-- class="form-group">
-                        @if (session('productos') !== null)
-                            <button data-toggle="modal" data-target="#createmodal" class="btn btn-warning">Pagar
-                            </button>
-                        @endif
-                    </!--div-->
+                                @if (session('productos') !== null)
+    <button data-toggle="modal" data-target="#createmodal" class="btn btn-warning">Pagar
+                                    </button>
+    @endif
+                            </!--div-->
 
 
 
@@ -284,17 +298,18 @@
                 </div>
 
                 <!--div class="">
-                            <form action="{{ route('agregarProductoVenta') }}" method="post">
-                                @csrf
-                                <div class="form-group">
-                                    <label for="codigo">Código del producto</label>
-                                    <input id="codigo" autocomplete="off" required autofocus name="codigo" type="text"
-                                           class="form-control"
-                                           placeholder="">
+                                    <form action="{{ route('agregarProductoVenta') }}" method="post">
+                                        @csrf
+                                        <div class="form-group">
+                                            <label for="codigo">Código del producto</label>
+                                            <input id="codigo" autocomplete="off" required autofocus name="codigo" type="text"
+                                                   class="form-control"
+                                                   placeholder="">
 
-                                </div>
-                            </form>
-                        </!--div-->
+                                        </div>
+                                    </form>
+                                </!--div-->
+
 
 
 
@@ -305,14 +320,15 @@
                             <div class="col-4">
                                 <h2>Total: Bs{{ number_format($total, 2) }}</h2>
                             </div>
-                            <div class="col-8">
+                            <!--div class="col-8">
                                 <div class="form-group">
                                     @if (session('productos') !== null)
-                                        <button data-toggle="modal" data-target="#createmodal" class="btn btn-warning">Pagar
+                                        <button data-toggle="modal" data-target="#createmodal"
+                                            class="btn btn-warning">Pagar
                                         </button>
                                     @endif
                                 </div>
-                            </div>
+                            </!--div-->
                         </div>
                     </div>
                     <div class="table-responsive">
@@ -349,7 +365,7 @@
                                                         placeholder="" min="1">
                                                 </td>
                                                 <td style="width: 5%">
-                                                    <button type="submit" class="btn btn-warning">
+                                                    <button type="submit" class="btn btn-warning btn-sm">
                                                         +
                                                     </button>
                                                 </td>
@@ -363,7 +379,7 @@
                                                 @method('delete')
                                                 @csrf
                                                 <input type="hidden" name="indice" value="{{ $loop->index }}">
-                                                <button type="submit" class="btn btn-danger">
+                                                <button type="submit" class="btn btn-danger btn-sm">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                             </form>
@@ -384,8 +400,10 @@
     </div>
     </div>
 
-    @include('amd.vender.modal.pago')
+
+
     @include('amd.vender.modal.catalogo')
+
 @endsection
 @section('scripts')
     <script src="js/bootstrap.bundle.min.js"></script>

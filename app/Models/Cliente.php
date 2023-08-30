@@ -21,5 +21,14 @@ class Cliente extends Model
     public function category(){
         return $this->belongsTo(Category::class);
     }
+    public function ventas()
+    {
+        return $this->hasMany(Venta::class, 'id_cliente');
+    }
+
+    public function pagos()
+    {
+        return $this->hasMany(Pago::class, 'id_cliente');
+    }
 
 }

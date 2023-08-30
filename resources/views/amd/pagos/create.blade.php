@@ -17,7 +17,7 @@
                         <div class=" col-md-12 grid-margin stretch-card">
                             <div class="card">
                                 <div class="card-body">
-                                    {!! Form::open(['route' => 'pago.store', 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
+                                    {!! Form::open(['route' => 'pagos.store', 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
                                     @csrf
                                     <div class="form-group">
                                         <label for="id_venta">Venta</label>
@@ -46,18 +46,30 @@
                                     <div class="container">
                                         <div class="row">
                                             <div class="col-8">
-                                                <div class="mb-1">
+                                                <div class="form-group">
+                                                    <label for="monto">Monto</label>
+                                                    <label for="" id="totalLabel">/Ref_<p
+                                                        id="total$"></p>
+                                                </label>
+                                                    <select class="form-control" id="monto" name="monto" required>
+                                                        <option value="">Seleccione una venta</option>
+                                                        @foreach($totales as $total)
+                                                            <option value="{{ number_format($total->total,2) }}">Fact#->{{ $total->id }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <!--div class="mb-1">
                                                     <label for="" class="form-label text-danger">Monto Bs
                                                     </label>
                                                     <label for="" class="form-label text-white badge-dark "
                                                         id="monto">
-                                                        <h3><b> {{ number_format($total, 2) }}</b>
+                                                        <h3><b> </b>
                                                             <label for="" id="totalLabel">/Ref_<p
                                                                     id="total$"></p>
                                                             </label>
                                                         </h3>
                                                     </label>
-                                                </div>
+                                                </!--div-->
                                             </div>
                                             <div class=" col-4 mb-1">
                                                 <label for="" class="form-label" id="tasa1">Tasa de
@@ -66,11 +78,7 @@
                                                     placeholder="" aria-describedby="helpId">
                                                 <div>
                                                     <div class="mb-3">
-                                                      <label for="" class="form-label">Cliente Nro.</label>
-                                                      <input type="text"
-                                                        class="form-control" name="id_venta" id="" value=""  aria-describedby="helpId" placeholder="">
-                                                      <small id="helpId" class="form-text text-muted">Help text</small>
-                                                    </div>
+
                                                 </div>
                                             </div>
 
@@ -182,7 +190,7 @@
 
                                     <button type="submit" class="btn btn-primary mr-2 btn-sm"
                                         style="font-size: 1rem;">Facturar</button>
-                                    <a href="{{ route('vender.index') }}" class="btn btn-danger">Cancelar</a>
+                                    <a href="" class="btn btn-danger">Cancelar</a>
 
                                 </div>
 
@@ -211,6 +219,15 @@
     document.getElementById('descripcion');
     document.getElementById('descripcionLabel').style.display = 'none';
     document.getElementById('descripcion').style.display = 'none';
+    var tot=document.getElementById('monto');
+    document.getElementById('monto').addEventListener('click',captamonto);
+    function captamonto(){
+        let timp=document.getElementById("monto").value;
+        tot=parseFloat(timp);
+        console.log('monto: '+tot);
+    }
+
+
     divis1.style.display = 'none';
     divis2.style.display = 'none';
     vuelto.style.display = 'none';
@@ -249,7 +266,7 @@
             document.getElementById('tasa').style.display = 'block';
             document.getElementById('descripcion').value = "";
         }
-        if (inlineRadio1.checked = true && checkbox1.checked) {
+        if (inlineRadio1.checked == true && checkbox1.checked) {
             document.getElementById('descripcionLabel').style.display = 'block';
             document.getElementById('descripcion').style.display = 'block';
         } else {
@@ -324,13 +341,13 @@
             document.getElementById('descripcionLabel').style.display = 'block';
             document.getElementById('descripcion').style.display = 'block';
             let cambia
-            cambia = ({{ $total }} / tasa1).toFixed(2);
+            let tot=document.getElementById("monto").value;
+        total=parseFloat(tot);
+            cambia = (total / tasa1).toFixed(2);
             if (nn2 < parseInt(cambia)) {
-                //resta.innerText = deuda;
-                //console.log('cambia '+cambia+' divisa '+nn2+' (<0)'+deuda+' debito '+debito2);
+
             } else {
                 debito3.style.display = 'none';
-                //resta.innerHtml=0;//console.log('cambia '+cambia+' divisa '+nn2+' (>=0)'+deuda);
             }
 
         } else {
@@ -338,7 +355,7 @@
             debito3.style.display = 'none';
             document.getElementById('debito3').value = "";
             let cambia
-            cambia = ({{ $total }} / tasa1).toFixed(2); //console.log('cambia '+cambia+' divisa '+nn2+' (=)');
+            cambia = (total / tasa1).toFixed(2); //console.log('cambia '+cambia+' divisa '+nn2+' (=)');
             if (nn2 = parseInt(cambia)) {
                 //resta.innerText = deuda;
             }
@@ -351,7 +368,9 @@
         const tas = tasa.value;
         const nn2 = n2.value;
         tasa1 = parseFloat(tas);
-        cambio = ({{ $total }} / tasa1).toFixed(2);
+        cambio = (total / tasa1).toFixed(2);
+        //let tot=document.getElementById("monto").value;
+        total=parseFloat(tot);
         if (!checkbox1.checked) {
             deuda = (deuda - debito2).toFixed(2);
             eqBs = (deuda * tasa1).toFixed(2);
@@ -370,7 +389,9 @@
         const tas = tasa.value;
         let cambio;
         tasa1 = parseFloat(tas);
-        cambio = ({{ $total }} / tasa1).toFixed(2);
+        let tot=document.getElementById("monto").value;
+        total=parseFloat(tot);
+        cambio = (total / tasa1).toFixed(2);
         total$.innerText = cambio;
         //console.log('cambio$' + cambio);
 
@@ -404,7 +425,9 @@
         n4 = parseInt(cambio) - parseInt(nn2); //resta de parte entera de monto$ y divisa para obtener vuelto
         deuda = (cambio - parseInt(nn2)).toFixed(2); //resta para obtener deuda
         let decimal;
-        decimal = parseFloat({{ $total }}) - parseInt({{ $total }});
+        //let tot=document.getElementById("monto").value;
+        total=parseFloat(tot);
+        decimal = parseFloat(total) - parseInt( total );
 
         //console.log('debito:' + debito2 + ' deuda_decimal: ' + deuda + ' deuda_entera ' + n4+' nn2: '+nn2+' cambio '+cambio);
 
@@ -595,8 +618,10 @@
         let diferencia;
         paypal = parseFloat(parcialBs.value);
         console.log('pay:' + paypal);
-        diferencia = ({{ $total }} - paypal).toFixed(2);
-        if (paypal < {{ $total }}) {
+        let tot=document.getElementById("monto").value;
+        total=parseFloat(tot);
+        diferencia = (total - paypal).toFixed(2);
+        if (paypal < total ) {
             document.getElementById('pagoLabel').innerText = 'Pago parcial';
         } else {
             document.getElementById('pagoLabel').innerText = 'Pagado Bs';

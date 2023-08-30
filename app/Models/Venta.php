@@ -10,11 +10,16 @@ class Venta extends Model
     {
         return $this->hasMany("App\Models\ProductoVendido", "id_venta");
     }
-
     public function cliente()
     {
-        return $this->belongsTo("App\Models\Cliente", "id_cliente");
+        return $this->belongsTo(Cliente::class, 'id_cliente');
     }
+
+    public function pagos()
+    {
+        return $this->hasMany(Pago::class, 'id_venta');
+    }
+
 
     public function user(){
         return $this->belongsTo(User::class);

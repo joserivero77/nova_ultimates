@@ -21,6 +21,7 @@ use App\Http\Controllers\ComprarController;
 use App\Http\Controllers\ComprasController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ExchangeRateController;
+use App\Http\Controllers\PagoController;
 use App\Http\Controllers\ReportController;
 use Barryvdh\DomPdf\Facade\Pdf;
 
@@ -105,7 +106,11 @@ Route::resource('shopping_cart_detail','ShoppingCartDetailController')->only('st
         Route::delete("/productoDeCompra", [ComprarController::class,'quitarProductoDeCompra'])->name("quitarProductoDeCompra");
         Route::post("/terminarOCancelarCompra", [ComprarController::class, 'terminarOCancelarCompra'])->name("terminarOCancelarCompra");
         Route::post("/agregarCantidadProductoc/{code}", [ComprarController::class, 'agregarCantidadProductoc'])->name("agregarCantidadProductoc");
-
+        //Route::get('/pagos',[PagoController::class,'index'])->name('pago.index');
+        //Route::get('/pagos/create',[PagoController::class,'create'])->name('pago.create');
+        //Route::post('/pagos/create', [PagoController::class, 'create'])->name('pago.create');
+        //Route::post('/pagos', [PagoController::class, 'store'])->name('pago.store');
+        Route::resource('/pagos',PagoController::class);
 
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
