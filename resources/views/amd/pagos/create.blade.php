@@ -1,4 +1,4 @@
-<form action="" method="" enctype="multipart/form-data" id="formulario">
+<form action="{{route("pagos.store")}}" method="post" enctype="multipart/form-data" id="formulario">
     <!-- Modal Body -->
     <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
     <div class="modal fade text-left" id="createmodal" tabindex="-1" data-bs-keyboard="true" data-backdrop="static"
@@ -17,81 +17,86 @@
                         <div class=" col-md-12 grid-margin stretch-card">
                             <div class="card">
                                 <div class="card-body">
-                                    {!! Form::open(['route' => 'pagos.store', 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
+
+                                    <form action="" method="post">
                                     @csrf
-                                    <div class="form-group">
-                                        <label for="id_venta">Venta</label>
-                                        <select class="form-control" name="id_venta" id="id_venta" required>
-                                            <option></option>
-                                            @foreach ($ventas as $venta)
-                                                <option value="{{ $venta->id }}">{{ $venta->cliente->name }}->Fact#{{ $venta->id }}</option>
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="id_venta" class="text-info">Cliente/Factura</label>
+                                                    <select class="form-control" name="id_venta" id="id_venta" required placeholder="Seleccione un Cliente">
+                                                        <option></option>
+                                                        @foreach ($ventas as $venta)
+                                                            <option value="{{ $venta->id }}">
+                                                                {{ $venta->cliente->name }}->Fact#{{ $venta->id }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    <div class="invalid-feedback">Debe seleccionar un cliente</div>
+                                                </div>
+                                            </div>
+                                            @foreach ($pagos as $pago )
+
+
+                                            @if ($pago->deuda!=0)
+                                                <div class="alert alert-primary" role="alert">
+                                                    <strong>{{ $pago->deuda }}</strong> Some
+                                                </div>
+
+                                            @else
+                                            <div class="alert alert-primary" role="alert">
+                                                <strong>PAGADO</strong> Some Word
+                                            </div>
+                                            @endif
                                             @endforeach
-                                        </select>
-                                        <div class="invalid-feedback">Debe seleccionar un cliente</div>
+
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="monto" class="form-label text-info">Factura a pagar</label>
+                                                    <select class="form-control" id="monto" name="monto1" required>
+                                                        <option value="">Seleccione una factura</option>
+                                                        @foreach ($totales as $total)
+                                                            <option value="{{ ($total->total) }}">
+                                                                Fact#->{{ $total->id }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+
+
+
+
+                                        </div>
                                     </div>
-                                    <!--div-- class="form-group">
-                                        <label for="id_venta">Monto</label>
-                                        <select class="form-control" name="monto" id="monto" required>
-                                            <option></option>
-                                            @foreach($ventas as $totali)
-                                                <option value="{{ $totali->id }}">{{ number_format($totali->total,2) }}->fact#{{ $totali->id }}</option>
-                                            @endforeach
-                                        </select>
-                                        <label for="" id="totalLabel">/Ref_<p
-                                            id="total$"></p>
-                                    </label>
-                                        <div class="invalid-feedback">Debe seleccionar un cliente</div>
-                                    </!--div-->
+
 
                                     <div class="container">
                                         <div class="row">
                                             <div class="col-8">
                                                 <div class="form-group">
-                                                    <label for="monto">Monto</label>
-                                                    <label for="" id="totalLabel">/Ref_<p
-                                                        id="total$"></p>
-                                                </label>
-                                                    <select class="form-control" id="monto" name="monto" required>
-                                                        <option value="">Seleccione una venta</option>
-                                                        @foreach($totales as $total)
-                                                            <option value="{{ number_format($total->total,2) }}">Fact#->{{ $total->id }}</option>
-                                                        @endforeach
-                                                    </select>
+                                                    <h5><label for="" class="form-label text-danger">Monto Bs
+                                                    </label><label for="" name="totalLabel"  id="totalLabel"class="form-label text-white badge-dark ">/Ref_<p id=""></p>
+                                                    </label><label for="" id="">/Ref_<p id="total$"></p>
+                                                    </label></h5>
                                                 </div>
-                                                <!--div class="mb-1">
-                                                    <label for="" class="form-label text-danger">Monto Bs
-                                                    </label>
-                                                    <label for="" class="form-label text-white badge-dark "
-                                                        id="monto">
-                                                        <h3><b> </b>
-                                                            <label for="" id="totalLabel">/Ref_<p
-                                                                    id="total$"></p>
-                                                            </label>
-                                                        </h3>
-                                                    </label>
-                                                </!--div-->
                                             </div>
                                             <div class=" col-4 mb-1">
                                                 <label for="" class="form-label" id="tasa1">Tasa de
                                                     cambio</label>
                                                 <input type="text" name="tasa" id="tasa" class="form-control"
-                                                    placeholder="" aria-describedby="helpId">
-                                                <div>
-                                                    <div class="mb-3">
+                                                    placeholder="" aria-describedby="helpId" required>
 
-                                                </div>
                                             </div>
 
-
                                             <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                                    id="inlineRadio1" value="option1">
+                                                <input class="form-check-input" type="radio"
+                                                    name="inlineRadioOptions" id="inlineRadio1" value="option1">
                                                 <label class="form-check-label text-primary"
                                                     for="inlineRadio1">Referencia $</label>
                                             </div>
                                             <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                                    id="inlineRadio2" value="option2">
+                                                <input class="form-check-input" type="radio"
+                                                    name="inlineRadioOptions" id="inlineRadio2" value="option2">
                                                 <label class="form-check-label text-primary" for="inlineRadio2">Pago
                                                     Bs</label>
                                             </div>
@@ -103,128 +108,128 @@
                                                     Bs</label>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <!--<div class="container">
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <div class="">
-                                                    <label for="" class="form-label" id="divis1">Divisa
-                                                        $</label>
-                                                    <input type="text" name="divisa" id="diviza" class="form-control"
-                                                        placeholder="Ingrese solo numeros enteros 1,2,3..."
-                                                        aria-describedby="helpId">
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="">
-                                                    <label for="" class="form-label" id="debito1">Monto Debito Bs</label>
-                                                    <input type="number" name="debito2" id="debito3" class="form-control"
-                                                        placeholder="" aria-describedby="helpId" autocomplete="false">
-                                                </div>
-                                            </div>
+                                        <div class="mb-1">
+                                            <label for="" class="form-label" id="divis1">Divisa
+                                                $</label>
+                                            <input type="number" name="divisa" id="diviza" class="form-control"
+                                                placeholder="Ingrese solo numeros enteros 1,2,3..."
+                                                aria-describedby="helpId">
+                                            <label for="" class="form-label" id="debito1">Monto Debito
+                                                Bs</label>
+                                            <input type="text" name="debito2" id="debito3" class="form-control"
+                                                placeholder="" aria-describedby="helpId" autocomplete="false">
+
                                         </div>
-                                    </div>-->
-                                    <div class="mb-1">
-                                        <label for="" class="form-label" id="divis1">Divisa
-                                            $</label>
-                                        <input type="text" name="divisa" id="diviza" class="form-control"
-                                            placeholder="Ingrese solo numeros enteros 1,2,3..."
-                                            aria-describedby="helpId">
-                                        <label for="" class="form-label" id="debito1">Monto Debito
-                                            Bs</label>
-                                        <input type="number" name="debito2" id="debito3" class="form-control"
-                                            placeholder="" aria-describedby="helpId" autocomplete="false">
+                                        <div class="mb-1">
+                                            <label for="vuelto" class="form-label" id="vuelto2"><small><b>Vuelto:
+                                                        $<label class="text-info"
+                                                            id="vuelto"></label></b></small></label>
+                                            <label for="" class="form-label" id="resta2"><small><b>Resta:
+                                                        $<label class="text-danger"
+                                                            id="resta" name="resta"></label></b></small></label>
+
+                                            <label for="" class="form-label"
+                                                id="eq1"><small><b>Equivalente
+                                                        a Bs
+                                                        <label class="text-info" name="eqBs"
+                                                            id="eqBs"></label></b></small></label>
+                                        </div>
+
+                                        <div class="mb-1">
+                                            <label for="" class="form-label" id="parcialLabel">Pago Realizado
+                                                Bs</label>
+                                            <input type="text" name="parcialBs" id="parcialBs"
+                                                class="form-control" placeholder="" aria-describedby="helpId"
+                                                autocomplete="false">
+                                        </div>
+                                        <div class="mb-1">
+                                            <input type="text" name="deuda" id="deud" hidden
+                                                class="form-control" placeholder="" aria-describedby="helpId"
+                                                autocomplete="false">
+                                        </div>
+                                        <div class="mb-1">
+                                            <input type="text" name="diferen" id="diferen" hidden
+                                                class="form-control" placeholder="" aria-describedby="helpId"
+                                                autocomplete="false">
+                                        </div>
+                                        <label for="" class="form-label"
+                                            id="diferenciaLabel"><small><b>Resta:  Bs<label class="text-danger" id="diferencia"
+                                                        name="diferencia"></label></b></small></label>
+
+                                        <div class="mb-3">
+                                            <label for="" class="form-label" id="descripcionLabel">Detalle
+                                                del  pago</label>
+                                            <textarea class="form-control" name="description" id="descripcion" rows="3"
+                                                placeholder="Ejemplo: Pago movil Banco por Bs: X.XXX.XXX,XX tlf: 041X-XXXXXXX Ref: 0001452321522 en fecha:12-08-18"
+                                                aria-describedby="helpId" autocomplete="false"></textarea>
+                                        </div>
+
+                                        <div class="mb-1">
+                                            <label for="" class="form-label text-bg-primary"
+                                                id="pagoLabel">Pago total Bs</label>
+                                            <input type="text" name="pago_parcial" id="pago" class="form-control"
+                                                placeholder="" aria-describedby="helpId" autocomplete="false">
+                                        </div>
+
+                                        <br>
+
+
+
+
+
+                                        <div class="form-group">
+                                            <label for="id_cliente">ID Cliente:</label>
+                                            <select name="id_cliente" id="id_cliente" class="form-control">
+                                                <option value="">Seleccione un cliente</option>
+                                                @foreach($ventas as $venta)
+                                                    <option value="{{ $venta->cliente->id }}">{{ $venta->cliente->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary mr-2 btn-sm"
+                                            style="font-size: 1rem;">Facturar</button>
+                                        <a href="" class="btn btn-danger btn-sm">Cancelar</a>
 
                                     </div>
-                                    <div class="mb-1">
-                                        <label for="vuelto" class="form-label" id="vuelto2"><small><b>Vuelto:
-                                                    $<label class="text-info"
-                                                        id="vuelto"></label></b></small></label>
-                                        <label for="" class="form-label" id="resta2"><small><b>Resta:
-                                                    $<label class="text-danger"
-                                                        id="resta"></label></b></small></label>
 
-                                        <label for="" class="form-label" id="eq1"><small><b>Equivalente
-                                                    a Bs
-                                                    <label class="text-info" name="eqBs"
-                                                        id="eqBs"></label></b></small></label>
-                                    </div>
-
-                                    <div class="mb-1">
-                                        <label for="" class="form-label" id="parcialLabel">Pago Realizado
-                                            Bs</label>
-                                        <input type="text" name="parcialBs" id="parcialBs" class="form-control"
-                                            placeholder="" aria-describedby="helpId" autocomplete="false">
-                                    </div>
-                                    <label for="" class="form-label" id="diferenciaLabel"><small><b>Resta:
-                                                Bs<label class="text-danger" id="diferencia"
-                                                    name="diferencia"></label></b></small></label>
-
-                                    <div class="mb-3">
-                                        <label for="" class="form-label" id="descripcionLabel">Detalle del
-                                            pago</label>
-                                        <textarea class="form-control" name="descripcion" id="descripcion" rows="3"
-                                            placeholder="Ejemplo: Pago movil Banco por Bs: X.XXX.XXX,XX tlf: 041X-XXXXXXX Ref: 0001452321522 en fecha:12-08-18"
-                                            aria-describedby="helpId" autocomplete="false"></textarea>
-                                    </div>
-
-                                    <div class="mb-1">
-                                        <label for="" class="form-label text-bg-primary" id="pagoLabel">Pago
-                                            total Bs</label>
-                                        <input type="text" name="pago" id="pago" class="form-control"
-                                            placeholder="" aria-describedby="helpId" autocomplete="false">
-                                    </div>
-
-                                    <br>
-
-
-
-
-
-
-
-
-
-
-
-                                    <button type="submit" class="btn btn-primary mr-2 btn-sm"
-                                        style="font-size: 1rem;">Facturar</button>
-                                    <a href="" class="btn btn-danger">Cancelar</a>
+                                </form>
 
                                 </div>
-
-                                {!! Form::close() !!}
                             </div>
                         </div>
+
                     </div>
-
                 </div>
-            </div>
 
+            </div>
         </div>
-    </div>
     </div>
 
 </form>
+
 
 <!--PAGO EN DIVISA-->
 <script type="text/javascript">
     const divis1 = document.getElementById('divis1');
     const divis2 = document.getElementById('diviza');
+    const deud = document.getElementById('deud');
     const inlineRadio1 = document.getElementById('inlineRadio1');
     const eq1 = document.getElementById('eq1');
+    document.getElementById('diferen');
     document.getElementById('tasa1').style.display = 'block';
     document.getElementById('tasa').style.display = 'block';
     document.getElementById('descripcion');
     document.getElementById('descripcionLabel').style.display = 'none';
     document.getElementById('descripcion').style.display = 'none';
-    var tot=document.getElementById('monto');
-    document.getElementById('monto').addEventListener('click',captamonto);
-    function captamonto(){
-        let timp=document.getElementById("monto").value;
-        tot=parseFloat(timp);
-        console.log('monto: '+tot);
+    var tot = document.getElementById('monto');
+    document.getElementById('monto').addEventListener('click', captamonto);
+
+    function captamonto() {
+        let timp = document.getElementById("monto").value;
+        tot = parseFloat(timp);
+        console.log('monto: ' + tot);
     }
 
 
@@ -341,8 +346,8 @@
             document.getElementById('descripcionLabel').style.display = 'block';
             document.getElementById('descripcion').style.display = 'block';
             let cambia
-            let tot=document.getElementById("monto").value;
-        total=parseFloat(tot);
+            let tot = document.getElementById("monto").value;
+            total = parseFloat(tot);
             cambia = (total / tasa1).toFixed(2);
             if (nn2 < parseInt(cambia)) {
 
@@ -370,16 +375,19 @@
         tasa1 = parseFloat(tas);
         cambio = (total / tasa1).toFixed(2);
         //let tot=document.getElementById("monto").value;
-        total=parseFloat(tot);
+        total = parseFloat(tot);
         if (!checkbox1.checked) {
             deuda = (deuda - debito2).toFixed(2);
+            //document.getElementById('deud').value=deuda;
             eqBs = (deuda * tasa1).toFixed(2);
+            document.getElementById('deud').value=eqBs;
             //console.log('deuda debitarSi = (deuda - debito2)');
         } else {
             deuda = cambio - parseFloat(nn2).toFixed(2);
             resta.value = deuda;
             resta.innerText = deuda;
             eqBs = (deuda * tasa1).toFixed(2);
+            document.getElementById('deud').value=eqBs;
             //console.log('deuda debitarSi ' + deuda);
         }
     }
@@ -389,9 +397,10 @@
         const tas = tasa.value;
         let cambio;
         tasa1 = parseFloat(tas);
-        let tot=document.getElementById("monto").value;
-        total=parseFloat(tot);
+        let tot = document.getElementById("monto").value;
+        total = parseFloat(tot);
         cambio = (total / tasa1).toFixed(2);
+        totalLabel.innerText=total;
         total$.innerText = cambio;
         //console.log('cambio$' + cambio);
 
@@ -426,8 +435,8 @@
         deuda = (cambio - parseInt(nn2)).toFixed(2); //resta para obtener deuda
         let decimal;
         //let tot=document.getElementById("monto").value;
-        total=parseFloat(tot);
-        decimal = parseFloat(total) - parseInt( total );
+        total = parseFloat(tot);
+        decimal = parseFloat(total) - parseInt(total);
 
         //console.log('debito:' + debito2 + ' deuda_decimal: ' + deuda + ' deuda_entera ' + n4+' nn2: '+nn2+' cambio '+cambio);
 
@@ -460,6 +469,8 @@
                 let aux;
                 aux = (rest * 1);
                 document.getElementById('eqBs').innerText = eqBs;
+                document.getElementById('eqBs').value = eqBs;
+                document.getElementById('deud').value=eqBs;
                 console.log('aux ' + aux);
                 pago = (cambio - rest + aux).toFixed(2);
 
@@ -478,6 +489,8 @@
 
                 resta.innerText = rest;
                 document.getElementById('eqBs').innerText = eqBs;
+                document.getElementById('eqBs').value = eqBs;
+                document.getElementById('deud').value=eqBs;
                 pago = (cambio - rest).toFixed(2);
                 if (decimal != 0) {
                     pay.value = pago * tasa1 + aux + 0.1;
@@ -518,6 +531,7 @@
                 } else {
                     debito.max = deuda;
                     debito.innerText = ''; //console.log('oye tio'+debito2+' deuda: '+deuda);
+                    debito.value='';
                     alert('La cantidad debitada' + ' no puede ser mayor que ' + deuda);
                     eqBs = 0;
                 }
@@ -542,6 +556,8 @@
                 }
 
                 document.getElementById('eqBs').innerText = eqBs;
+                document.getElementById('eqBs').value = eqBs;
+                document.getElementById('deud').value=eqBs;
                 //console.log('pago >0 ' + pago + ' camnbio ' + cambio + ' rest ' + rest + ' deuda ' + deuda +
                 //    ' debito2 ' + debito2);
             }
@@ -577,6 +593,8 @@
 
             eqBs = (deuda * tasa1).toFixed(2);
             document.getElementById('eqBs').innerText = eqBs;
+            document.getElementById('eqBs').value = eqBs;
+            document.getElementById('deud').value=eqBs;
             //console.log('pago =0 ' + pago + ' camnbio ' + cambio + ' rest ' + deuda);
 
         }
@@ -615,13 +633,14 @@
         document.getElementById('diferenciaLabel').style.display = 'inline-block';
         document.getElementById('diferencia').style.display = 'inline-block';
         let paypal;
-        let diferencia;
+        let diferencia; let diferen;
         paypal = parseFloat(parcialBs.value);
         console.log('pay:' + paypal);
-        let tot=document.getElementById("monto").value;
-        total=parseFloat(tot);
-        diferencia = (total - paypal).toFixed(2);
-        if (paypal < total ) {
+        let tot = document.getElementById("monto").value;
+        total = parseFloat(tot);
+        diferencia = (total - paypal).toFixed(2);console.log('diferencia');
+        diferen = (total - paypal).toFixed(2);
+        if (paypal < total) {
             document.getElementById('pagoLabel').innerText = 'Pago parcial';
         } else {
             document.getElementById('pagoLabel').innerText = 'Pagado Bs';
@@ -629,6 +648,7 @@
         document.getElementById('pago').value = paypal;
         document.getElementById('diferencia').value = diferencia;
         document.getElementById('diferencia').innerText = diferencia;
+        document.getElementById('diferen').value=diferen;
 
     }
 

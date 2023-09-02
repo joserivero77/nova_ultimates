@@ -88,24 +88,26 @@
 
 
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-12 chart-bar pt-4 pb-2">
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Deuda por Cliente</h3>
             </div>
             <div class="card-body">
-                <canvas id="graficaDeudas"></canvas>
+                <canvas id="graficaDeudas" width="2400px" height="1400px"></canvas>
             </div>
         </div>
     </div>
+</div>
+<div class="col-12  chart-pie pt-4 pb-2">
+    <canvas id="graficaDeudas"></canvas>
 </div>
 
 
 @endsection
 @section('scripts')
-<script src="js/cdnjs.Chart.js_4.4.0_chart.min.js">
 
-</script>
+<script src="vendor/chart.js/Chart.min.js"></script>
     <script>
         var clientes = @json($clientes);
         var deudasTotales = @json($deudasTotales);

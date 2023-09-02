@@ -10,10 +10,10 @@
                 {{session('mensaje')}}
             </div>
         @endif
-            <a class="btn btn-info" href="{{route("compras.index")}}">
+            <a class="btn btn-info btn-sm" href="{{route("compras.index")}}">
                 <i class="fa fa-arrow-left"></i>&nbsp;Volver
             </a>
-            <a class="btn btn-success" href="">
+            <a class="btn btn-success btn-sm" href="">
                 <i class="fa fa-print"></i>&nbsp;Reporte
             </a>
             <h2>Productos</h2>

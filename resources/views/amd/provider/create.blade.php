@@ -97,8 +97,8 @@
                   </div>
 
 
-                <button type="submit" class="btn btn-primary mr-2">Registrar</button>
-                <a href="{{ route('providers.index') }}" class="btn btn-danger">Cancelar</a>
+                <button type="submit" class="btn btn-primary mr-2 btn-sm">Registrar</button>
+                <a href="{{ route('providers.index') }}" class="btn btn-danger btn-sm">Cancelar</a>
             {!! Form::close() !!}
             </div>
         </div>

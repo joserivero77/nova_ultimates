@@ -97,7 +97,7 @@
                                         </div>
                                     </div>
 
-                                    <!--<div class="container">
+                                    <div class="container">
                                         <div class="row">
                                             <div class="col-6">
                                                 <div class="">
@@ -116,7 +116,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>-->
+                                    </div>
                                     <div class="mb-1">
                                         <label for="" class="form-label" id="divis1">Divisa
                                             $</label>

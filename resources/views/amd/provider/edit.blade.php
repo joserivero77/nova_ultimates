@@ -94,8 +94,8 @@
                   </span>
                 @enderror
                     </div>
-                <button type="submit" class="btn btn-primary mr-2" style="font-size: 1rem;">Actualizar</button>
-                <a href="{{ route('providers.index') }}" class="btn btn-danger">Cancelar</a>
+                <button type="submit" class="btn btn-primary mr-2 btn-sm" style="font-size: 1rem;">Actualizar</button>
+                <a href="{{ route('providers.index') }}" class="btn btn-danger btn-sm">Cancelar</a>
             {!! Form::close() !!}
             </div>
         </div>

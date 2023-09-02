@@ -1,5 +1,5 @@
 @extends('layouts.amd')
-@section('title','Paga')
+@section('title', 'Paga')
 @section('stylescss')
     <style>
         .formulario .vuelto {
@@ -83,30 +83,44 @@
         }
     </style>
 @section('content')
-<button data-toggle="modal" data-target="#createmodal" class="btn btn-warning">Pagar</button>
-<div class="table-responsive">
-    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-        <thead>
-            <tr>
-                <th scope="col">Venta Nro.</th>
-                <th scope="col">Cliente Nro.</th>
-                <th scope="col">Pago parcial</th>
-                <th scope="col">Tipo</th>
-                <th scope="col">Descripcion</th>
-                <th scope="col">Deuda</th>
-                <th>Estatus</th>
-            </tr>
-        </thead>
-        <tbody>
+    <button data-toggle="modal" data-target="#createmodal" class="btn btn-warning">Pagar</button>
+    <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th scope="col">Factura Nro.</th>
+                    <th scope="col">Cliente</th>
+                    <th scope="col">Pago Realizado</th>
+                    <th scope="col">Tipo de pago</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Deuda</th>
+                    <th scope="col">Estatus</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($pagos as $pago)
+                    <tr>
+                        <th scope="row">{{ $pago->id_venta }}</th>
+
+                        <td>
+                            <a href="">{{ $pago->cliente->name }}</a>
+                        </td>
+                        <td>{{ $pago->pago_parcial}}</td>
+                        <td>{{ $pago->tipo }}</td>
+                        <td>{{ $pago->description }}</td>
+                        <td>{{ $pago->deuda}}</td>
+                        <th>{{ $pago->status }}</th>
+                    </tr>
+                @endforeach
 
 
-        </tbody>
-    </table>
-</div>
-@include('amd.pagos.create')
+            </tbody>
+        </table>
+    </div>
+    @include('amd.pagos.create')
 @endsection
 @section('scripts')
-<script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/jquery-3.5.1.min.js"></script>
     <script>
         // const content = element.innerHTML;;

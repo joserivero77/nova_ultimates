@@ -113,7 +113,7 @@
                 </div>
             </div>
             <div class="card-footer text-muted">
-                <a href="{{ route('providers.index') }}" type="button" class="btn btn-primary float-right">Regresar</a>
+                <a href="{{ route('providers.index') }}" type="button" class="btn btn-primary float-right btn-sm">Regresar</a>
             </div>
         </div>
     </div>

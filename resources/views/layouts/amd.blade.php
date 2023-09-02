@@ -125,8 +125,9 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Vistas:</h6>
                         <a class="collapse-item" href="{{ asset(route('comprar.index')) }}">Comprar</a>
-
                         <a class="collapse-item" href="{{ asset(route('vender.index')) }}">Vender</a>
+                        <a class="collapse-item" href="{{ asset(route('pagos.index')) }}">Pagar</a>
+                        <a class="collapse-item" href="{{ asset(route('grafica.deudas')) }}">Graficar</a>
 
                         <!--a class="collapse-item" href="login.html">Login</!--a>
                         <a class="collapse-item" href="register.html">Register</a>
@@ -769,6 +770,8 @@
         </div>
     </div>
     @yield('scripts')
+    <script src='js/cdnjs.Chart.js_4.4.0_chart.min.js'></script>
+    <script src="vendor/chart.js/Chart.min.js"></script>
     <!-- Bootstrap core JavaScript-->
     {!! Html::script('sbadmin/vendor/jquery/jquery.min.js') !!}
     {!! Html::script('sbadmin/vendor/bootstrap/js/bootstrap.bundle.min.js') !!}
@@ -780,7 +783,7 @@
     <!-- Jquery Min Js -->
     {!! Html::script('galio/assets/js/vendor/jquery-3.3.1.min.js') !!}
     <!-- Popper Min Js -->
-
+    {!! Html::script('js/cdnjs.Chart.js_4.4.0_chart.min.js') !!}
     <!-- Bootstrap Min Js -->
     {!! Html::script('galio/assets/js/vendor/bootstrap.min.js') !!}
     <!-- Plugins Js-->

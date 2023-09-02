@@ -13,6 +13,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FrontController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ChartController;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\VentasController;
@@ -24,6 +25,7 @@ use App\Http\Controllers\ExchangeRateController;
 use App\Http\Controllers\PagoController;
 use App\Http\Controllers\ReportController;
 use Barryvdh\DomPdf\Facade\Pdf;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -47,7 +49,8 @@ Route::get('/', function () {
 //Route::resource('almacen/categoria','CategoriaController');
 //Route::resource('almacen/categoria', CategoriaController::class);
 Auth::routes();
-
+Route::resource('pagos',PagoController::class)->names('pagos');
+Route::get('/grafica-deudas', [ChartController::class, 'deudaPorCliente'])->name('grafica.deudas');
 Route::get('ventas/reporte_dia', [ReportController::class,'reporte_dia'])->name('reporte.dia');
 Route::get('ventas/reporte_fecha', [ReportController::class,'reporte_fecha'])->name('reporte.fecha');
 Route::post('ventas/reporte_results', [ReportController::class,'reporte_results'])->name('reporte.results');
@@ -109,8 +112,8 @@ Route::resource('shopping_cart_detail','ShoppingCartDetailController')->only('st
         //Route::get('/pagos',[PagoController::class,'index'])->name('pago.index');
         //Route::get('/pagos/create',[PagoController::class,'create'])->name('pago.create');
         //Route::post('/pagos/create', [PagoController::class, 'create'])->name('pago.create');
-        //Route::post('/pagos', [PagoController::class, 'store'])->name('pago.store');
-        Route::resource('/pagos',PagoController::class);
+        //Route::post('/pagos', [PagoController::class, 'store'])->name('pagos.store');
+
 
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
@@ -124,6 +127,7 @@ Route::get('/Cart-removeitem',[CartController::class,'removeitem'])->name('cart.
 Route::get('/cart',)->name('atras');
 Route::get('board',[HomeController::class,'amd'])->name('amd');
 Route::get('/exchange-rate', [ExchangeRateController::class,'index']);
+
 
 
 

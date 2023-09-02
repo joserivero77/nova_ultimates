@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Pago extends Model
 {
     use HasFactory;
-    protected $guarded=[];
+
     protected $fillable=[
         'id_venta',//nro de factura
         'id_cliente',//cliente
@@ -17,8 +17,6 @@ class Pago extends Model
         'pago_parcial',//
         'tipo',//unidad de tipo de producto, grams, litros, onzas, sacos, cajas etc.
         'status',
-
-
     ];
 
     public function productos()
@@ -60,6 +58,6 @@ class Pago extends Model
     }
 
     public function get_active_factura(){
-        return Self::where('status','PAGADO');
+        return Self::where('status','PAGADA');
     }
 }

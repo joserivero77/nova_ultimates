@@ -70,10 +70,10 @@
 
                                     <td style="width: 150px;">
                                     {!! Form::open(['route'=>['providers.destroy', $provider],'method'=>'DELETE'])!!}
-                                    <a class="jsgrig-button jsgrid-edit-button btn btn-primary" href="{{ route('providers.edit',$provider) }}" title="Editar">
+                                    <a class="jsgrig-button jsgrid-edit-button btn btn-primary btn-sm" href="{{ route('providers.edit',$provider) }}" title="Editar">
                                         <i class="far fa-edit"></i>
                                     </a>
-                                    <button class="jsgrig-button jsgrid-delete-button unstyled-button btn btn-danger" type="submit" title="Eliminar" href="">
+                                    <button class="jsgrig-button jsgrid-delete-button unstyled-button btn btn-danger btn-sm" type="submit" title="Eliminar" href="">
                                         <i class="far fa-trash-alt"></i></button>
                                     {!! Form::close()!!}
                                     </td>

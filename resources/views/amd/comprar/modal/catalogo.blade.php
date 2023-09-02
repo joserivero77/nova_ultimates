@@ -11,7 +11,7 @@
                     <h2 class="modal-title text-bg-primary" id="modalTitleId"><i class="fa fa-address-book"></i>CATALOGO
                         DE PRODUCTOS
                     </h2>
-                    <button type="button" class="btn btn-close" data-dismiss="modal" aria-label="Close"><i
+                    <button type="button" class="btn btn-close btn-sm" data-dismiss="modal" aria-label="Close"><i
                             class="far fa-times-circle"></i></button>
                 </div>
 
@@ -42,7 +42,7 @@
                                                         enctype="multipart/form-data">
                                                         @csrf
                                                         <div class="form-group">
-                                                            <button class="btn btn-primary text-center btn-block"
+                                                            <button class="btn btn-primary text-center btn-block btn-sm"
                                                                 type="submit" name="" value="Agregar"
                                                                 role="button">Agregar al carrito1</button>
                                                         </div>
@@ -80,9 +80,9 @@
                                                         enctype="multipart/form-data">
                                                         @csrf
                                                         <div class="form-group">
-                                                            <button class="btn btn-primary text-center btn-block"
+                                                            <button class="btn btn-primary text-center btn-block btn-sm"
                                                                 type="submit" name="" value="Agregar"
-                                                                role="button">Agregar al carrito2</button>
+                                                                role="button">Agregar al carrito</button>
                                                         </div>
                                                     </form>
                                                 </div>
