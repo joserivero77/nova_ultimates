@@ -214,10 +214,19 @@
 
             </div>
 
-
+            <div class="row">
+                <div class="col-lg-4 offset-md-3">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="searchInput" placeholder="Buscar producto">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" onclick="searchProduct()"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="row">
 
-                <<div class=" overflow-scroll">
+                <div class=" overflow-scroll">
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xxl-4 col-4">
                         @foreach ($prod as $pro)
                             <div class=" card text-center justify-center align-content-center align-content-lg-center align-content-xl-between align-content-xxl-between align-content-md-around align-content-sm-start"
@@ -252,12 +261,13 @@
             </div>
 
             <!----Datos del Cliente------>
-            <div class="col-lg-10 col-sm-10 col-md-10 col-xl-10 col-xxl-10 col-10>
-                <div class="">
-                    <div class=" col-6">
+            <div class="col-lg-8 col-sm-8 col-md-8 col-xl-8 col-xxl-8 col-8>
+                <div class="ml-lg-2">
+                    <div class="col-lg-6 offset-md-1">
                         <form action="{{ route('terminarOCancelarVenta') }}" method="post" class="needs-validation"
                             novalidate>
                             @csrf
+
                             <div class="form-group">
                                 <label for="id_cliente">Cliente</label>
                                 <select class="form-control" name="id_cliente" id="id_cliente" required>
@@ -406,6 +416,23 @@
 
 @endsection
 @section('scripts')
+<script>
+    function searchProduct() {
+        var input = document.getElementById('searchInput').value.toLowerCase();
+        var products = document.getElementsByClassName('card');
+
+        for (var i = 0; i < products.length; i++) {
+            var productName = products[i].getElementsByClassName('card-title')[0].innerText.toLowerCase();
+            var productCode = products[i].getElementsByClassName('card-text')[0].innerText.toLowerCase();
+
+            if (productName.includes(input) || productCode.includes(input)) {
+                products[i].style.display = 'block';
+            } else {
+                products[i].style.display = 'none';
+            }
+        }
+    }
+</script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/jquery-3.5.1.min.js"></script>
     <script>
