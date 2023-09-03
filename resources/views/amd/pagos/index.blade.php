@@ -2,92 +2,55 @@
 @section('title', 'Paga')
 @section('stylescss')
     <style>
-        .formulario .vuelto {
-            display: inline-block;
-        }
-
-        .formulario .vuelto2 {
-            display: inline-block;
-        }
-
-        .formulario .resta {
-            display: inline-block;
-        }
-
-        .formulario .resta2 {
-            display: inline-block;
-        }
-
-        .formulario .divis1 {
-            display: none;
-        }
-
-        .formulario .diviza {
-            display: none;
-        }
-
-        .formulario .debito1 {
-            display: none;
-        }
-
-        .formulario .debito3 {
-            display: none;
-        }
-
-        .formulario .eq1 {
-            display: inline-block;
-        }
-
-        .formulario .eqBs {
-            display: inline-block;
-        }
-
-        .formulario .parcialLabel {
-            display: :none;
-        }
-
-        .formulario .parcialBs {
-            display: none;
-        }
-
-        .formulario .checkboxLabel {
-            display: none;
-        }
-
-        .formulario .checkbox1 {
-            display: none;
-        }
-
-        .formulario .tasa1 {
-            display: block;
-        }
-
-        .formulario .tasa {
-            display: block;
-        }
-
-        .formulario .diferenciaLabel {
-            display: none;
-        }
-
-        .formulario .diferencia {
-            display: none;
-        }
-
-        .formulario .descripcionLabel {
-            display: none;
-        }
-
+        .formulario .vuelto,
+        .formulario .vuelto2,
+        .formulario .resta,
+        .formulario .resta2,
+        .formulario .eq1,
+        .formulario .eqBs,
+        .formulario .tasa1,
+        .formulario .tasa,
+        .formulario .divis1,
+        .formulario .diviza,
+        .formulario .debito1,
+        .formulario .debito3,
+        .formulario .parcialLabel,
+        .formulario .parcialBs,
+        .formulario .checkboxLabel,
+        .formulario .checkbox1,
+        .formulario .diferenciaLabel,
+        .formulario .diferencia,
+        .formulario .descripcionLabel,
         .formulario .descripcion {
             display: none;
         }
+
+        .formulario .eq1,
+        .formulario .eqBs,
+        .formulario .tasa1,
+        .formulario .tasa,
+        .formulario .diferenciaLabel,
+        .formulario .diferencia,
+        .formulario .descripcionLabel,
+        .formulario .descripcion {
+            display: block;
+        }
+
+        .formulario .parcialLabel,
+        .formulario .parcialBs,
+        .formulario .checkboxLabel,
+        .formulario .checkbox1 {
+            display: none;
+        }
     </style>
+@endsection
 @section('content')
     <button data-toggle="modal" data-target="#createmodal" class="btn btn-warning">Pagar</button>
     <div class="table-responsive">
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
                 <tr>
+                    <th>FECHA</th>
                     <th scope="col">Factura Nro.</th>
                     <th scope="col">Cliente</th>
                     <th scope="col">Pago Realizado</th>
@@ -100,50 +63,27 @@
             <tbody>
                 @foreach ($pagos as $pago)
                     <tr>
-                        <th scope="row">{{ $pago->id_venta }}</th>
-
+                        <td>{{ $pago->created_at }}</td>
+                        <td scope="row">Fact #{{ str_pad($pago->id_venta, 7, '0', STR_PAD_LEFT) }}</td>
                         <td>
                             <a href="">{{ $pago->cliente->name }}</a>
                         </td>
-                        <td>{{ $pago->pago_parcial}}</td>
+                        <td>{{ $pago->pago_parcial }}</td>
                         <td>{{ $pago->tipo }}</td>
                         <td>{{ $pago->description }}</td>
-                        <td>{{ $pago->deuda}}</td>
-                        <th>{{ $pago->status }}</th>
+                        <td>{{ $pago->deuda }}</td>
+                        <td>{{ $pago->status }}</td>
                     </tr>
                 @endforeach
-
-
             </tbody>
         </table>
     </div>
     @include('amd.pagos.create')
 @endsection
 @section('scripts')
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/jquery-3.5.1.min.js"></script>
-    <script>
-        // const content = element.innerHTML;;
-
-
-        /*document.getElementById('divisa').addEventListener('change', function() {
-            var vuelto = document.getElementsByClassName('vuelto');
-            console.log('vuelto')
-        });*/
-
-
-        //const consultaDolar = require("consulta-dolar-venezuela");
-
-        /*consultaDolar.getMonitor("BCV", "lastUpdate").then($ => {
-            console.log($)
-        }); /*Obtener la ultima actualizacion del dólar en BCV*/
-    </script>
     {!! Html::script('js/jquery-3.5.1.min.js') !!}
-    {!! Html::script('sbadmin/vendor/jquery/jquery.min.js') !!}
-    {!! Html::script('sbadmin/vendor/bootstrap/js/bootstrap.bundle.min.js') !!}
     {!! Html::script('js/bootstrap.bundle.min.js') !!}
     {!! Html::script('sbadmin/vendor/jquery-easing/jquery.easing.min.js') !!}
     {!! Html::script('sbadmin/js/sb-admin-2.min.js') !!}
     {!! Html::script('js/bootstrap.min.js') !!}
-
 @endsection

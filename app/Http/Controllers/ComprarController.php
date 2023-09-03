@@ -6,7 +6,7 @@ use App\Models\Category;
 use App\Models\Provider;
 use App\Models\Producto;
 use App\Models\ProductoComprado;
-use App\MOdels\Compra;
+use App\Models\Compra;
 use Illuminate\Http\Request;
 
 class comprarController extends Controller

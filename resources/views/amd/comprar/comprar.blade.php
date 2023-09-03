@@ -53,7 +53,7 @@
 
                         <!----------------------------------------------------------------------->
                     </div>
-                    <div class="col-2">
+                    <div class="col-3">
                         <div class="container mb-3">
                             <div class="row">
                                 <div class="col-lg-3 col-sm-4 col-md-4 col-xl-3 col-xxl-3 col-4">
@@ -159,7 +159,7 @@
 
 
             <!----Datos del Proveedor------>
-            <div class="col-lg-8 col-sm-8 col-md-8 col-xl-8 col-xxl-8 col-8">
+            <div class="col-lg-12 col-sm-12 col-md-12 col-xl-12 col-xxl-12 col-12">
                 <div class="">
                     <form action="{{route("terminarOCancelarCompra")}}" method="post" class="needs-validation" novalidate>
                         @csrf

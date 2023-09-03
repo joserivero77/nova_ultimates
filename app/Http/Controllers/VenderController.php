@@ -6,7 +6,7 @@ use App\Models\Category;
 use App\Models\Cliente;
 use App\Models\Producto;
 use App\Models\ProductoVendido;
-use App\MOdels\Venta;
+use App\Models\Venta;
 use Illuminate\Http\Request;
 use App\Http\Requests\VenderStoreRequest;
 

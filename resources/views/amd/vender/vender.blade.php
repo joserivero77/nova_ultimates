@@ -140,7 +140,7 @@
 
 
 
-                        <div class="col-2">
+                        <div class="col-3">
                             <div class="container mb-3">
                                 <div class="row">
                                     <div class="col-lg-3 col-sm-4 col-md-4 col-xl-3 col-xxl-3 col-4">
@@ -252,7 +252,7 @@
             </div>
 
             <!----Datos del Cliente------>
-            <div class="col-lg-8 col-sm-8 col-md-8 col-xl-8 col-xxl-8 col-8">
+            <div class="col-lg-10 col-sm-10 col-md-10 col-xl-10 col-xxl-10 col-10>
                 <div class="">
                     <div class=" col-6">
                         <form action="{{ route('terminarOCancelarVenta') }}" method="post" class="needs-validation"
