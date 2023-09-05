@@ -51,6 +51,7 @@ Route::get('/', function () {
 Auth::routes();
 Route::resource('pagos',PagoController::class)->names('pagos');
 Route::get('/grafica-deudas', [ChartController::class, 'deudaPorCliente'])->name('grafica.deudas');
+Route::get('/obtener-datos-venta', [PagoController::class,'obtenerDatosVenta']);
 Route::get('ventas/reporte_dia', [ReportController::class,'reporte_dia'])->name('reporte.dia');
 Route::get('ventas/reporte_fecha', [ReportController::class,'reporte_fecha'])->name('reporte.fecha');
 Route::post('ventas/reporte_results', [ReportController::class,'reporte_results'])->name('reporte.results');

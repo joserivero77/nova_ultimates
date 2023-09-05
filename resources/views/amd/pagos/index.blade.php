@@ -21,6 +21,10 @@
         .formulario .diferenciaLabel,
         .formulario .diferencia,
         .formulario .descripcionLabel,
+        .formulario .monto2Label,
+        .formulario .montoLabel,
+        .formulario .monto2,
+        .formulario .monto,
         .formulario .descripcion {
             display: none;
         }

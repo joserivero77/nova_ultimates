@@ -18,9 +18,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call([
+            ClienteSeeder::class,
+        ]);
 
         // User::factory(10)->create();
-        Category::factory()
+        /*Category::factory()
         ->count(10)
         ->create();
         Provider::factory()
@@ -28,7 +31,8 @@ class DatabaseSeeder extends Seeder
         ->create();
         Product::factory()
         ->count(50)
-        ->create();
+        ->create();*/
+
 
     }
 }

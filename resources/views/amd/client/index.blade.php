@@ -44,13 +44,13 @@
                             class="btn btn-success">Registrar Cliente</span></a>
                     </div>
                 </div>
-
+{{ $clients->render() }}
                     <div class="table-responsive">
                         <table  class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead class="">
                                 <tr>
 
-                                    <th>Id</th>
+
                                     <th>Nombre</th>
                                     <th>Cedula</th>
                                     <th>RIF</th>
@@ -64,7 +64,7 @@
                             <tbody>
                                 @foreach($clients as $client)
                                 <tr>
-                                    <th scope="row">{{$client->id  }}</th>
+
 
                                     <td>
                                     <a href="{{ route('clients.show',$client) }}">{{$client->name  }}</a>

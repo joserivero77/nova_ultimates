@@ -17,4 +17,5 @@ class Visita extends Model
     public function client(){
         return $this->belongsTo(Cliente::class);
     }
+    protected $guarded=[];
 }

@@ -68,7 +68,7 @@
                             <thead class="">
                                 <tr>
 
-                                    <th>Id</th>
+
                                     <th>Nombre</th>
                                     <th>Cedula</th>
                                     <th>RIF</th>
@@ -82,7 +82,7 @@
                             <tbody>
                                 @foreach($clientes as $client)
                                 <tr>
-                                    <th scope="row">{{$client->id  }}</th>
+
 
                                     <td>
                                     <a href="{{ route('clients.show',$client) }}">{{$client->name  }}</a>

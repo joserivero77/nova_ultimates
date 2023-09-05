@@ -50,6 +50,6 @@ class Producto extends Model
     }
 
 
-
+    protected $guarded=[];
 
 }

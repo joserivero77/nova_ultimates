@@ -17,6 +17,6 @@ class Compra extends Model
     {
         return $this->belongsTo("App\Models\Provider", "id_provider");
     }
-
+    protected $guarded=[];
 
 }

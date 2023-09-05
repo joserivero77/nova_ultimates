@@ -36,4 +36,6 @@ class Venta extends Model
         return $this->hasMany(ProductoVendido::class);
     }*/
 
+    protected $guarded=[];
+
 }

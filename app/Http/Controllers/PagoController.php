@@ -20,29 +20,65 @@ class PagoController extends Controller
     {
         // Aquí puedes escribir la lógica para mostrar los pagos registrados
 
-        //return view("amd.ventas.ventas_index", ["ventas" => $ventasConTotales,'ConTotales'=>$ConTotales]);
+
         $ventas = Venta::get();
-        $pagos = Pago::where('status', '=', 'PENDIENTE')->get();
-        $pagos = Pago::orderBy('created_at', 'desc')->get();
-        /*$ultimosPagos = Pago::latest('67')
-            ->groupBy('id_venta')
-            ->get();
-            dd($ultimosPagos);*/
+        //$pagos = Pago::where('status', '=', 'PENDIENTE')->get();
+        $pagos=Pago::all();
+        //$pagos = Pago::orderBy('created_at', 'desc')->get();
+
+            //dd($ultimosPagos);
         $deuda = Pago::select(['id','id_venta','deuda'])->get();
-        $maux = $deuda;
-        //$ultimoPago = Pago::latest()->first(); //dd($ultimoPago);
-        $ultimasFilas=$this->obtenerUltimasFilasPorIdVenta();//dd($ultimasFilas);
+
+
+        $ultimasFilas=$this->obtenerUltimasFilasPorIdVenta();
         //$deudaAnterior = $ultimoPago->deuda;
 
         $ventasConTotales = Venta::join("productos_vendidos", "productos_vendidos.id_venta", "=", "ventas.id")
             ->select("ventas.*", DB::raw("sum(productos_vendidos.cantidad * productos_vendidos.precio)*1.16 as total"))
             ->groupBy("ventas.id", "ventas.created_at", "ventas.updated_at", "ventas.id_cliente")
             ->get();
-        // dd('total: '+$ventasConTotales);
-        //$pagos=Pago::select("deuda","pago_parcial")->groupBy("pagos.id")->get();
+
+        $totales = $ventasConTotales;
         $clientes = Venta::pluck('id_cliente', 'id');
+
         //dd($ventasConTotales);
-        return view("amd.pagos.index", compact('pagos', 'ventas', 'maux', 'clientes'), ['totales' => $ventasConTotales]);
+        return view("amd.pagos.index", compact('pagos', 'ventas','deuda', 'clientes','ultimasFilas','totales'));
+    }
+    public function obtenerDatosVenta(Request $request)
+    {
+        $idVenta = $request->input('idVenta');
+
+        // Obtener los datos de la venta
+        $venta = Venta::find($idVenta);
+
+        if ($venta) {
+            // Verificar si ya existe un pago para la venta
+            $existePago = Pago::where('id_venta', $idVenta)->exists();
+
+            if ($existePago) {
+                // Obtener los pagos relacionados con la venta
+                $pagos = Pago::where('id_venta', $idVenta)->where('status', '=', 'PENDIENTE')->get();
+
+                return response()->json([
+                    'success' => true,
+                    'existePago' => true,
+                    'pagos' => $pagos
+                ]);
+            } else {
+                // Obtener las facturas sin pago relacionadas con la venta
+                $facturas = $venta->facturasSinPago;
+
+                return response()->json([
+                    'success' => true,
+                    'existePago' => false,
+                    'facturas' => $facturas
+                ]);
+            }
+        }
+
+        return response()->json([
+            'success' => false
+        ]);
     }
 
     public function obtenerUltimasFilasPorIdVenta()
@@ -71,10 +107,11 @@ class PagoController extends Controller
             ->select("pagos.*", "deuda", "pago_parcial")->groupBy("ventas.id", "pagos.id")->get();
 
         // Aquí puedes escribir la lógica para mostrar el formulario de pago
+        $totales = $ventasConTotales;
         $pagos = Pago::where('status', '=', 'PENDIENTE')->get();
         $ventas = Venta::pluck('id_venta', 'id_venta');
         $clientes = Venta::pluck('id_cliente', 'id_venta');
-        return view('amd.pagos.create', compact('ventas', 'ventasConTotales', 'total', 'clientes', 'pagos'));
+        return view('amd.pagos.create', compact('ventas', 'totales', 'total', 'clientes', 'pagos'));
     }
 
     public function store(Request $request)

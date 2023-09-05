@@ -126,7 +126,7 @@ class comprarController extends Controller
        //*********************************************************** */
     private function agregarProductoACarrito($producto)
     {
-        if ($producto->stock <0) {
+        if ($producto->stock =0) {
             return redirect()->route("comprar.index")
                 ->with([
                     "mensaje" => "No hay existencias del producto",
@@ -142,10 +142,7 @@ class comprarController extends Controller
         } else {
             if ($productos[$posibleIndice]->cantidad + 1 > $producto->stock) {
                 return redirect()->route("comprar.index")
-                    ->with([
-                        "mensaje" => "No se pueden agregar más productos de este tipo, se quedarían sin existencia",
-                        "tipo" => "danger"
-                    ]);
+                    ;
             }
             //$cant = $request->post("cantidad");dd($cant);
             //$productos[$posibleIndice]->$this->agregarCantidadProducto();
@@ -192,8 +189,8 @@ class comprarController extends Controller
         $prodo=Producto::get_active_products()->get();//dd($prod);
         $prod=Producto::get();
         $total = 0;$cant=0;
-        foreach ($this->obtenerProductos() as $producto) {//dd($producto->cantidad);
-            $total += $producto->cantidad * $producto->precio_compra;//dd($total);
+        foreach ($this->obtenerProductos() as $producto) {dd($producto->cantidad);
+            $total += $producto->cantidad * $producto->precio_compra;dd($total);
             $cant+=$producto->cantidad;//dd($cant);
         }
 

@@ -7,7 +7,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h2 class="modal-title text-primary text-center" id="modalTitleId"><i
-                            class=" fa fa-money-bill"></i>Forma de Pago</h2><label for="" id="dolar"></label>
+                            class=" fa fa-money-bill"></i>Forma de Pago</h2><label for=""
+                        id="dolar"></label>
                     <button type="button" class="btn btn-close" data-dismiss="modal" aria-label="Close"><i
                             class="far fa-times-circle"></i></button>
                 </div>
@@ -41,25 +42,47 @@
 
                                                 <div class="col-6">
                                                     <div class="form-group">
-                                                        <label for="monto" class="form-label text-info">Factura a
+                                                        <label for="monto" id="montoLabel"
+                                                            class="form-label text-info">Factura sin
                                                             pagar</label>
                                                         <select class="form-control" id="monto" name="monto1"
                                                             required>
                                                             <option value="0">Seleccione una factura</option>
                                                             @foreach ($totales as $total)
                                                                 <option value="{{ $total->total }}">
-                                                                <label>Fact #{{ str_pad($total->id, 7, '0', STR_PAD_LEFT) }}</label></option>
+                                                                    <label>Fact
+                                                                        #{{ str_pad($total->id, 7, '0', STR_PAD_LEFT) }}</label>
+                                                                </option>
                                                             @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
-
-
-
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label for="monto2" id="monto2Label"
+                                                            class="form-label text-info">Facturas pendientes</label>
+                                                        <select class="form-control" id="monto2" name="monto2"
+                                                            required>
+                                                            <option value="0">Seleccione una factura</option>
+                                                            @foreach ($ultimasFilas as $ultimasFila)
+                                                                <option value="{{ $ultimasFila->deuda }}">
+                                                                    <label>Fact
+                                                                        #{{ str_pad($ultimasFila->id_venta, 7, '0', STR_PAD_LEFT) }}</label>
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="mb-3">
+                                                <label for="" class="form-label" hidden>Name</label>
+                                                <input type="text" class="form-control" name="" id="existepag"
+                                                    hidden aria-describedby="helpId" placeholder="">
 
                                             </div>
                                         </div>
-
 
                                         <div class="container">
                                             <div class="row">
@@ -76,7 +99,8 @@
                                                     </div>
                                                 </div>
                                                 <div class=" col-4 mb-1">
-                                                    <label for="" class="form-label text-bg-info" id="tasa1">Tasa de
+                                                    <label for="" class="form-label text-bg-info"
+                                                        id="tasa1">Tasa de
                                                         cambio</label>
                                                     <input type="text" name="tasa" id="tasa"
                                                         class="form-control" placeholder="" aria-describedby="helpId"
@@ -93,7 +117,8 @@
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="radio"
                                                         name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                                                    <label class="form-check-label text-primary" for="inlineRadio2">Pago
+                                                    <label class="form-check-label text-primary"
+                                                        for="inlineRadio2">Pago
                                                         Bs</label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
@@ -107,7 +132,7 @@
 
                                             <div class="mb-1">
                                                 <label for="" class="form-label" id="divis1">Divisa
-                                                    $</label>
+                                                    $</label><label id="valorDolar"></label>
                                                 <input type="number" name="divisa" id="diviza"
                                                     class="form-control" disabled
                                                     placeholder="Ingrese solo numeros enteros 1,2,3..."
@@ -211,10 +236,68 @@
 
 </form>
 <script>
-consultaDolar.getMonitor("BCV", "lastUpdate").then($ =>{console.log('BCV: '+$)}); /*Obtener la ultima actualizacion del dólar en BCV*/
-document.getElementById('dolar').innerText=$;
+    // Obtener los elementos select que serán mostrados u ocultados
+    const selectUltimasFilas = document.getElementById('monto2');
+    const selectTotales = document.getElementById('monto');
+
+    // Escuchar el evento de cambio en el select de id_venta
+    document.getElementById('id_venta').addEventListener('change', function() {
+        // Obtener el valor seleccionado en el select de id_venta
+        const idVentaSeleccionado = this.value;
+        var pagos = @json($pagos);
+        console.log('pagos: ', pagos);
+        var totales = @json($totales);
+        console.log('totales', totales);
+        console.log('idventaseleccionado', idVentaSeleccionado);
+        // Verificar si existe un id de la tabla pagos para el id_venta seleccionado
+        const existePago = pagos.some(function(id) {
+            console.log('id.id_venta', id.id_venta);
+            return id.id_venta == idVentaSeleccionado;
+        });
+        console.log('existepago', existePago);
+        document.getElementById('existepag').value = existePago;
+        // Mostrar u ocultar los select según la condición
+        if (existePago) {
+            // Si existe un pago, mostrar el select de últimas filas
+            selectUltimasFilas.style.display = 'block';
+            selectTotales.style.display = 'none';
+            document.getElementById('montoLabel').style.display = 'none';
+            document.getElementById('monto2Label').style.display = 'block';
+            console.log('existe pago');
+            var ultimasFilas = @json($ultimasFilas);
+            console.log('ultimasfilas', ultimasFilas);
+            // Recorrer el array de últimas filas y agregar las opciones al select
+            ultimasFilas.forEach(function(fila) {
+                if (fila.id_venta === idVentaSeleccionado) {
+                    const option = document.createElement('option');
+                    option.value = fila.id_venta;
+                    option.text = fila.deuda;
+                    selectUltimasFilas.add(option);
+                }
+            });
+        } else {
+            // Si no existe un pago, mostrar el select de totales
+            selectUltimasFilas.style.display = 'none';
+            selectTotales.style.display = 'block';
+            document.getElementById('monto2Label').style.display = 'none';
+            document.getElementById('montoLabel').style.display = 'block';
+            console.log('no hay pago');
+
+            // Recorrer el array de totales y agregar las opciones al select
+            totales.forEach(function(total) {
+                if (total.id_venta === idVentaSeleccionado) {
+                    const option = document.createElement('option');
+                    option.value = total.id_venta;
+                    option.text = total.total;
+                    selectTotales.add(option);
+                }
+            });
+        }
+    });
 </script>
-<script>//Script para cargar los datos del id_cliente al seleccionar la compra pero del id_venta que ha realiado ese cliente
+
+<script>
+    //Script para cargar los datos del id_cliente al seleccionar la compra pero del id_venta que ha realiado ese cliente
     document.getElementById('id_venta').addEventListener('change', function() {
         var selectedVenta = this.value;
         var idClienteSelect = document.getElementById('id_cliente');
@@ -255,19 +338,95 @@ document.getElementById('dolar').innerText=$;
     document.getElementById('descripcion').style.display = 'none';
     document.getElementById('ref').style.display = 'none';
     var tot = document.getElementById('monto');
-    document.getElementById('monto').addEventListener('click', captamonto);
+    var existePago = document.getElementById('existepag').value;
+    document.getElementById('montoLabel').style.display = 'none';
+    document.getElementById('monto2Label').style.display = 'none';
+    document.getElementById('monto').style.display = 'none';
+    document.getElementById('monto2').style.display = 'none';
+    //document.getElementById('id_venta').addEventListener('change', verSelectFacturas);
+    document.getElementById('monto').addEventListener('change', captamonto);
+    document.getElementById('monto2').addEventListener('change', captamonto);
+
+
+    function verSelectFacturas() {
+        document.getElementById('montoLabel');
+        document.getElementById('monto2Label');
+        let timp = document.getElementById("monto").value;
+        let ultimafilas = document.getElementById('monto2').value;
+        let totalLabel=document.getElementById('totalLabel').value;
+        tot = parseFloat(timp);
+        ultimafila = parseFloat(ultimafilas);
+        console.log('tot ',tot,' ultimafilas ',ultimafilas,' totalLabel ',totalLabel);
+        const idVentaSeleccionado = this.value;
+        var pagos = @json($pagos);
+        //console.log('id.id_venta=ideseleccion ',id.id_venta,'   ',idVentaSeleccionado);
+        // Verificar si existe un id de la tabla pagos para el id_venta seleccionado
+        const existePago = pagos.some(function(id) {
+
+            if (id.id_venta == idVentaSeleccionado) {
+                document.getElementById('monto2Label').style.display = 'none';
+                document.getElementById('montoLabel').style.display = 'none';
+                document.getElementById('monto').style.display = 'none';
+                document.getElementById('monto2').style.display = 'none';
+                //document.getElementById('montoLabel').value="";
+                //document.getElementById('montoLabel').innerText="";
+            } else {
+                document.getElementById('montoLabel').style.display = 'none';
+                document.getElementById('monto2Label').style.display = 'none';
+                document.getElementById('monto').style.display = 'none';
+                document.getElementById('monto2').style.display = 'none';
+                //document.getElementById('monto2Label').value="";
+                //document.getElementById('monto2Label').innerText="";
+            }
+        });console.log('idi',existePago);
+        //var existePago = document.getElementById('existepag').value;
+
+        /*if (existePago==false) {
+
+            document.getElementById('monto2Label').style.display = 'inline-block';
+            document.getElementById('montoLabel').style.display = 'none';
+            document.getElementById('monto').style.display = 'none';
+            document.getElementById('monto2').style.display = 'inline-block';
+
+        } else {
+
+            document.getElementById('montoLabel').style.display = 'inline-block';
+            document.getElementById('monto2Label').style.display = 'none';
+            document.getElementById('monto').style.display = 'inline-block';
+            document.getElementById('monto2').style.display = 'none';
+
+        }*/
+
+        //document.getElementById('totalLabel').style.display = 'inline-Block';
+    }
 
     function captamonto() {
         let timp = document.getElementById("monto").value;
+
+        let ultimafilas = document.getElementById('monto2').value;
+        let totalLabel=document.getElementById('totalLabel');
         tot = parseFloat(timp);
-        if(tot=="Seleccione una factura"){
-            totalLabel.innerText = 'No hay factura seleccionada';
-        }else{
-            totalLabel.innerText = tot;
+        ultimafila = parseFloat(ultimafilas);
+        var existePago = document.getElementById('existepag').value;
+        console.log('existe pago en captamonto: ',existePago,' ultimafila: ',ultimafila,' tot ',tot);
+        document.getElementById('monto2Label').value="";
+        console.log('existe pago en captamonto tot false: ', existePago, ' tot ', tot);
+            //document.getElementById('montoLabel').style.display = 'block';
+            //document.getElementById('monto2Label').style.display = 'none';
+            //document.getElementById('totalLabel').innerText = document.getElementById("monto").value;
+            document.getElementById('totalLabel').innerText=tot;
+        if (ultimafila!=0) {
+            console.log('existe pago en captamonto u true: ', existePago, ' ultimafila ', ultimafila);
+            //document.getElementById('monto2Label').style.display = 'block';
+            //document.getElementById('montoLabel').style.display = 'block';
+            document.getElementById('montoLabel').value="";
+            //totalLabel.value = ultimafila;
+            document.getElementById('totalLabel').innerText=ultimafila;
+            //document.getElementById('totalLabel').style.display = 'inline-Block';
         }
 
         document.getElementById('totalLabel').style.display = 'inline-Block';
-        console.log('monto: ' + tot);
+        //console.log('monto: ' + tot);
     }
 
 
@@ -282,13 +441,14 @@ document.getElementById('dolar').innerText=$;
     parcialBs.style.display = 'none';
     inlineRadio1.addEventListener('click', divisa);
     inlineRadio2.addEventListener('click', Bs);
-    document.getElementById('tasa').addEventListener('keyup',habilitadivisa);
+    document.getElementById('tasa').addEventListener('keyup', habilitadivisa);
 
-    function habilitadivisa(){
+    function habilitadivisa() {
 
-                document.getElementById('diviza').disabled = false;
+        document.getElementById('diviza').disabled = false;
 
     }
+
     function divisa() {
         if (inlineRadio1.checked = true) {
             console.log('divisa');
@@ -297,7 +457,7 @@ document.getElementById('dolar').innerText=$;
             vuelto.style.display = 'inline-block';
             vuelto2.style.display = 'inline-block';
             resta2.style.display = 'inline-block';
-            document.getElementById('tasa').focus=true;
+            //document.getElementById('tasa').focus = true;
             document.getElementById('checkbox1').style.display = 'block';
             document.getElementById('checkboxLabel').style.display = 'block';
             document.getElementById('parcialLabel').style.display = 'none';
@@ -314,7 +474,7 @@ document.getElementById('dolar').innerText=$;
             document.getElementById('pago').value = '';
             document.getElementById('tasa1').style.display = 'block';
             document.getElementById('tasa').style.display = 'block';
-            document.getElementById('descripcion').value = "";
+            document.getElementById('descripcion').value = "El pago fue realizado en divisa o moneda extrajera";
         }
         if (inlineRadio1.checked == true && checkbox1.checked) {
             document.getElementById('descripcionLabel').style.display = 'block';
@@ -386,6 +546,16 @@ document.getElementById('dolar').innerText=$;
     function mostrarDebito() {
         let nn2 = n2.value;
         console.log('chequed'); //
+        let tot = document.getElementById("monto").value;
+        var existePago = document.getElementById('existepag').value;
+        let ultimafilas = document.getElementById('monto2').value;
+
+        if (existePago) {
+
+            total = parseFloat(ultimafilas);
+        } else {
+            total = parseFloat(tot);
+        }
         if (checkbox1.checked) {
             debito1.style.display = 'block';
             debito3.style.display = 'block';
@@ -394,8 +564,8 @@ document.getElementById('dolar').innerText=$;
             document.getElementById('descripcionLabel').style.display = 'block';
             document.getElementById('descripcion').style.display = 'block';
             let cambia
-            let tot = document.getElementById("monto").value;
-            total = parseFloat(tot);
+
+
             cambia = (total / tasa1).toFixed(2);
             if (nn2 < parseInt(cambia)) {
 
@@ -421,6 +591,7 @@ document.getElementById('dolar').innerText=$;
         const tas = tasa.value;
         const nn2 = n2.value;
         tasa1 = parseFloat(tas);
+        console.log('total de debitarsi: ', total);
         cambio = (total / tasa1).toFixed(2);
         //let tot=document.getElementById("monto").value;
         total = parseFloat(tot);
@@ -446,16 +617,25 @@ document.getElementById('dolar').innerText=$;
         let cambio;
         tasa1 = parseFloat(tas);
         let tot = document.getElementById("monto").value;
-        total = parseFloat(tot);
+        let ultimafilas = document.getElementById('monto2').value;
+        var existePago = document.getElementById('existepag').value;
+        console.log('existe pago en restar: ', existePago,' ultimafilas ',ultimafilas,' tot ',tot);
+        if (ultimafilas!=0) {
+
+            total = parseFloat(ultimafilas);
+        } else {
+            total = parseFloat(tot);
+        }
+
         cambio = (total / tasa1).toFixed(2);
         //totalLabel.innerText=total;
         total$.innerText = cambio;
-        //console.log('cambio$' + cambio);
+        console.log('cambio$ en restar(): ' + cambio);
 
         const deb = debito.value;
         if (deb != "") {
             debito2 = parseFloat(deb);
-            console.log('HAY DEBIO ' + debito2);
+            console.log('HAY DEBITO ' + debito2);
         } else {
             debito2 = 0;
         }
@@ -523,7 +703,7 @@ document.getElementById('dolar').innerText=$;
                 pago = (cambio - rest + aux).toFixed(2);
 
                 if (decimal != 0) {
-                    document.getElementById('pago').value = pago * tasa1 + 0.1;
+                    document.getElementById('pago').value = pago * tasa1;
                 } else {
                     document.getElementById('pago').value = pago * tasa1;
                 }
@@ -598,7 +778,7 @@ document.getElementById('dolar').innerText=$;
                 vuelto.innerText = (n4).toFixed(2);
                 pago = (cambio - rest).toFixed(2);
                 if (decimal != 0) {
-                    pay.value = pago * tasa1 + 0.1;
+                    pay.value = pago * tasa1;
                 } else {
                     pay.value = pago * tasa1;
                 }
@@ -634,7 +814,7 @@ document.getElementById('dolar').innerText=$;
             vuelto.innerText = (n4);
             pago = (cambio - deuda).toFixed(2);
             if (decimal != 0) {
-                pay.value = pago * tasa1 + 0.1;
+                pay.value = pago * tasa1;
             } else {
                 pay.value = pago * tasa1;
             }
@@ -686,9 +866,21 @@ document.getElementById('dolar').innerText=$;
         paypal = parseFloat(parcialBs.value);
         console.log('pay:' + paypal);
         let tot = document.getElementById("monto").value;
-        total = parseFloat(tot);
+
+        var existePago = document.getElementById('existepag').value;
+        let ultimafilas = document.getElementById('monto2').value;
+        console.log('existe pago en restar: ', existePago,' ultimafilas ',ultimafilas,' tot ',tot);
+        if (ultimafilas!=0) {
+
+            total = parseFloat(ultimafilas);
+        } else {
+            total = parseFloat(tot);console.log('total interno: ', total);
+        }
+
+        //total = parseFloat(tot);
+        console.log('total: ', total);
         diferencia = (total - paypal).toFixed(2);
-        console.log('diferencia');
+        console.log('diferencia', diferencia);
         diferen = (total - paypal).toFixed(2);
         if (paypal < total) {
             document.getElementById('pagoLabel').innerText = 'Pago parcial';
@@ -720,6 +912,7 @@ document.getElementById('dolar').innerText=$;
         document.getElementById('eqBs').value = '';
         document.getElementById('vuelto').value = '';
         document.getElementById('resta').value = '';
+        document.getElementById('tasa').value=1;
 
     }
 </script>

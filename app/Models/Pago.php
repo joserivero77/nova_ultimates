@@ -60,4 +60,5 @@ class Pago extends Model
     public function get_active_factura(){
         return Self::where('status','PAGADA');
     }
+    protected $guarded=[];
 }

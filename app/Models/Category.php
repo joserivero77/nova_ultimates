@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
-    protected $guarded=[];
+
     protected $fillable=[
 
         'name',
@@ -18,4 +18,5 @@ class Category extends Model
     public function products(){
         return $this->hasMany(Product::class);
     }
+    protected $guarded=[];
 }

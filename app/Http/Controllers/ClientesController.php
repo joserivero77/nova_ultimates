@@ -17,7 +17,7 @@ class ClientesController extends Controller
     public function index()
     {
         //
-        $clientes=Client::paginate(4);
+        $clientes=Client::orderBy('name')->get();
         return view('amd.client.index', compact('clientes'));
     }
     public function vender(){

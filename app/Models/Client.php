@@ -38,4 +38,5 @@ class Client extends Model
     {
         return $this->hasMany(Pago::class, 'id_cliente');
     }
+    protected $guarded=[];
 }
