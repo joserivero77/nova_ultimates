@@ -87,7 +87,11 @@ class PagoController extends Controller
         $query->selectRaw('MAX(id)')
             ->from('pagos')
             ->groupBy('id_venta');
-    })->get();
+        })
+        ->where(function ($query) {
+            $query->where('status', '!=', 'PAGADO')
+                ->orWhere('deuda', '!=', 0);
+        })->get();
     return $ultimasFilas;
     //return view('tu_vista', compact('ultimasFilas'));
 }

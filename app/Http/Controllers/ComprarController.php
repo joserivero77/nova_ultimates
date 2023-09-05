@@ -189,8 +189,8 @@ class comprarController extends Controller
         $prodo=Producto::get_active_products()->get();//dd($prod);
         $prod=Producto::get();
         $total = 0;$cant=0;
-        foreach ($this->obtenerProductos() as $producto) {dd($producto->cantidad);
-            $total += $producto->cantidad * $producto->precio_compra;dd($total);
+        foreach ($this->obtenerProductos() as $producto) {//dd($producto->cantidad);
+            $total += $producto->cantidad * $producto->precio_compra;//dd($total);
             $cant+=$producto->cantidad;//dd($cant);
         }
 

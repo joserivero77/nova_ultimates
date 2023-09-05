@@ -102,7 +102,7 @@ Route::resource('shopping_cart_detail','ShoppingCartDetailController')->only('st
         Route::get("/productoDeVenta", [VenderController::class, 'agregarProductoVenta'])->name("agregarProductoVenta");
         Route::delete("/productoDeVenta", [VenderController::class,'quitarProductoDeVenta'])->name("quitarProductoDeVenta");
         Route::post("/terminarOCancelarVenta", [VenderController::class, 'terminarOCancelarVenta'])->name("terminarOCancelarVenta");
-        Route::post("/agregarCantidadProductov/{code}", [VenderController::class, 'agregarCantidadProductov'])->name("agregarCantidadProductov");
+        Route::post("agregarCantidadProductov/{code}", [VenderController::class, 'agregarCantidadProductov'])->name("agregarCantidadProductov");
 
         Route::resource("compras", ComprasController::class);
         Route::get("/comprar", [ComprarController::class, 'index'])->name("comprar.index");
