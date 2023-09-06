@@ -69,7 +69,7 @@
                   </div>
                   <div class="form-group">
                     <label for="precio_compra" class="form-label">Precio de compra</label>
-                    <input type="number" name="precio_compra" id="precio_compra"  aria-describedby="helpId"
+                    <input type="text" name="precio_compra" id="precio_compra"  aria-describedby="helpId"
                     class="form-control @error('precio_compra') is-invalid
                     @enderror" placeholder="" aria-describedby="helpId">
                     @error('precio_compra')
@@ -82,7 +82,7 @@
                   </div>
                   <div class="form-group">
                   <label for="precio_venta" class="form-label">Precio de venta</label>
-                  <input type="number" name="precio_venta" id="precio_venta"  aria-describedby="helpId"
+                  <input type="text" name="precio_venta" id="precio_venta"  aria-describedby="helpId"
                   class="form-control @error('precio_venta') is-invalid
                   @enderror" placeholder="" aria-describedby="helpId">
                   @error('precio_venta')

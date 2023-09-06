@@ -1,80 +1,72 @@
-<!doctype html>
-<html lang="en">
-
+html
+<!DOCTYPE html>
+<html>
 <head>
-  <title>Title</title>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <!-- Bootstrap CSS v5.2.1 -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-
+    <title>Detalle de venta</title>
+    <style>
+        /* Estilos CSS personalizados para la factura */
+        /* ... */
+    </style>
 </head>
-
 <body>
-  <header>
-    <!-- place navbar here -->
-  </header>
-  <main>
-    VENTAS
-    <h2>Productos</h2>
-            <table  class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                <tr>
-                    <th>Cod. Producto</th>
-                    <th>Descripción</th>
-                    <th>Precio</th>
-                    <th>Cantidad</th>
-                    <th>Subtotal</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($venta->productos as $producto)
-                    <tr>
-                        <td><a href="">{{ $producto->code}}</a></td>
-                        <td>{{$producto->description}}</td>
-
-                        <td>Bs{{number_format($producto->precio, 2)}}</td>
-                        <td>{{$producto->cantidad}}</td>
-                        <td>Bs{{number_format($producto->cantidad * $producto->precio, 2)}}</td>
-                    </tr>
-                @endforeach
-                </tbody>
-                <tfoot>
-                <tr>
-
-
-                    <td colspan="3"></td>
-                    <td><strong>SubTotal</strong></td>
-                    <td>Bs{{number_format($total, 2)}}</td>
-
-                </tr>
-                <tr>
-                    <td colspan="3"></td>
-                    <td><strong>Impuesto (16,0%) </strong></td>
-                    <td>Bs{{ number_format($producto->cantidad * $producto->precio*0.16,2) }}</td>
-                </tr>
-                <tr>
-                    <td colspan="3"></td>
-                    <td><strong>Total</strong></td>
-                    <td>Bs{{ number_format($producto->cantidad * $producto->precio*1.16,2) }}</td>
-                </tr>
-                </tfoot>
-            </table>
-  </main>
-  <footer>
-    <!-- place footer here -->
-  </footer>
-  <!-- Bootstrap JavaScript Libraries -->
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
-  </script>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
-    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
-  </script>
+    <div class="row">
+        <div class="col-12">
+            <h1>Detalle de venta Nº{{$venta->id}}</h1>
+            <h1>Cliente: <small><b>{{$venta->cliente->name}}  Direccion Fiscal:{{ $venta->cliente->address }}  RIF:{{ $venta->cliente->rif }}</b></small></h1>
+            @if(session("mensaje"))
+                <div class="alert alert-{{session('tipo') ? session("tipo") : "info"}}">
+                    {{session('mensaje')}}
+                </div>
+            @endif
+            <a class="btn btn-info" href="{{route("ventas.index")}}">
+                <i class="fa fa-arrow-left"></i>&nbsp;Volver
+            </a>
+            <a class="btn btn-success" href="">
+                <i class="fa fa-print"></i>&nbsp;Reporte
+            </a>
+            <h2>Productos</h2>
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Cod. Producto</th>
+                            <th>Descripción</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($venta->productos as $producto)
+                            <tr>
+                                <td><a href="{{ route('products.show',$producto->code) }}">{{ $producto->code}}</a></td>
+                                <td>{{$producto->description}}</td>
+                                <td>Bs{{number_format($producto->precio, 2)}}</td>
+                                <td>{{$producto->cantidad}}</td>
+                                <td>Bs{{number_format($producto->cantidad * $producto->precio, 2)}}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3"></td>
+                            <td><strong>SubTotal</strong></td>
+                            <td>Bs{{number_format($total, 2)}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"></td>
+                            <td><strong>I.V.A (16,0%)</strong></td>
+                            <td>Bs{{ number_format($total*0.16,2) }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"></td>
+                            <td><strong>Total</strong></td>
+                            <td>Bs{{ number_format($total*1.16,2) }}</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
 </body>
-
 </html>

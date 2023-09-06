@@ -47,7 +47,7 @@
                         </div>
                         <div class="row no-gutters align-items-center">
                             <div class="col-auto">
-                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">count({{ $clientesSinPagos }})</div>
                             </div>
                             <div class="col">
                                 <div class="progress progress-sm mr-2">
@@ -73,8 +73,8 @@
                 <div class="row no-gutters align-items-center bg-black">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                            Ganancia Neta-Mes</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                            Pagos Pendientes por cobrar</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $pagospendientes }}</div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -87,51 +87,28 @@
 </div>
 
 
+
 <div class="row">
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Deuda por Cliente</h3>
+
+
+            <div class="">
+                <h3 class="">Deuda por Cliente</h3>
             </div>
-            <div class="card-body">
-                <canvas id="graficaDeudas"></canvas>
+            <div class="">
+                <canvas style="width: 5px height:5px" id="grafica"></canvas>
             </div>
+
+
         </div>
-    </div>
-</div>
 
 
 @endsection
 @section('scripts')
+
+
 <script src="js/cdnjs.Chart.js_4.4.0_chart.min.js">
 
 </script>
-    <script>
-        var clientes = @json($clientes);
-        var deudasTotales = @json($deudasTotales);
 
-        var ctx = document.getElementById('graficaDeudas').getContext('2d');
-        var chart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: clientes,
-                datasets: [{
-                    label: 'Deuda por Cliente',
-                    data: deudasTotales,
-                    backgroundColor: 'rgba(0, 123, 255, 0.5)',
-                    borderColor: 'rgba(0, 123, 255, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-    </script>
 {!! Html::script('js/cdnjs.Chart.js_4.4.0_chart.min.js') !!}
 @endsection

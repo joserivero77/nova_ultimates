@@ -75,7 +75,7 @@
                             @else
                                 <a class="nav-link disabled" href="{{ route('products.create') }}"
                                     @disabled(true)><span class="btn btn-primary">Registrar producto</span></a>
-                                <div class="alert alert-danger">
+                                <div class="alert alert-danger">{{ $products->render() }}
                                     <p><b>Debe ingresar primero un Proveedor</b></p>
                                 </div>
                             @endif
@@ -91,7 +91,8 @@
 
 
                     <div class="table-responsive">
-                        <table table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <input type="text" id="searchInput" class="form-control mb-3" placeholder="Buscar...">
+                        <table table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
 
@@ -101,7 +102,6 @@
                                     <th>Stock</th>
                                     <th>Categoria</th>
                                     <th>Estado</th>
-
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -192,8 +192,9 @@
                                         <div class="container align-content-center">
                                             <img class="card-img-top img-fluid img_thumbnail"
                                                 src="{{ asset('/image') }}/{{ $pro->image }}" alt="Title"
-                                                title="Categoria" style="height: 120px;width: 120px;" data-toggle="popover"
-                                                data-trigger="hover" data-content="{{ $pro->description }}">
+                                                title="Categoria" style="height: 120px;width: 120px;"
+                                                data-toggle="popover" data-trigger="hover"
+                                                data-content="{{ $pro->description }}">
                                         </div>
                                         <div class="card-body align-content-md-between align-content-sm-between">
                                             <h5 class="card-title">{{ $pro->name }}</h5>
@@ -207,12 +208,12 @@
                                             <div style="align-content: center">
                                                 <p class="btn-holder">
                                                     <!-- <a href="{{ route('vender.index', $pro->code) }}"
-                                                                <a href="{{ route('pasarId', $pro->code) }}"
-                                                                class="btn btn-primary text-center btn-block" type="submit"
-                                                                name="codigo"
-                                                                value="Agregar" role="button">
-                                                                Agregar al carrito
-                                                            </a>-->
+                                                                    <a href="{{ route('pasarId', $pro->code) }}"
+                                                                    class="btn btn-primary text-center btn-block" type="submit"
+                                                                    name="codigo"
+                                                                    value="Agregar" role="button">
+                                                                    Agregar al carrito
+                                                                </a>-->
                                                 </p>
                                                 <form action="{{ route('pasarId', $pro->code) }}" method="post">
                                                     @csrf
@@ -251,10 +252,48 @@
     </footer>
 @endsection
 @section('scripts')
+<script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script>
+
+
+
+            $(document).ready(function() {
+                // Agregar un evento de escucha para el evento 'input'
+                $('#searchInput').on('input', function() {
+                    // Obtener el valor del campo de entrada de búsqueda
+                    var searchValue = $(this).val().toLowerCase();
+
+                    // Filtrar las filas de la tabla que coincidan con el término de búsqueda
+                    $('#dataTable2 tbody tr').filter(function() {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+                    });
+                });
+            });
+    </script>
+
     <script>
         $(function() {
             $('[data-toggle="popover"]').popover()
         });
     </script>
 
+    <!--script>
+        $(document).ready(function() {
+            $('#dataTable').DataTable({
+                paging: false,
+                searching: true,
+                dom: 'Bfrtip',
+                buttons: []
+            });
+        });
+    </!--script-->
+
+    {!! Html::script('js/jquery-3.5.1.min.js') !!}
+    {!! Html::script('sbadmin/vendor/jquery/jquery.min.js') !!}
+    {!! Html::script('sbadmin/vendor/bootstrap/js/bootstrap.bundle.min.js') !!}
+    {!! Html::script('js/bootstrap.bundle.min.js') !!}
+    {!! Html::script('sbadmin/vendor/jquery-easing/jquery.easing.min.js') !!}
+    {!! Html::script('sbadmin/js/sb-admin-2.min.js') !!}
+    {!! Html::script('js/bootstrap.min.js') !!}
 @endsection

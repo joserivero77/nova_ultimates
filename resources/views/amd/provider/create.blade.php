@@ -57,7 +57,7 @@
                 </div>
                 <div class="form-group">
                   <label for="rif" class="form-label">Rif</label>
-                  <input type="number" name="rif" id="rif"  aria-describedby="helpId"
+                  <input type="text" name="rif" id="rif"  aria-describedby="helpId"
                   class="form-control @error('rif') is-invalid
                   @enderror" placeholder=" ingrese hasta 11 digitos" aria-describedby="helpId">
                   @error('rif')

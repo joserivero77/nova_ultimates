@@ -60,7 +60,7 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Interface
+                Inicio
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -81,37 +81,41 @@
                 </div>
             </li>
 
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Ventas
+            </div>
+
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-wrench"></i>
-                    <span>Gestion de Clientes</span>
+                    <span>Gestion de Ventas</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Vistas:</h6>
+                        <a class="collapse-item" href="{{ asset(route('vender.index')) }}">Vender</a>
+                        <a class="collapse-item" href="{{ asset(route('pagos.index')) }}">Pagar</a>
                         <a class="collapse-item" href="{{ asset(route('clients.index')) }}">Registro de Clientes</a>
                         <a class="collapse-item" href="{{ asset(route('visitas.index')) }}">Control de visitas a Clientes</a>
-                        <a class="collapse-item" href="{{ asset(route('providers.index')) }}">Proveedores</a>
 
-
-                        <!--a-- class="collapse-item" href="utilities-color.html">Colors</a>
-
-                        <a class="collapse-item" href="utilities-border.html">Borders</a>
-                        <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                        <a-- class="collapse-item" href="utilities-other.html">Other</a-->
                     </div>
                 </div>
             </li>
+
 
             <!-- Divider -->
             <hr class="sidebar-divider">
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Addons
+                Almacen
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -119,14 +123,13 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>Gestion de Ventas</span>
+                    <span>Gestion de Compras</span>
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Vistas:</h6>
                         <a class="collapse-item" href="{{ asset(route('comprar.index')) }}">Comprar</a>
-                        <a class="collapse-item" href="{{ asset(route('vender.index')) }}">Vender</a>
-                        <a class="collapse-item" href="{{ asset(route('pagos.index')) }}">Pagar</a>
+                        <a class="collapse-item" href="{{ asset(route('providers.index')) }}">Proveedores</a>
                         <a class="collapse-item" href="{{ asset(route('grafica.deudas')) }}">Graficar</a>
 
                         <!--a class="collapse-item" href="login.html">Login</!--a>
@@ -139,7 +142,33 @@
                     </div>
                 </div>
             </li>
+<!-- Divider -->
+<hr class="sidebar-divider">
 
+<!-- Heading -->
+<div class="sidebar-heading">
+    Configuracion
+</div>
+
+<!-- Nav Item - Utilities Collapse Menu -->
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+        aria-expanded="true" aria-controls="collapseUtilities">
+        <i class="fas fa-fw fa-wrench"></i>
+
+    </a>
+    <div id="collapseone" class="collapse" aria-labelledby="headingUtilities"
+        data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Vistas:</h6>
+            <a class="collapse-item" href="">Datos de la Empresa</a>
+            <a class="collapse-item" href="">Impuesto</a>
+            <a class="collapse-item" href="">Logo</a>
+            <a class="collapse-item" href=""></a>
+
+        </div>
+    </div>
+</li>
             <!-- Nav Item - Charts ->
             <li-- class="nav-item">
                 <a class="nav-link" href="charts.html">

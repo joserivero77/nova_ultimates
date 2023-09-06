@@ -13,7 +13,7 @@
             <a class="btn btn-info" href="{{route("ventas.index")}}">
                 <i class="fa fa-arrow-left"></i>&nbsp;Volver
             </a>
-            <a class="btn btn-success" href="">
+            <a class="btn btn-success" href="" target="_blanck">
                 <i class="fa fa-print"></i>&nbsp;Reporte
             </a>
             <h2>Productos</h2>

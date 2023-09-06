@@ -46,8 +46,6 @@ Route::get('/', function () {
   return view('layouts.amd');
 });*/
 
-//Route::resource('almacen/categoria','CategoriaController');
-//Route::resource('almacen/categoria', CategoriaController::class);
 Auth::routes();
 Route::resource('pagos',PagoController::class)->names('pagos');
 Route::get('/grafica-deudas', [ChartController::class, 'deudaPorCliente'])->name('grafica.deudas');
@@ -60,7 +58,7 @@ Route::get('categories/pdf2',[Controller::class,'imprimir'])->name('imprimir');
 Route::get('visita/visitas/pdf',[VisitaController::class, 'imprimir'])->name('visitas.pdf');
 Route::get('categories/pdf',[CategoryController::class, 'imprime'])->name('category.pdf');
 Route::get('pdf',[ProductController::class, 'pdf'])->name('catalogoproducto.pdf');
-Route::get("ventas_pdf/{venta}", [VentasController::class,'pdf'])->name("ventas_pdf");
+Route::post("/ventas/{venta}", [VentasController::class,'pdf'])->name("ventas_pdf");
 
 Route::resource('categories', CategoryController::class)->names('categories');
 Route::get('categories/modal/create','CategoryController@create')->name('create');

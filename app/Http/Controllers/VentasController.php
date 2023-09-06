@@ -108,7 +108,7 @@ class VentasController extends Controller
     public function show(Venta $venta)
     {
         $total = 0;
-
+        //dd($venta);
         foreach ($venta->productos as $producto) {
             $total += $producto->cantidad * $producto->precio;
 
@@ -125,19 +125,22 @@ class VentasController extends Controller
     public function pdf(){
 
         $total = 0;
-        //dd($ConTotales);
-        foreach ($ventas->productos as $producto) {
+        //dd($venta);
+        $venta=Venta::get();
+        foreach ($venta->productos as $producto) {
             $total += $producto->cantidad * $producto->precio;
 
         }
 
-        $pdf=\Pdf::loadView('amd.ventas.ventas_pdf',compact([
+        $pdf=\Pdf::loadView('amd.ventas.ventas_pdf',[
             "venta" => $venta,
             "total" => $total,
 
-        ]));
+        ]);
         return $pdf->stream('ReporteVenta_'.$venta->id.'.pdf');
     }
+
+
 
     /**
      * Show the form for editing the specified resource.

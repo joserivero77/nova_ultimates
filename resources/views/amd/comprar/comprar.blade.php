@@ -4,9 +4,10 @@
     <style>
         .overflow-scroll {
             overflow: auto;
-            width: 230px;
+            width: 240px;
             height: 300px;
-            border: 1px solid blue;
+            border: 2px solid rgb(154, 154, 235);
+            border-radius: 5px;
         }
 
         .card-menos {
@@ -47,19 +48,27 @@
             <div class="dropdown">
                 <div class="alert alert-primary" role="alert">
                     <div class="row">
-                        <div class=" col-10">
+                        <div class=" col-9">
                             <strong>
                                 CATALOGO DE PRODUCTOS
                             </strong>
-
                             <!----------------------------------------------------------------------->
+                            <div class="input-group col-lg-6 col-md-6 col-sm-6 col-xl-6 col-xxl-4 col-8">
+                                <input type="text" class="form-control" id="searchInput"
+                                    placeholder="Buscar producto" autocomplete="false">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" onclick="searchProduct()"><i
+                                            class="fas fa-search"></i></button>
+                                </div>
+                            </div>
+
                         </div>
                         <div class="col-3">
-                            <div class="container mb-3">
+                            <div class="container mb-10">
                                 <div class="row">
                                     <div class="col-lg-3 col-sm-4 col-md-4 col-xl-3 col-xxl-3 col-4">
                                         <!-- Content Wrapper -->
-                                        <div class="dropdown open">
+                                        <div class="dropdown open mt-4 ml-5 mr-0">
                                             <a href="#" class=" btn btn-primary dropdown-toggle btn-sm"
                                                 data-toggle="dropdown" aria-haspopup="true" type="button" id="triggerId"
                                                 aria-expanded="false"><i class="fa fa-shopping-cart"></i>
@@ -124,163 +133,148 @@
                         </div>
                     </div>
                 </div>
-
-
             </div>
 
-            <div class="row">
-                <!--tarjetas del catalogo-->
-                <div class="overflow-scroll">
-                    <div class="col-lg-12 col-md-3 col-sm-3 col-xl-12 col-xxl-12">
-                        @foreach ($prod as $pro)
-                            <div class="card text-center justify-center align-content-center align-content-lg-center align-content-xl-between align-content-xxl-between align-content-md-around align-content-sm-start"
-                                style="width: 200px">
-                                <div class="container align-content-center">
-                                    <img class="card-img-top img-fluid img_thumbnail"
-                                        src="{{ asset('/image') }}/{{ $pro->image }}" alt="Title" title="Categoria"
-                                        style="height: 100px;width: 120px;" data-toggle="popover" data-trigger="hover"
-                                        data-content="{{ $pro->description }}">
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="row">
+            <!--tarjetas del catalogo-->
+            <div class="overflow-scroll">
+                <div class="col-lg-12 col-md-3 col-sm-3 col-xl-12 col-xxl-12">
+                    @foreach ($prod as $pro)
+                        <div class="card text-center justify-center align-content-center align-content-lg-center align-content-xl-between align-content-xxl-between align-content-md-around align-content-sm-start"
+                            style="width: 200px">
+                            <div class="container align-content-center">
+                                <img class="card-img-top img-fluid img_thumbnail"
+                                    src="{{ asset('/image') }}/{{ $pro->image }}" alt="Title" title="Categoria"
+                                    style="height: 90px;width: 80px;" data-toggle="popover" data-trigger="hover"
+                                    data-content="{{ $pro->description }}">
+                            </div>
+                            <div class="card-body align-content-md-between align-content-sm-between">
+                                <h5 class="card-title">{{ $pro->name }}</h5>
+                                <p>Codigo:{{ $pro->code }}</p>
+                                <p class="card-text text-info"><strong><b>Precio: </b> Bs
+                                        {{ $pro->precio_compra }}</strong></p>
+                                <div>
                                 </div>
-                                <div class="card-body align-content-md-between align-content-sm-between">
-                                    <h5 class="card-title">{{ $pro->name }}</h5>
-                                    <p>Codigo:{{ $pro->code }}</p>
-                                    <p class="card-text text-info"><strong><b>Precio: </b> Bs
-                                            {{ $pro->precio_compra }}</strong></p>
-                                    <div>
-                                    </div>
-                                    <div style="align-content: center">
-                                        <form action="{{ route('pasarIdc', $pro->code) }}" method="post">
+                                <div style="align-content: center">
+                                    <form action="{{ route('pasarIdc', $pro->code) }}" method="post">
+                                        @csrf
+                                        <div class="form-group">
+                                            <button class="btn btn-primary text-center btn-block btn-sm" type="submit"
+                                                name="" value="Agregar" role="button">Agregar al
+                                                carrito</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
+
+            <!----Datos del Proveedor------>
+            <div class="col-lg-9 col-sm-9 col-md-9 col-xl-9 col-xxl-12 col-12">
+                <div class="">
+                    <form action="{{ route('terminarOCancelarCompra') }}" method="post" class="needs-validation"
+                        novalidate>
+                        @csrf
+                        <div class="form-group">
+                            <label for="id_provider" class="text-info"><b><h5>Proveedor</h5></b></label>
+                            <select class="form-control" style=" width:500px" name="id_provider" id="id_provider" required>
+                                <option></option>
+                                @foreach ($providers as $provider)
+                                    <option value="{{ $provider->id }}">{{ $provider->name }}</option>
+                                @endforeach
+                            </select>
+                            <div class="invalid-feedback">Debe seleccionar un proveedor</div>
+                        </div>
+                        @if (session('productosc') !== null)
+                            <div class="form-group">
+                                <button name="accion" value="terminar" id="terminar" type="submit"
+                                    class="btn btn-success btn-sm">Terminar
+                                    compra
+                                </button>
+                                <button name="accion" value="cancelar" type="submit"
+                                    class="btn btn-danger btn-sm">Cancelar
+                                    compra
+                                </button>
+                            </div>
+                        @endif
+                    </form>
+                </div>
+
+                @if (session('productosc') !== null)
+                    <h2>Total: Bs{{ number_format($total, 2) }}</h2>
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Producto</th>
+                                    <th>Descripción</th>
+                                    <th>Precio</th>
+                                    <th>Cantidad</th>
+                                    <th>Subtotal</th>
+                                    <th>Incremento</th>
+                                    <th></th>
+                                    <th>Quitar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (session('productosc') as $producto)
+                                    <tr>
+                                        <td>{{ $producto->name }}</td>
+                                        <td>{{ $producto->description }}</td>
+                                        <td>Bs{{ number_format($producto->precio_compra, 2) }}</td>
+                                        <td>{{ $producto->cantidad }}</td>
+                                        <td>Bs{{ number_format($producto->cantidad * $producto->precio_compra, 2) }}
+                                        </td>
+
+                                        <form action="{{ route('agregarCantidadProductoc', $producto->code) }}"
+                                            method="post">
                                             @csrf
                                             <div class="form-group">
-                                                <button class="btn btn-primary text-center btn-block btn-sm" type="submit"
-                                                    name="" value="Agregar" role="button">Agregar al
-                                                    carrito</button>
+                                                <!--label-- for="codigo">Código del producto</!--label-->
+                                                <td style="width: 12%">
+                                                    <input id="" autocomplete="off" value="1"
+                                                        name="cantidad" type="number"
+                                                        class="form-control cart_update" placeholder=""
+                                                        min="1">
+                                                </td>
+                                                <td style="width: 5%">
+                                                    <button type="submit" class="btn btn-warning btn-sm">
+                                                        +
+                                                    </button>
+                                                </td>
+
                                             </div>
                                         </form>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
 
 
-                <!----Datos del Proveedor------>
-                <div class="col-lg-12 col-sm-12 col-md-12 col-xl-12 col-xxl-12 col-12">
-                    <div class="">
-                        <form action="{{ route('terminarOCancelarCompra') }}" method="post" class="needs-validation"
-                            novalidate>
-                            @csrf
-                            <div class="form-group">
-                                <label for="id_provider">Proveedor</label>
-                                <select class="form-control" name="id_provider" id="id_provider" required>
-                                    <option></option>
-                                    @foreach ($providers as $provider)
-                                        <option value="{{ $provider->id }}">{{ $provider->name }}</option>
-                                    @endforeach
-                                </select>
-                                <div class="invalid-feedback">Debe seleccionar un proveedor</div>
-                            </div>
-                            @if (session('productosc') !== null)
-                                <div class="form-group">
-                                    <button name="accion" value="terminar" id="terminar" type="submit"
-                                        class="btn btn-success btn-sm">Terminar
-                                        compra
-                                    </button>
-                                    <button name="accion" value="cancelar" type="submit"
-                                        class="btn btn-danger btn-sm">Cancelar
-                                        compra
-                                    </button>
-                                </div>
-                            @endif
-                        </form>
-                    </div>
-                    <!--div-- class="">
-                        <form action="{{ route('agregarProductoCompra') }}" method="post">
-                            @csrf
-                            <div class="form-group">
-                                <label for="codigo">Código del producto</label>
-                                <input id="codigo" autocomplete="off" value=""
-                                required autofocus
-                                name="codigo"
-                                type="text"
-                                class="form-control cart_update"
-                                placeholder="">
 
-                            </div>
-                        </form>
-                    </!--div-->
-
-
-                    @if (session('productosc') !== null)
-                        <h2>Total: Bs{{ number_format($total, 2) }}</h2>
-                        <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <thead>
-                                    <tr>
-                                        <th>Producto</th>
-                                        <th>Descripción</th>
-                                        <th>Precio</th>
-                                        <th>Cantidad</th>
-                                        <th>Subtotal</th>
-                                        <th>Incremento</th>
-                                        <th></th>
-                                        <th>Quitar</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (session('productosc') as $producto)
-                                        <tr>
-                                            <td>{{ $producto->name }}</td>
-                                            <td>{{ $producto->description }}</td>
-                                            <td>Bs{{ number_format($producto->precio_compra, 2) }}</td>
-                                            <td>{{ $producto->cantidad }}</td>
-                                            <td>Bs{{ number_format($producto->cantidad * $producto->precio_compra, 2) }}</td>
-
-                                            <form action="{{ route('agregarCantidadProductoc', $producto->code) }}"
-                                                method="post">
+                                        <td>
+                                            <form action="{{ route('quitarProductoDeCompra') }}" method="post">
+                                                @method('delete')
                                                 @csrf
-                                                <div class="form-group">
-                                                    <!--label-- for="codigo">Código del producto</!--label-->
-                                                    <td style="width: 12%">
-                                                        <input id="" autocomplete="off" value="1"
-                                                            name="cantidad" type="number"
-                                                            class="form-control cart_update" placeholder=""
-                                                            min="1">
-                                                    </td>
-                                                    <td style="width: 5%">
-                                                        <button type="submit" class="btn btn-warning btn-sm">
-                                                            +
-                                                        </button>
-                                                    </td>
-
-                                                </div>
+                                                <input type="hidden" name="indice" value="{{ $loop->index }}">
+                                                <button type="submit" class="btn btn-danger">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
                                             </form>
-
-
-
-                                            <td>
-                                                <form action="{{ route('quitarProductoDeCompra') }}" method="post">
-                                                    @method('delete')
-                                                    @csrf
-                                                    <input type="hidden" name="indice" value="{{ $loop->index }}">
-                                                    <button type="submit" class="btn btn-danger">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    @else
-                        <h2>Aquí aparecerán los productos de la compra
-                            <br>
-                            Debe hacer click en Agregar a Carrito
-                        </h2>
-                    @endif
-                </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                @else
+                    <h4>Aquí aparecerán los productos de la compra
+                        <br>
+                        Debe hacer click en Agregar a Carrito
+                    </h4>
+                @endif
             </div>
         </div>
     </div>
@@ -291,6 +285,23 @@
 
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/jquery-3.5.1.min.js"></script>
+    <script>
+        function searchProduct() {
+            var input = document.getElementById('searchInput').value.toLowerCase();
+            var products = document.getElementsByClassName('card');
+
+            for (var i = 0; i < products.length; i++) {
+                var productName = products[i].getElementsByClassName('card-title')[0].innerText.toLowerCase();
+                var productCode = products[i].getElementsByClassName('card-text')[0].innerText.toLowerCase();
+
+                if (productName.includes(input) || productCode.includes(input)) {
+                    products[i].style.display = 'block';
+                } else {
+                    products[i].style.display = 'none';
+                }
+            }
+        }
+    </script>
     <script>
         document.getElementById('terminar').addEventListener("click", function() {
             var forms = document.getElementsByClassName("needs-validation");

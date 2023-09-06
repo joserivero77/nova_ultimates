@@ -39,14 +39,18 @@
         <div class=" col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-10">
                         <a href="#" data-toggle="modal" data-target="#createmodal" class="nav-link"><span
                             class="btn btn-success">Registrar Cliente</span></a>
                     </div>
+                    <div class="col-2">
+                        {{ $clients->render() }}
+                    </div>
                 </div>
-{{ $clients->render() }}
+
+
                     <div class="table-responsive">
-                        <table  class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <table  class="table table-bordered" id="" width="100%" cellspacing="0">
                             <thead class="">
                                 <tr>
 
@@ -108,6 +112,7 @@
 @include('amd.client.modal.create')
 @endsection
 @section('scripts')
+
 
 <!-- Bootstrap core JavaScript-->
 <script src="vendor/jquery/jquery.min.js"></script>

@@ -23,7 +23,7 @@ class CreateProductosTable extends Migration
             $table->decimal("precio_compra", 12, 2);
             $table->decimal("precio_venta", 12, 2);
             $table->decimal("stock", 12, 2)->default(0);//existencia
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->string('unit');
             $table->enum('status',['ACTIVE','DESACTIVED'])->default('ACTIVE');
 

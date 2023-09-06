@@ -56,7 +56,7 @@
                   </div>
                   <div class="form-group">
                     <label for="rif" class="form-label">Rif</label>
-                    <input type="number" name="rif" id="rif" value="{{ $provider->rif }}"
+                    <input type="text" name="rif" id="rif" value="{{ $provider->rif }}"
                     aria-describedby="helpId" class="form-control @error('rif') is-invalid
                     @enderror" placeholder="" aria-describedby="helpId">
                     @error('rif')
