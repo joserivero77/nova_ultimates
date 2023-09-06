@@ -122,11 +122,11 @@ class VentasController extends Controller
             "totalfinal"=>$totalfinal,
         ]);
     }
-    public function pdf(){
+    public function pdf(Venta $venta){
 
         $total = 0;
         //dd($venta);
-        $venta=Venta::get();
+        //$venta=Venta::get();
         foreach ($venta->productos as $producto) {
             $total += $producto->cantidad * $producto->precio;
 

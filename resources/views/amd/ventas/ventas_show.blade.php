@@ -29,15 +29,15 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($venta->productos as $producto)
-                        <tr>
-                            <td><a href="{{ route('products.show',$producto->code) }}">{{ $producto->code}}</a></td>
-                            <td>{{$producto->description}}</td>
-                            <td>Bs{{number_format($producto->precio, 2)}}</td>
-                            <td>{{$producto->cantidad}}</td>
-                            <td>Bs{{number_format($producto->cantidad * $producto->precio, 2)}}</td>
-                        </tr>
-                    @endforeach
+                        @foreach($venta->productos as $productoVendido)
+    <tr>
+        <td><a href="{{ route('products.show', $productoVendido->producto->code) }}">{{ $productoVendido->producto->name }}</a></td>
+        <td>{{ $productoVendido->description }}</td>
+        <td>Bs{{ number_format($productoVendido->precio, 2) }}</td>
+        <td>{{ $productoVendido->cantidad }}</td>
+        <td>Bs{{ number_format($productoVendido->cantidad * $productoVendido->precio, 2) }}</td>
+    </tr>
+@endforeach
                     </tbody>
                     <tfoot>
                     <tr>

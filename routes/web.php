@@ -58,7 +58,7 @@ Route::get('categories/pdf2',[Controller::class,'imprimir'])->name('imprimir');
 Route::get('visita/visitas/pdf',[VisitaController::class, 'imprimir'])->name('visitas.pdf');
 Route::get('categories/pdf',[CategoryController::class, 'imprime'])->name('category.pdf');
 Route::get('pdf',[ProductController::class, 'pdf'])->name('catalogoproducto.pdf');
-Route::post("/ventas/{venta}", [VentasController::class,'pdf'])->name("ventas_pdf");
+Route::get("/ventas/{venta}/pdf", [VentasController::class, 'pdf'])->name("ventas_pdf");
 
 Route::resource('categories', CategoryController::class)->names('categories');
 Route::get('categories/modal/create','CategoryController@create')->name('create');

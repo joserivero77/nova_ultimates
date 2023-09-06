@@ -1,29 +1,27 @@
-html
 <!DOCTYPE html>
 <html>
 <head>
     <title>Detalle de venta</title>
     <style>
         /* Estilos CSS personalizados para la factura */
-        /* ... */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid black;
+            text-align: center;
+            padding: 8px;
+        }
     </style>
 </head>
 <body>
     <div class="row">
         <div class="col-12">
-            <h1>Detalle de venta Nº{{$venta->id}}</h1>
-            <h1>Cliente: <small><b>{{$venta->cliente->name}}  Direccion Fiscal:{{ $venta->cliente->address }}  RIF:{{ $venta->cliente->rif }}</b></small></h1>
-            @if(session("mensaje"))
-                <div class="alert alert-{{session('tipo') ? session("tipo") : "info"}}">
-                    {{session('mensaje')}}
-                </div>
-            @endif
-            <a class="btn btn-info" href="{{route("ventas.index")}}">
-                <i class="fa fa-arrow-left"></i>&nbsp;Volver
-            </a>
-            <a class="btn btn-success" href="">
-                <i class="fa fa-print"></i>&nbsp;Reporte
-            </a>
+            <h1>Detalle de venta Nº1</h1>
+            <h1>Cliente: <small><b>Nombre del cliente</b></small></h1>
+            <a class="btn btn-info" href="#">Volver</a>
+            <a class="btn btn-success" href="#">Reporte</a>
             <h2>Productos</h2>
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -37,31 +35,29 @@ html
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($venta->productos as $producto)
-                            <tr>
-                                <td><a href="{{ route('products.show',$producto->code) }}">{{ $producto->code}}</a></td>
-                                <td>{{$producto->description}}</td>
-                                <td>Bs{{number_format($producto->precio, 2)}}</td>
-                                <td>{{$producto->cantidad}}</td>
-                                <td>Bs{{number_format($producto->cantidad * $producto->precio, 2)}}</td>
-                            </tr>
-                        @endforeach
+                        <tr>
+                            <td><a href="#">Código de producto</a></td>
+                            <td>Descripción del producto</td>
+                            <td>Bs100.00</td>
+                            <td>2</td>
+                            <td>Bs200.00</td>
+                        </tr>
                     </tbody>
                     <tfoot>
                         <tr>
                             <td colspan="3"></td>
                             <td><strong>SubTotal</strong></td>
-                            <td>Bs{{number_format($total, 2)}}</td>
+                            <td>Bs200.00</td>
                         </tr>
                         <tr>
                             <td colspan="3"></td>
                             <td><strong>I.V.A (16,0%)</strong></td>
-                            <td>Bs{{ number_format($total*0.16,2) }}</td>
+                            <td>Bs32.00</td>
                         </tr>
                         <tr>
                             <td colspan="3"></td>
                             <td><strong>Total</strong></td>
-                            <td>Bs{{ number_format($total*1.16,2) }}</td>
+                            <td>Bs232.00</td>
                         </tr>
                     </tfoot>
                 </table>

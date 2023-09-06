@@ -50,9 +50,10 @@
                                     <td>Bs{{number_format($venta->totalfinal, 2)}}</td>
                                     <td>{{number_format($venta->vent)}}</td>
                                     <td style="margin-left: 50px">
-                                        <a class="btn btn-info btn-sm" href="">
+                                        <a class="btn btn-info btn-sm" href="{{ route('ventas_pdf', $venta->id) }}" target="_blank" method="get">
                                             <i class="fa fa-print"></i>
                                         </a>
+
                                     </td>
                                     <td style="width: 20px">
                                         <a class="btn btn-success btn-sm" href="{{route("ventas.show", $venta)}}">

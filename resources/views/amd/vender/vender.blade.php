@@ -305,7 +305,11 @@
                                         <td>{{ $producto->cantidad }}</td>
                                         <td>Bs{{ number_format($producto->cantidad * $producto->precio_venta, 2) }}
                                         </td>
-
+                                        <td>
+                                            <input id="{{ $producto->code }}" autocomplete="off" value="{{ $producto->cantidad }}"
+                                                name="cantidad" type="number" class="form-control cart_update" placeholder="" min="1"
+                                                onchange="updateCantidad('{{ $producto->code }}', this.value)">
+                                        </td>
                                         <form action="{{ route('agregarCantidadProductov', $producto->code) }}"
                                             method="post">
                                             @csrf
@@ -359,6 +363,28 @@
 
 @endsection
 @section('scripts')
+<script>
+    function updateCantidad(code, cantidad) {
+        $.ajax({
+            url: "{{ route('agregarCantidadProductoc') }}",
+            type: "POST",
+            data: {
+                _token: "{{ csrf_token() }}",
+                code: code,
+                cantidad: cantidad
+            },
+            success: function(response) {
+                // Actualizar el subtotal en la tabla
+                $("#subtotal-" + code).text("Bs" + response.subtotal);
+                // Actualizar el total si es necesario
+                $("#total").text("Total: Bs" + response.total);
+            },
+            error: function(xhr, status, error) {
+                console.log(error);
+            }
+        });
+    }
+</script>
     <script>
         function searchProduct() {
             var input = document.getElementById('searchInput').value.toLowerCase();
