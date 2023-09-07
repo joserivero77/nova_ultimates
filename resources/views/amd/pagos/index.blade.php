@@ -68,7 +68,7 @@
                 @foreach ($pagos as $pago)
                     <tr>
                         <td>{{ $pago->created_at }}</td>
-                        <td scope="row">Fact #{{ str_pad($pago->id_venta, 7, '0', STR_PAD_LEFT) }}</td>
+                        <td scope="row">Fact #{{ str_pad($pago->id_venta, 5, '0', STR_PAD_LEFT) }}</td>
                         <td>
                             <a href="">{{ $pago->cliente->name }}</a>
                         </td>

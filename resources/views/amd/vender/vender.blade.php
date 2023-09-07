@@ -124,7 +124,7 @@
             </div>
 
             <div class="dropdown">
-                <div class="alert alert-primary" role="">
+                <div class="alert alert-primary" role="alert">
                     <div class="row">
                         <div class=" col-9">
                             <strong>
@@ -144,10 +144,8 @@
                             <div class="container mb-10">
                                 <div class="row">
                                     <div class="col-lg-3 col-sm-4 col-md-4 col-xl-3 col-xxl-3 col-4">
-
                                         <!-- Content Wrapper -->
-                                        <div
-                                            class="dropdown open mt-4 ml-5 mr-0">
+                                        <div class="dropdown open mt-4 ml-5 mr-0">
                                             <a href="#" class=" btn btn-primary dropdown-toggle btn-sm"
                                                 data-toggle="dropdown" aria-haspopup="true" type="button" id="triggerId"
                                                 aria-expanded="false"><i class="fa fa-shopping-cart"></i>
@@ -198,7 +196,12 @@
                                                     @endif
 
                                                 </div>
-
+                                                <div class="row">
+                                                    <div
+                                                        class="col-lg-12 col-sm-12 col-12 total-section text-center checkout">
+                                                        <a href="" class=""></a>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div><br>
                                     </div>
@@ -255,8 +258,11 @@
                         novalidate>
                         @csrf
                         <div class="form-group">
-                            <label for="id_cliente" class="text-info"><b><h5>Cliente</h5></b></label>
-                            <select class="form-control" style=" width:500px" name="id_cliente" id="id_cliente" required>
+                            <label for="id_cliente" class="text-info"><b>
+                                    <h5>Cliente</h5>
+                                </b></label>
+                            <select class="form-control" style=" width:500px" name="id_cliente" id="id_cliente"
+                            required>
                                 <option></option>
                                 @foreach ($clientes as $client)
                                     <option value="{{ $client->id }}">{{ $client->name }}</option>
@@ -264,7 +270,6 @@
                             </select>
                             <div class="invalid-feedback">Debe seleccionar un cliente</div>
                         </div>
-
                         @if (session('productos') !== null)
                             <div class="form-group">
                                 <button name="accion" value="terminar" id="terminar" type="submit"
@@ -305,28 +310,19 @@
                                         <td>{{ $producto->cantidad }}</td>
                                         <td>Bs{{ number_format($producto->cantidad * $producto->precio_venta, 2) }}
                                         </td>
-                                        <td>
-                                            <input id="{{ $producto->code }}" autocomplete="off" value="{{ $producto->cantidad }}"
-                                                name="cantidad" type="number" class="form-control cart_update" placeholder="" min="1"
-                                                onchange="updateCantidad('{{ $producto->code }}', this.value)">
-                                        </td>
-                                        <form action="{{ route('agregarCantidadProductov', $producto->code) }}"
+
+                                        <form id="form-{{ $producto->code }}"
+                                            action="{{ route('agregarCantidadProductov', $producto->code) }}"
                                             method="post">
                                             @csrf
                                             <div class="form-group">
                                                 <!--label-- for="codigo">Código del producto</!--label-->
                                                 <td style="width: 12%">
-                                                    <input id="" autocomplete="off" value="1"
-                                                        name="cantidad" type="number"
-                                                        class="form-control cart_update" placeholder=""
-                                                        min="1">
+                                                    <input id="cantidad-{{ $producto->code }}" autocomplete="off"
+                                                        value="{{ $producto->cantidad }}" name="cantidad" type="number"
+                                                        class="form-control cart_update"
+                                                        placeholder="" min="1">
                                                 </td>
-                                                <td style="width: 5%">
-                                                    <button type="submit" class="btn btn-warning btn-sm">
-                                                        +
-                                                    </button>
-                                                </td>
-
                                             </div>
                                         </form>
 
@@ -356,35 +352,28 @@
         </div>
     </div>
 
-
-
-
     @include('amd.vender.modal.catalogo')
-
 @endsection
 @section('scripts')
-<script>
-    function updateCantidad(code, cantidad) {
-        $.ajax({
-            url: "{{ route('agregarCantidadProductoc') }}",
-            type: "POST",
-            data: {
-                _token: "{{ csrf_token() }}",
-                code: code,
-                cantidad: cantidad
-            },
-            success: function(response) {
-                // Actualizar el subtotal en la tabla
-                $("#subtotal-" + code).text("Bs" + response.subtotal);
-                // Actualizar el total si es necesario
-                $("#total").text("Total: Bs" + response.total);
-            },
-            error: function(xhr, status, error) {
-                console.log(error);
-            }
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const inputs = document.querySelectorAll('.cart_update');
+
+            inputs.forEach(function(input) {
+                input.addEventListener('input', function() {
+                    const form = this.closest('form');
+                    form.submit();
+                });
+
+                input.addEventListener('change', function() {
+                    const form = this.closest('form');
+                    form.submit();
+                });
+            });
         });
-    }
-</script>
+    </script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery-3.5.1.min.js"></script>
     <script>
         function searchProduct() {
             var input = document.getElementById('searchInput').value.toLowerCase();
@@ -407,28 +396,6 @@
             var forms = document.getElementsByClassName("needs-validation");
             var validation = Array.prototype.filter.call(forms, function(form) {
                 if (form.checkValidity() === true) {
-                    console.log("listo para registrar proveedor");
-                } else {
-                    console.log("Debe seleccionar un proveedor");
-                    alert('ATENCION:Debe selccionar un proveedor');
-                }
-                form.classList.add("was-validated");
-            });
-
-        });
-    </script>
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/jquery-3.5.1.min.js"></script>
-    <script>
-        // const content = element.innerHTML;;
-
-
-
-
-        document.getElementById('terminar').addEventListener("click", function() {
-            var forms = document.getElementsByClassName("needs-validation");
-            var validation = Array.prototype.filter.call(forms, function(form) {
-                if (form.checkValidity() === true) {
                     console.log("listo para registrar cliente");
                 } else {
                     console.log("Debe seleccionar un cliente");
@@ -438,19 +405,8 @@
             });
 
         });
-
-        /*document.getElementById('divisa').addEventListener('change', function() {
-            var vuelto = document.getElementsByClassName('vuelto');
-            console.log('vuelto')
-        });*/
-
-
-        //const consultaDolar = require("consulta-dolar-venezuela");
-
-        /*consultaDolar.getMonitor("BCV", "lastUpdate").then($ => {
-            console.log($)
-        }); /*Obtener la ultima actualizacion del dólar en BCV*/
     </script>
+
     {!! Html::script('js/jquery-3.5.1.min.js') !!}
     {!! Html::script('sbadmin/vendor/jquery/jquery.min.js') !!}
     {!! Html::script('sbadmin/vendor/bootstrap/js/bootstrap.bundle.min.js') !!}

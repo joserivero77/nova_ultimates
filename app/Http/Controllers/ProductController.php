@@ -69,15 +69,12 @@ class ProductController extends Controller
         //
         //dd($request);
         $product = Producto::find($request->id);
-        //$product->calculateStock();
         if($request->hasFile('picture')){
             $file=$request->file('picture');
             $image_name=time().'_'.$file->getClientOriginalName();
             $file->move(public_path('/image'),$image_name);
         }
 
-        //$product->stock = $product->purchases->0sum('quantity') - $product->sales->sum('quantity');
-        //$product->save();
         $product=Producto::create($request->all()+[
             'image'=>$image_name,
         ]);

@@ -28,14 +28,14 @@
                             <thead>
                                 <tr>
 
-                                    <th>Nro</th>
+                                    <th>Factura Nro</th>
                                     <th>Fecha</th>
                                     <th>Cliente</th>
                                     <th>Total</th>
                                     <th>Cant. Vendida</th>
                                     <th style="width: 100px">Opciones</th>
-                                    <th></th>
-                                    <th></th>
+
+
 
 
                                 </tr>
@@ -44,7 +44,7 @@
                             <tbody>
                                 @foreach($ventas as $venta)
                                 <tr>
-                                    <td>{{ $venta->id }}</td>
+                                    <td>{{ str_pad($venta->id, 5, '0', STR_PAD_LEFT) }}</td>
                                     <td>{{date_format($venta->created_at,'d/m/y')}}</td>
                                     <td>{{$venta->cliente->name}}</td>
                                     <td>Bs{{number_format($venta->totalfinal, 2)}}</td>

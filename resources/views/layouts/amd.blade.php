@@ -161,14 +161,27 @@
         data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Vistas:</h6>
-            <a class="collapse-item" href="">Datos de la Empresa</a>
+            <a class="collapse-item" href="{{ asset(route('empresas.index')) }}">Datos de la Empresa</a>
             <a class="collapse-item" href="">Impuesto</a>
-            <a class="collapse-item" href="">Logo</a>
             <a class="collapse-item" href=""></a>
 
         </div>
     </div>
 </li>
+<nav class="navbar navbar-expand navbar-light bg-primary">
+    <ul class="nav navbar-nav">
+        <li class="nav-item">
+            <div></div>
+
+            <a class="nav-link collapse-item" href="{{ asset(route('empresas.index')) }}"><i class=" fa fa-address-book" style="color: white"></i>Datos de la Empresa</a>
+
+        </li>
+        <li class="nav-item">
+
+            <a class="nav-link collapse-item" href="">Impuesto</a>
+        </li>
+    </ul>
+</nav>
             <!-- Nav Item - Charts ->
             <li-- class="nav-item">
                 <a class="nav-link" href="charts.html">

@@ -54,15 +54,15 @@
                             </strong>
                             <!----------------------------------------------------------------------->
                             <div class="input-group col-lg-6 col-md-6 col-sm-6 col-xl-6 col-xxl-4 col-8">
-                                <input type="text" class="form-control" id="searchInput"
-                                    placeholder="Buscar producto" autocomplete="false">
+                                <input type="text" class="form-control" id="searchInput" placeholder="Buscar producto"
+                                    autocomplete="false">
                                 <div class="input-group-append">
                                     <button class="btn btn-primary" onclick="searchProduct()"><i
                                             class="fas fa-search"></i></button>
                                 </div>
                             </div>
-
                         </div>
+
                         <div class="col-3">
                             <div class="container mb-10">
                                 <div class="row">
@@ -182,8 +182,11 @@
                         novalidate>
                         @csrf
                         <div class="form-group">
-                            <label for="id_provider" class="text-info"><b><h5>Proveedor</h5></b></label>
-                            <select class="form-control" style=" width:500px" name="id_provider" id="id_provider" required>
+                            <label for="id_provider" class="text-info"><b>
+                                    <h5>Proveedor</h5>
+                                </b></label>
+                            <select class="form-control" style=" width:500px" name="id_provider" id="id_provider"
+                                required>
                                 <option></option>
                                 @foreach ($providers as $provider)
                                     <option value="{{ $provider->id }}">{{ $provider->name }}</option>
@@ -229,26 +232,23 @@
                                         <td>{{ $producto->description }}</td>
                                         <td>Bs{{ number_format($producto->precio_compra, 2) }}</td>
                                         <td>{{ $producto->cantidad }}</td>
-
                                         <td>Bs{{ number_format($producto->cantidad * $producto->precio_compra, 2) }}
                                         </td>
 
-                                        <form id="form-{{ $producto->code }}" action="{{ route('agregarCantidadProductoc', $producto->code) }}"
+                                        <form id="form-{{ $producto->code }}"
+                                            action="{{ route('agregarCantidadProductoc', $producto->code) }}"
                                             method="post">
                                             @csrf
                                             <div class="form-group">
                                                 <!--label-- for="codigo">Código del producto</!--label-->
                                                 <td style="width: 12%">
-                                                    <input id="cantidad-{{ $producto->code }}" autocomplete="off" value="{{ $producto->cantidad }}"
-                                                        name="cantidad" type="number"
-                                                        class="form-control cart_update" placeholder=""
-                                                        min="1">
+                                                    <input id="cantidad-{{ $producto->code }}" autocomplete="off"
+                                                        value="{{ $producto->cantidad }}" name="cantidad" type="number"
+                                                        class="form-control cart_update"
+                                                        placeholder="" min="1">
                                                 </td>
-
-
                                             </div>
                                         </form>
-
 
 
                                         <td>
@@ -279,23 +279,23 @@
     @include('amd.comprar.modal.catalogo')
 @endsection
 @section('scripts')
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const inputs = document.querySelectorAll('.cart_update');
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const inputs = document.querySelectorAll('.cart_update');
 
-        inputs.forEach(function(input) {
-            input.addEventListener('input', function() {
-                const form = this.closest('form');
-                form.submit();
-            });
+            inputs.forEach(function(input) {
+                input.addEventListener('input', function() {
+                    const form = this.closest('form');
+                    form.submit();
+                });
 
-            input.addEventListener('change', function() {
-                const form = this.closest('form');
-                form.submit();
+                input.addEventListener('change', function() {
+                    const form = this.closest('form');
+                    form.submit();
+                });
             });
         });
-    });
-</script>
+    </script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/jquery-3.5.1.min.js"></script>
     <script>

@@ -25,15 +25,12 @@
                             <table table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" >
                                 <thead>
                                     <tr>
-                                        <th>Id</th>
+                                        <th>Nro</th>
                                         <th>Fecha</th>
                                         <th>Proveedor</th>
                                         <th>Total</th>
                                         <th>Cant. Comprada</th>
                                         <th style="width: 100px">Opciones</th>
-                                        <th></th>
-                                        <th></th>
-
                                     </tr>
 
                                 </thead>
@@ -45,11 +42,11 @@
                             <td>{{$compra->provider->name}}</td>
                             <td>Bs{{number_format($compra->total, 2)}}</td>
                             <td>{{number_format($compra->cante)}}</td>
-                            <td style="width: 50px">
+                            <!--td style="width: 50px">
                                 <a class="btn btn-info btn-sm" href="">
                                     <i class="fa fa-print"></i>
                                 </a>
-                            </td>
+                            </!--td-->
                             <td style="width: 20px">
                                 <a class="btn btn-success btn-sm" href="{{route("compras.show", $compra)}}">
                                     <i class="fa fa-info"></i>

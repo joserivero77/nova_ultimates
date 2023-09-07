@@ -24,6 +24,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\ExchangeRateController;
 use App\Http\Controllers\PagoController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\EmpresaController;
 use Barryvdh\DomPdf\Facade\Pdf;
 
 
@@ -100,7 +101,7 @@ Route::resource('shopping_cart_detail','ShoppingCartDetailController')->only('st
         Route::get("/productoDeVenta", [VenderController::class, 'agregarProductoVenta'])->name("agregarProductoVenta");
         Route::delete("/productoDeVenta", [VenderController::class,'quitarProductoDeVenta'])->name("quitarProductoDeVenta");
         Route::post("/terminarOCancelarVenta", [VenderController::class, 'terminarOCancelarVenta'])->name("terminarOCancelarVenta");
-        Route::post("agregarCantidadProductov/{code}", [VenderController::class, 'agregarCantidadProductov'])->name("agregarCantidadProductov");
+        Route::post("/agregarCantidadProductov/{code}", [VenderController::class, 'agregarCantidadProductov'])->name("agregarCantidadProductov");
 
         Route::resource("compras", ComprasController::class);
         Route::get("/comprar", [ComprarController::class, 'index'])->name("comprar.index");
@@ -126,6 +127,7 @@ Route::get('/Cart-removeitem',[CartController::class,'removeitem'])->name('cart.
 Route::get('/cart',)->name('atras');
 Route::get('board',[HomeController::class,'amd'])->name('amd');
 Route::get('/exchange-rate', [ExchangeRateController::class,'index']);
+Route::resource("empresas", EmpresaController::class)->names('empresas');
 
 
 
