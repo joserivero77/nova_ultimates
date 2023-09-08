@@ -20,6 +20,10 @@ class Producto extends Model
         'category_id',
     ];
 
+    public function ventas()
+    {
+        return $this->hasMany(ProductoVendido::class, 'id_producto');
+    }
     public function category(){
         return $this->belongsTo(Category::class);
     }

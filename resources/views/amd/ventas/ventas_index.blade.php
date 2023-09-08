@@ -33,10 +33,8 @@
                                     <th>Cliente</th>
                                     <th>Total</th>
                                     <th>Cant. Vendida</th>
+                                    <th>Estado</th>
                                     <th style="width: 100px">Opciones</th>
-
-
-
 
                                 </tr>
 
@@ -49,6 +47,16 @@
                                     <td>{{$venta->cliente->name}}</td>
                                     <td>Bs{{number_format($venta->totalfinal, 2)}}</td>
                                     <td>{{number_format($venta->vent)}}</td>
+                                    <td>
+                                        @if ($venta->estado === 'ACTIVA')
+                                            <form action="{{ route('ventas.anular', $venta->id) }}" method="POST">
+                                                @csrf
+                                                <button class="btn btn-primary btn-sm" type="submit">Anular</button>
+                                            </form>
+                                        @else
+                                            Venta anulada
+                                        @endif
+                                    </td>
                                     <td style="margin-left: 50px">
                                         <a class="btn btn-info btn-sm" href="{{ route('ventas_pdf', $venta->id) }}" target="_blank" method="get">
                                             <i class="fa fa-print"></i>

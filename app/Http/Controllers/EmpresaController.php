@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Storage;
 
 class EmpresaController extends Controller
 {
-    //
     public function index()
     {
         $empresas = Empresa::all();
@@ -31,7 +30,7 @@ class EmpresaController extends Controller
             'email' => 'email',
         ]);
 
-        $logoPath = $request->file('logo')->store('public/logos');
+        $logoPath = $request->file('logo')->store('/storage/logos/');
         $logoUrl = Storage::url($logoPath);
 
         Empresa::create([
@@ -45,12 +44,13 @@ class EmpresaController extends Controller
 
         return redirect()->route('empresas.index')->with('success', 'Empresa registrada exitosamente.');
     }
+
     public function show(Empresa $empresa)
     {
-        //
-        $empresa=Empresa::find($empresa->id);
-        return view('amd.empresas.show',compact('empresa'));
+        $empresa = Empresa::find($empresa->id);
+        return view('amd.empresas.show', compact('empresa'));
     }
+
     public function edit(Empresa $empresa)
     {
         return view('amd.empresas.edit', compact('empresa'));
@@ -69,10 +69,8 @@ class EmpresaController extends Controller
 
         if ($request->hasFile('logo')) {
             Storage::delete($empresa->logo);
-
-            $logoPath = $request->file('logo')->store('public/img');
+            $logoPath = $request->file('logo')->store('public/logos');
             $logoUrl = Storage::url($logoPath);
-
             $empresa->update([
                 'nombre' => $request->nombre,
                 'logo' => $logoUrl,
@@ -98,7 +96,6 @@ class EmpresaController extends Controller
     {
         Storage::delete($empresa->logo);
         $empresa->delete();
-
         return redirect()->route('empresas.index')->with('success', 'Empresa eliminada exitosamente.');
     }
 }

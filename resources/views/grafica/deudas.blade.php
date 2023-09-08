@@ -98,8 +98,8 @@
             <canvas id="graficaDeudas"></canvas>
         </div>
         <hr>
-        Styling for the bar chart can be found in the
-        <code>/js/demo/chart-bar-demo.js</code> file.
+        Esto esta en desarrollo
+        <code>aun no funcional se debe ajustar los estilos y sincerar los datos</code>
     </div>
 </div>
 

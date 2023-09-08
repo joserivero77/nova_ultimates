@@ -25,6 +25,7 @@ use App\Http\Controllers\ExchangeRateController;
 use App\Http\Controllers\PagoController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\EmpresaController;
+use App\Http\Controllers\ImpuestoController;
 use Barryvdh\DomPdf\Facade\Pdf;
 
 
@@ -128,7 +129,7 @@ Route::get('/cart',)->name('atras');
 Route::get('board',[HomeController::class,'amd'])->name('amd');
 Route::get('/exchange-rate', [ExchangeRateController::class,'index']);
 Route::resource("empresas", EmpresaController::class)->names('empresas');
-
-
+Route::post('/ventas/{venta}/anular', [VentasController::class, 'anularVenta'])->name('ventas.anular');
+Route::resource('impuestos', ImpuestoController::class);
 
 

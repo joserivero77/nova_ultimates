@@ -142,46 +142,65 @@
                     </div>
                 </div>
             </li>
+
+            <!-- Divider -->
+
 <!-- Divider -->
 <hr class="sidebar-divider">
-
 <!-- Heading -->
 <div class="sidebar-heading">
-    Configuracion
+    Otros
 </div>
-
 <!-- Nav Item - Utilities Collapse Menu -->
 <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-        aria-expanded="true" aria-controls="collapseUtilities">
-        <i class="fas fa-fw fa-wrench"></i>
-
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReportes"
+        aria-expanded="true" aria-controls="collapseReportes">
+        <i class="fas fa-fw fa-cog"></i>
+        <span>Configuracion</span>
     </a>
-    <div id="collapseone" class="collapse" aria-labelledby="headingUtilities"
+    <div id="collapseReportes" class="collapse" aria-labelledby="headingReportes"
         data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Vistas:</h6>
             <a class="collapse-item" href="{{ asset(route('empresas.index')) }}">Datos de la Empresa</a>
-            <a class="collapse-item" href="">Impuesto</a>
-            <a class="collapse-item" href=""></a>
-
+            <a class="collapse-item" href="{{ asset(route('impuestos.index')) }}">Impuesto</a>
         </div>
     </div>
 </li>
-<nav class="navbar navbar-expand navbar-light bg-primary">
-    <ul class="nav navbar-nav">
-        <li class="nav-item">
-            <div></div>
+<!-- Nav Item - Utilities Collapse Menu -->
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMensajes"
+        aria-expanded="true" aria-controls="collapseMensajes">
+        <i class="fas fa-fw fa-envelope"></i>
+        <span>Mensajes</span>
+    </a>
+    <div id="collapseMensajes" class="collapse" aria-labelledby="headingMensajes"
+        data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Vistas:</h6>
+            <a class="collapse-item" href="#">Mensaje 1</a>
+            <a class="collapse-item" href="#">Mensaje 2</a>
+            <a class="collapse-item" href="#">Mensaje 3</a>
+        </div>
+    </div>
+</li>
+<!-- Nav Item - Utilities Collapse Menu -->
+<!--li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseConfiguracion"
+        aria-expanded="true" aria-controls="collapseConfiguracion">
 
-            <a class="nav-link collapse-item" href="{{ asset(route('empresas.index')) }}"><i class=" fa fa-address-book" style="color: white"></i>Datos de la Empresa</a>
-
-        </li>
-        <li class="nav-item">
-
-            <a class="nav-link collapse-item" href="">Impuesto</a>
-        </li>
-    </ul>
-</nav>
+        <span>Configuración</span>
+    </a>
+    <div id="collapseConfiguracion" class="collapse" aria-labelledby="headingConfiguracion"
+        data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Vistas:</h6>
+            <a class="collapse-item" href="#">Configuración 1</a>
+            <a class="collapse-item" href="#">Configuración 2</a>
+            <a class="collapse-item" href="#">Configuración 3</a>
+        </div>
+    </div>
+</!--li-->
             <!-- Nav Item - Charts ->
             <li-- class="nav-item">
                 <a class="nav-link" href="charts.html">
@@ -196,6 +215,14 @@
                     <span>Login</span></a>
             </li>
 
+<!--------------------------------------------------------------------->
+
+
+
+
+
+
+<!-------------------------------------------------------------------->
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 

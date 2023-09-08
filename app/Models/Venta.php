@@ -6,15 +6,28 @@ use Illuminate\Database\Eloquent\Model;
 
 class Venta extends Model
 {
-    public function productos()
-    {
-        return $this->hasMany("App\Models\ProductoVendido", "id_venta");
-    }
+    protected $fillable = [
+        'code',
+        'id_venta',
+        'description',
+        'cantidad',
+        'precio',
+        'id_producto',
+
+    ];
     public function cliente()
     {
         return $this->belongsTo(Cliente::class, 'id_cliente');
     }
 
+    public function productos()
+{
+    return $this->hasMany( ProductoVendido::class, 'id_venta',  'id');
+}
+public function productosdeVenta()
+{
+    return $this->hasMany( Producto::class, 'code',  'id');
+}
     public function pagos()
     {
         return $this->hasMany(Pago::class, 'id_venta');

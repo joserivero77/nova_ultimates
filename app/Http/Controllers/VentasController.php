@@ -13,6 +13,7 @@ use App\Models\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
+use App\Models\Pago;
 use Mike42\Escpos\Printer;
 
 class VentasController extends Controller
@@ -64,6 +65,7 @@ class VentasController extends Controller
     public function index()
     {
         $producto=Producto::get();
+        $pagos=Pago::get();
         $ConTotales = Venta::join("productos_vendidos", "productos_vendidos.id_venta", "=", "ventas.id")
             ->select("ventas.*", DB::raw("sum(productos_vendidos.cantidad * productos_vendidos.precio*0.16) as sutotal"))
             ->groupBy("ventas.id", "ventas.created_at", "ventas.updated_at", "ventas.id_cliente")
@@ -75,7 +77,7 @@ class VentasController extends Controller
             ->groupBy("ventas.id", "ventas.created_at", "ventas.updated_at", "ventas.id_cliente")
             ->get();
         //dd($ventasConTotales);
-        return view("amd.ventas.ventas_index", ["ventas" => $ventasConTotales,'totales'=>$ventasConTotales]);
+        return view("amd.ventas.ventas_index", ["ventas" => $ventasConTotales,'totales'=>$ventasConTotales,'producto'=>$producto,'pagos'=>$pagos]);
     }
 
     /**
@@ -112,9 +114,8 @@ class VentasController extends Controller
         foreach ($venta->productos as $producto) {
             $total += $producto->cantidad * $producto->precio;
 
-            $totalfinal=$total;
-
         }
+        $totalfinal=$total;
         return view("amd.ventas.ventas_show", [
             "venta" => $venta,
             "total" => $total,
@@ -140,7 +141,41 @@ class VentasController extends Controller
         return $pdf->stream('ReporteVenta_'.$venta->id.'.pdf');
     }
 
+    /*public function anularVenta(Venta $venta)
+    {
+        DB::transaction(function () use ($venta) {
+            foreach ($venta->productos as $producto) {
+                $producto->stock += $producto->cantidad;
+                $producto->save();
+            }
+        // Actualizar el estado de la venta a "ANULADA"
+        $venta->estado = 'ANULADA';
+        $venta->save();  });
 
+        // Realizar cualquier otra lógica necesaria, como devolver los productos al stock
+
+        return redirect()->route('ventas.index')->with('success', 'Venta anulada exitosamente.');
+    }*/
+    public function anularVenta(Venta $venta)
+{
+    // Obtener la lista de productos vendidos de la venta
+    $productosVendidos = $venta->productos;//dd($productosVendidos);
+
+    // Actualizar el valor de stock para cada producto vendido
+    foreach ($productosVendidos as $productoVendido) {
+        $producto = Producto::where('code', $productoVendido->code)->first();
+        $producto->stock += $productoVendido->cantidad;
+        // Actualizar el estado de la venta a "ANULADA"
+
+    }
+    $venta->estado = 'ANULADA';
+        $venta->save();//dd($producto);
+        $producto->save();
+    return redirect()->route('ventas.index')->with('success', 'Venta anulada exitosamente.');
+    // Anular la venta (actualizar el estado de la venta, etc.)
+
+    // Redirigir o retornar la respuesta adecuada
+}
 
     /**
      * Show the form for editing the specified resource.

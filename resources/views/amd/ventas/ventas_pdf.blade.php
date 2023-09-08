@@ -55,12 +55,14 @@
             /* Ajusta la opacidad según tus necesidades */
             z-index: -1;
         }
-        div .parra{
 
-            text-justify:auto;
-            text-align:right;
+        div .parra {
+
+            text-justify: auto;
+            text-align: right;
         }
-        div .fact{
+
+        div .fact {
             border: 3.8px solid rgb(12, 12, 13);
             border-radius: 15px;
         }
@@ -68,13 +70,20 @@
     <div class="container"><img src="img\descarga.jpeg" alt="Logo" class=""></div>
     <div class="parra col-6">
         <p><small>Nova Inversiones C.A <br>
-            Direccion:Urb. Valles de San Diego <br> Apto 5-c 1er piso <br>
-            Telefonos:04129874587/04141023579 <br>
-            RIF: J-10025486-9</small></p>
+                Direccion:Urb. Valles de San Diego <br> Apto 5-c 1er piso <br>
+                Telefonos:04129874587/04141023579 <br>
+                RIF: J-10025486-9</small></p>
     </div>
 </head>
 
 <body>
+    <div class="container"><img src="img\Pagada.jpg" alt="anulada" class="watermark"></div>
+    @if ($venta->estado == 'ANULADA')
+        <div class="container"><img src="img\Anulada.jpg" alt="anulada" class="watermark"></div>
+    @endif
+
+
+
 
     <div class="row">
         <div class="col-12">

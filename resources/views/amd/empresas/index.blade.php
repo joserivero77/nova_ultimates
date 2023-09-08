@@ -1,4 +1,5 @@
 @extends('layouts.amd')
+
 @section('styles')
 <style type="text/css">
 .unstyled-button
@@ -8,12 +9,12 @@
     background: none;
 }
 </style>
+@endsection
+
 @section('content')
     <div class="container">
         <h1>Listado de Empresas</h1>
-
         <a href="{{ route('empresas.create') }}" class="btn btn-primary mb-3">Crear Empresa</a>
-
         <table class="table">
             <thead>
                 <tr>
@@ -30,7 +31,7 @@
                         <td>{{ $empresa->nombre }}</td>
                         <td>
                             @if($empresa->logo)
-                                <img src="{{ asset('img/imagenes' .$empresa->logo) }}" alt="Logo de la Empresa" width="50">
+                                <img src="{{ asset('/storage/logos')}} / {{ $empresa->logo }}" alt="Logo de la Empresa" width="50">
                             @else
                                 Sin logo
                             @endif
