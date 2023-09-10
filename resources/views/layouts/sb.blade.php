@@ -9,23 +9,16 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>@yield('title') AppSisNova</title>
-    @yield('stylescss')
+    <title>SB Admin 9 - Dashboard</title>
+
     <!-- Custom fonts for this template-->
-    {!! Html::style('sbadmin/vendor/fontawesome-free/css/all.min.css') !!}
-    <!--{! Html::style('sbadmin/https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i') !!}-->
-    {!! Html::style('sbadmin/css/sb-admin-2.min.css') !!}
-    {!! Html::style('css/sb-admin-2.min.css') !!}
-
-
-    <!--link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet"-->
+        rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <!--link href="css/sb-admin-2.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/path/to/dropify.min.css"-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
 
@@ -38,11 +31,11 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('home') }}">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <!--i-- class="fas fa-laugh-wink"></!--i-->
+                    <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">AppSisNova  <small>v-1.0</small> <sup></sup></div>
+                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
             </a>
 
             <!-- Divider -->
@@ -50,9 +43,9 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="{{ route('home') }}">
+                <a class="nav-link" href="index.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Panel</span></a>
+                    <span>Dashboard</span></a>
             </li>
 
             <!-- Divider -->
@@ -60,7 +53,7 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Inicio
+                Interface
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -68,54 +61,42 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Gestion de Productos</span>
+                    <span>Components</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Vistas</h6>
-                        <a class="collapse-item" href="{{ asset(route('categories.index')) }}">Categorias</a>
-                        <a class="collapse-item" href="{{ asset(route('products.index')) }}">Productos</a>
-                        <!--a class="collapse-item" href="buttons.html">Buttons</!--a>
-                        <a-- class="collapse-item" href="cards.html">Cards</a-->
+                        <h6 class="collapse-header">Custom Components:</h6>
+                        <a class="collapse-item" href="buttons.html">Buttons</a>
+                        <a class="collapse-item" href="cards.html">Cards</a>
                     </div>
                 </div>
             </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Ventas
-            </div>
 
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-wrench"></i>
-                    <span>Gestion de Ventas</span>
+                    <span>Utilities</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Vistas:</h6>
-                        <a class="collapse-item" href="{{ asset(route('vender.index')) }}">Vender</a>
-                        <a class="collapse-item" href="{{ asset(route('pagos.index')) }}">Pagar</a>
-                        <a class="collapse-item" href="{{ asset(route('clients.index')) }}">Registro de Clientes</a>
-                        <a class="collapse-item" href="{{ asset(route('visitas.index')) }}">Control de visitas a Clientes</a>
-
+                        <h6 class="collapse-header">Custom Utilities:</h6>
+                        <a class="collapse-item" href="utilities-color.html">Colors</a>
+                        <a class="collapse-item" href="utilities-border.html">Borders</a>
+                        <a class="collapse-item" href="utilities-animation.html">Animations</a>
+                        <a class="collapse-item" href="utilities-other.html">Other</a>
                     </div>
                 </div>
             </li>
-
 
             <!-- Divider -->
             <hr class="sidebar-divider">
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Almacen
+                Addons
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -123,106 +104,36 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>Gestion de Compras</span>
+                    <span>Pages</span>
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Vistas:</h6>
-                        <a class="collapse-item" href="{{ asset(route('comprar.index')) }}">Comprar</a>
-                        <a class="collapse-item" href="{{ asset(route('providers.index')) }}">Proveedores</a>
-                        <!--a class="collapse-item" href="{{ asset(route('grafica.deudas')) }}">Graficar</!--a-->
-
-                        <!--a class="collapse-item" href="login.html">Login</!--a>
+                        <h6 class="collapse-header">Login Screens:</h6>
+                        <a class="collapse-item" href="login.html">Login</a>
                         <a class="collapse-item" href="register.html">Register</a>
                         <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
                         <div class="collapse-divider"></div>
                         <h6 class="collapse-header">Other Pages:</h6>
                         <a class="collapse-item" href="404.html">404 Page</a>
-                        <a-- class="collapse-item" href="blank.html">Blank Page</a-->
+                        <a class="collapse-item" href="blank.html">Blank Page</a>
                     </div>
                 </div>
             </li>
 
-            <!-- Divider -->
-
-<!-- Divider -->
-<hr class="sidebar-divider">
-<!-- Heading -->
-<div class="sidebar-heading">
-    Otros
-</div>
-<!-- Nav Item - Utilities Collapse Menu -->
-<li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReportes"
-        aria-expanded="true" aria-controls="collapseReportes">
-        <i class="fas fa-fw fa-cog"></i>
-        <span>Configuracion</span>
-    </a>
-    <div id="collapseReportes" class="collapse" aria-labelledby="headingReportes"
-        data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Vistas:</h6>
-            <a class="collapse-item" href="{{ asset(route('empresas.index')) }}">Datos de la Empresa</a>
-            <a class="collapse-item" href="{{ asset(route('impuestos.index')) }}">Impuesto</a>
-        </div>
-    </div>
-</li>
-<!-- Nav Item - Utilities Collapse Menu -->
-<!--li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMensajes"
-        aria-expanded="true" aria-controls="collapseMensajes">
-        <i class="fas fa-fw fa-envelope"></i>
-        <span>Mensajes</span>
-    </a>
-    <div id="collapseMensajes" class="collapse" aria-labelledby="headingMensajes"
-        data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Vistas:</h6>
-            <a class="collapse-item" href="#">Mensaje 1</a>
-            <a class="collapse-item" href="#">Mensaje 2</a>
-            <a class="collapse-item" href="#">Mensaje 3</a>
-        </div>
-    </div>
-</!--li-->
-<!-- Nav Item - Utilities Collapse Menu -->
-<!--li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseConfiguracion"
-        aria-expanded="true" aria-controls="collapseConfiguracion">
-
-        <span>Configuración</span>
-    </a>
-    <div id="collapseConfiguracion" class="collapse" aria-labelledby="headingConfiguracion"
-        data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Vistas:</h6>
-            <a class="collapse-item" href="#">Configuración 1</a>
-            <a class="collapse-item" href="#">Configuración 2</a>
-            <a class="collapse-item" href="#">Configuración 3</a>
-        </div>
-    </div>
-</!--li-->
-            <!-- Nav Item - Charts ->
-            <li-- class="nav-item">
+            <!-- Nav Item - Charts -->
+            <li class="nav-item">
                 <a class="nav-link" href="charts.html">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Charts</span></a>
-            </li-->
+            </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="tables.html">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Login</span></a>
+                    <span>Tables</span></a>
             </li>
 
-<!--------------------------------------------------------------------->
-
-
-
-
-
-
-<!-------------------------------------------------------------------->
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
@@ -233,9 +144,9 @@
 
             <!-- Sidebar Message -->
             <div class="sidebar-card d-none d-lg-flex">
-                <!--img class="sidebar-card-illustration mb-2" src="img/imagenes/20230720074037.png" alt="..."-->
-                <p class="text-center mb-2"><strong>AppSisNova</strong> es un software para la administracion de ventas de la empresa NovaInversiones,C.A 2023</p>
-                <!--a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</!--a-->
+                <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">
+                <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
+                <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
             </div>
 
         </ul>
@@ -256,7 +167,7 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    <!--form
+                    <form
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
                             <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
@@ -267,7 +178,7 @@
                                 </button>
                             </div>
                         </div>
-                    </!--form-->
+                    </form>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -298,12 +209,12 @@
 
                         <!-- Nav Item - Alerts -->
                         <li class="nav-item dropdown no-arrow mx-1">
-                            <!--a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
-                                <!- Counter - Alerts ->
+                                <!-- Counter - Alerts -->
                                 <span class="badge badge-danger badge-counter">3+</span>
-                            </!--a-->
+                            </a>
                             <!-- Dropdown - Alerts -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="alertsDropdown">
@@ -312,9 +223,9 @@
                                 </h6>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="mr-3">
-                                        <!--div class="icon-circle bg-primary">
+                                        <div class="icon-circle bg-primary">
                                             <i class="fas fa-file-alt text-white"></i>
-                                        </div-->
+                                        </div>
                                     </div>
                                     <div>
                                         <div class="small text-gray-500">December 12, 2019</div>
@@ -339,7 +250,7 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="small text-gray-500">Abril, 2023</div>
+                                        <div class="small text-gray-500">December 2, 2019</div>
                                         Spending Alert: We've noticed unusually high spending for your account.
                                     </div>
                                 </a>
@@ -351,23 +262,19 @@
                         <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <!--i class="fas fa-envelope fa-fw"></!--i>
-                                <svg-- xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
-                                    <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
-                                  </svg-->
-
+                                <i class="fas fa-envelope fa-fw"></i>
                                 <!-- Counter - Messages -->
-                                <!--span class="badge badge-danger badge-counter">1</!--span-->
+                                <span class="badge badge-danger badge-counter">7</span>
                             </a>
                             <!-- Dropdown - Messages -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="messagesDropdown">
                                 <h6 class="dropdown-header">
-                                    Carrito
+                                    Message Center
                                 </h6>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src=""
+                                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
                                             alt="...">
                                         <div class="status-indicator bg-success"></div>
                                     </div>
@@ -379,7 +286,7 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src=""
+                                        <img class="rounded-circle" src="img/undraw_profile_2.svg"
                                             alt="...">
                                         <div class="status-indicator"></div>
                                     </div>
@@ -391,7 +298,7 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src=""
+                                        <img class="rounded-circle" src="img/undraw_profile_3.svg"
                                             alt="...">
                                         <div class="status-indicator bg-warning"></div>
                                     </div>
@@ -403,7 +310,7 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src=""
+                                        <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
                                             alt="...">
                                         <div class="status-indicator bg-success"></div>
                                     </div>
@@ -423,9 +330,9 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"></span>
-                                <b>. </b><img class=" rounded-circle" width="80px;" height="70px;"
-                                    src=" {{ asset('img/descarga(33).JPEG') }} ">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <img class="img-profile rounded-circle"
+                                    src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -459,19 +366,17 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <!--div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-
-                        <a href="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                    </div>
 
-                    </!--div>
+                    <!-- Content Row -->
+                    <div class="row">
 
-                    <!- Content Row -->
-                    <!--div class="row">
-
-                        <!- Earnings (Monthly) Card Example ->
-                        <div-- class="col-xl-3 col-md-6 mb-4">
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-primary shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -486,9 +391,9 @@
                                     </div>
                                 </div>
                             </div>
-                        </div-->
+                        </div>
 
-                        <!-- Earnings (Monthly) Card Example ->
+                        <!-- Earnings (Monthly) Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-success shadow h-100 py-2">
                                 <div class="card-body">
@@ -506,7 +411,7 @@
                             </div>
                         </div>
 
-                        <!- Earnings (Monthly) Card Example ->
+                        <!-- Earnings (Monthly) Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-info shadow h-100 py-2">
                                 <div class="card-body">
@@ -535,7 +440,7 @@
                             </div>
                         </div>
 
-                        <!-- Pending Requests Card Example ->
+                        <!-- Pending Requests Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-warning shadow h-100 py-2">
                                 <div class="card-body">
@@ -552,22 +457,16 @@
                                 </div>
                             </div>
                         </div>
-                    </div-->
+                    </div>
 
                     <!-- Content Row -->
+
                     <div class="row">
-                    <div class="col-lg-12">
-                        @yield('content')
-                    </div>
-                    <div>
-                        @yield('create')
-                    </div>
-                    </div>
-                    <div class="row">
-                        <!-- Area Chart ->
+
+                        <!-- Area Chart -->
                         <div class="col-xl-8 col-lg-7">
                             <div class="card shadow mb-4">
-                                <!- Card Header - Dropdown ->
+                                <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                     <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
@@ -586,7 +485,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!- Card Body ->
+                                <!-- Card Body -->
                                 <div class="card-body">
                                     <div class="chart-area">
                                         <canvas id="myAreaChart"></canvas>
@@ -595,10 +494,10 @@
                             </div>
                         </div>
 
-                        <!- Pie Chart ->
+                        <!-- Pie Chart -->
                         <div class="col-xl-4 col-lg-5">
                             <div class="card shadow mb-4">
-                                <!- Card Header - Dropdown ->
+                                <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                     <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
@@ -617,7 +516,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!- Card Body ->
+                                <!-- Card Body -->
                                 <div class="card-body">
                                     <div class="chart-pie pt-4 pb-2">
                                         <canvas id="myPieChart"></canvas>
@@ -636,16 +535,16 @@
                                 </div>
                             </div>
                         </div>
-                    </div-->
+                    </div>
 
                     <!-- Content Row -->
                     <div class="row">
 
                         <!-- Content Column -->
-                        <div-- class="col-lg-6 mb-4">
+                        <div class="col-lg-6 mb-4">
 
                             <!-- Project Card Example -->
-                            <!--div class="card shadow mb-4">
+                            <div class="card shadow mb-4">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
                                 </div>
@@ -681,10 +580,10 @@
                                             aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                 </div>
-                            </!--div>
+                            </div>
 
-                            <!- Color System -->
-                            <!--div class="row">
+                            <!-- Color System -->
+                            <div class="row">
                                 <div class="col-lg-6 mb-4">
                                     <div class="card bg-primary text-white shadow">
                                         <div class="card-body">
@@ -749,14 +648,14 @@
                                         </div>
                                     </div>
                                 </div>
-                            </!--div>
+                            </div>
 
-                        </div-->
+                        </div>
 
-                        <!--div-- class="col-lg-6 mb-4">
+                        <div class="col-lg-6 mb-4">
 
-                            <!- Illustrations -->
-                            <!--div-- class="card shadow mb-4">
+                            <!-- Illustrations -->
+                            <div class="card shadow mb-4">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
                                 </div>
@@ -772,10 +671,10 @@
                                     <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on
                                         unDraw &rarr;</a>
                                 </div>
-                            </!--div-->
+                            </div>
 
                             <!-- Approach -->
-                            <!--div-- class="card shadow mb-4">
+                            <div class="card shadow mb-4">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
                                 </div>
@@ -786,9 +685,9 @@
                                     <p class="mb-0">Before working with this theme, you should become familiar with the
                                         Bootstrap framework, especially the utility classes.</p>
                                 </div>
-                            </!--div-->
+                            </div>
 
-                        </!--div-->
+                        </div>
                     </div>
 
                 </div>
@@ -798,14 +697,13 @@
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            @yield('footer')
-            <!--footer-- class="sticky-footer bg-white">
+            <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Website 2023</span>
+                        <span>Copyright &copy; Your Website 2021</span>
                     </div>
                 </div>
-            </!--footer-->
+            </footer>
             <!-- End of Footer -->
 
         </div>
@@ -838,61 +736,23 @@
             </div>
         </div>
     </div>
-    @yield('scripts')
-    <script src='js/cdnjs.Chart.js_4.4.0_chart.min.js'></script>
-    <script src="vendor/chart.js/Chart.min.js"></script>
+
     <!-- Bootstrap core JavaScript-->
-    {!! Html::script('sbadmin/vendor/jquery/jquery.min.js') !!}
-    {!! Html::script('sbadmin/vendor/bootstrap/js/bootstrap.bundle.min.js') !!}
-    {!! Html::script('sbadmin/vendor/jquery-easing/jquery.easing.min.js') !!}
-    {!! Html::script('sbadmin/js/sb-admin-2.min.js') !!}
-    {!! Html::script('js/jquery-3.5.1.min.js') !!}
-    {!! Html::script('js/popper.js@1.12.9_dist_umd_popper.min.js') !!}
-    {!! Html::script('galio/assets/js/vendor/modernizr-3.6.0.min.js') !!}
-    <!-- Jquery Min Js -->
-    {!! Html::script('galio/assets/js/vendor/jquery-3.3.1.min.js') !!}
-    <!-- Popper Min Js -->
-    {!! Html::script('js/cdnjs.Chart.js_4.4.0_chart.min.js') !!}
-    <!-- Bootstrap Min Js -->
-    {!! Html::script('galio/assets/js/vendor/bootstrap.min.js') !!}
-    <!-- Plugins Js-->
-    {!! Html::script('galio/assets/js/plugins.js') !!}
-    <!-- Ajax Mail Js -->
-    {!! Html::script('galio/assets/js/ajax-mail.js') !!}
-    <!-- Active Js -->
-    {!! Html::script('galio/assets/js/main.js') !!}
-    {{--  {!! Html::script('galio/assets/js/main.js') !!}  --}}
-    <!-- Switcher JS [Please Remove this when Choose your Final Projct] -->
-    {!! Html::script('galio/assets/js/switcher.js') !!}
-    <!--{!! Html::script('js/popper.js@1.12.9_dist_umd_popper.min.js') !!}-->
-    {!! Html::script('vendor/datatables/jquery.dataTables.min.js') !!}
-    {!! Html::script('vendor/datatables/dataTables.bootstrap4.min.js') !!}
-    {!! Html::script('js/demo/datatables-demo.js') !!}
-
-
-    <!-- Page level custom scripts -->
-
-
-    <!--div>!! Html::script('sbadmin/vendor/chart.js/Chart.min.js') !!
-    !! Html::script('sbadmin/js/demo/chart-area-demo.js') !!
-    !! Html::script('sbadmin/js/demo/chart-pie-demo.js') !!</!--div-->
-
-
-    <!--script src="vendor/jquery/jquery.min.js"></!--script>
+    <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!- Core plugin JavaScript->
+    <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <!- Custom scripts for all pages->
+    <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
 
-    <!- Page level plugins ->
+    <!-- Page level plugins -->
     <script src="vendor/chart.js/Chart.min.js"></script>
 
-    <!- Page level custom scripts ->
+    <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
-    <script-- src="js/demo/chart-pie-demo.js"></script-->
+    <script src="js/demo/chart-pie-demo.js"></script>
 
 </body>
 

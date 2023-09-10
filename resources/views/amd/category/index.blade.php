@@ -23,7 +23,7 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('amd') }}">Panel Administrador</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('imprimir') }}">Categorias</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><a href="">Categorias</a></li>
                 <li class="breadcrumb-item"><a href="{{ route('category.pdf') }}" target="_blank"><i class="fa fa-file-pdf w-20 h-20 btn-danger shadow"></i>PDF</a></li>
           </ol>
         </nav>

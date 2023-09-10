@@ -55,6 +55,7 @@
 
 
             <button type="submit" class="btn btn-primary">Guardar</button>
+            <a href="{{ route('empresas.index') }}" class="btn btn-danger btn-sm">Cancelar</a>
         </form>
     </div>
 @endsection

@@ -11,29 +11,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    {!! Html::script('sbadmin/vendor/jquery/jquery.min.js') !!}
-    {!! Html::script('sbadmin/vendor/bootstrap/js/bootstrap.bundle.min.js') !!}
-    {!! Html::script('sbadmin/vendor/jquery-easing/jquery.easing.min.js') !!}
-    {!! Html::script('sbadmin/js/sb-admin-2.min.js') !!}
-    {!! Html::script('js/jquery-3.5.1.min.js') !!}
-    {!! Html::script('js/popper.js@1.12.9_dist_umd_popper.min.js') !!}
-    {!! Html::script('galio/assets/js/vendor/modernizr-3.6.0.min.js') !!}
-    <!-- Jquery Min Js -->
-    {!! Html::script('galio/assets/js/vendor/jquery-3.3.1.min.js') !!}
-    <!-- Popper Min Js -->
-    {!! Html::script('galio/assets/js/vendor/popper.min.js') !!}
-    <!-- Bootstrap Min Js -->
-    {!! Html::script('galio/assets/js/vendor/bootstrap.min.js') !!}
-    <!-- Plugins Js-->
-    {!! Html::script('galio/assets/js/plugins.js') !!}
-    <!-- Ajax Mail Js -->
-    {!! Html::script('galio/assets/js/ajax-mail.js') !!}
-    <!-- Active Js -->
-    {!! Html::script('galio/assets/js/main.js') !!}
-    {{--  {!! Html::script('galio/assets/js/main.js') !!}  --}}
-    <!-- Switcher JS [Please Remove this when Choose your Final Projct] -->
-    {!! Html::script('galio/assets/js/switcher.js') !!}
-    <!--{!! Html::script('js/popper.js@1.12.9_dist_umd_popper.min.js') !!}-->
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -41,17 +18,13 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    {!! Html::style('sbadmin/vendor/fontawesome-free/css/all.min.css') !!}
-    {!! Html::style('sbadmin/https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i') !!}
-    {!! Html::style('sbadmin/css/sb-admin-2.min.css') !!}
-    {!! Html::style('css/sb-admin-2.min.css') !!}
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    Sistema Nova
+                    {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>

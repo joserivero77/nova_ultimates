@@ -1,5 +1,4 @@
-@extends('layouts.home_amd')
-@section('stylescss')
+@extends('layouts.app')
 
 @section('content')
 <div class="container">
@@ -64,4 +63,3 @@
     </div>
 </div>
 @endsection
-@section('scripts')
